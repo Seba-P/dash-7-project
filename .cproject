@@ -589,6 +589,48 @@
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
+<target name="[lib] CHIP_CC1101" path="framework/hal/platforms/platform/chips/cc1101" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>CHIP_CC1101</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] CHIP_CC1101/fast" path="framework/hal/platforms/platform/chips/cc1101" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>CHIP_CC1101/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[lib] CHIP_CC1101" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>CHIP_CC1101</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[lib] CHIP_CC1101" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/cc1101" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/CHIP_CC1101.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="framework/hal/platforms/platform/chips/cc1101" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="framework/hal/platforms/platform/chips/cc1101" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
 <target name=": all" path="framework/components" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
 <buildArguments></buildArguments>
@@ -1129,6 +1171,545 @@
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name=": clean" path="apps" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] continuous_tx.axf" path="apps/continuous_tx" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>continuous_tx.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] continuous_tx.axf/fast" path="apps/continuous_tx" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>continuous_tx.axf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] continuous_tx.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>continuous_tx.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] continuous_tx.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/continuous_tx" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/continuous_tx.axf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] continuous_tx.elf" path="apps/continuous_tx" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>continuous_tx.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] continuous_tx.elf/fast" path="apps/continuous_tx" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>continuous_tx.elf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] continuous_tx.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>continuous_tx.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] continuous_tx.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/continuous_tx" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/continuous_tx.elf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": flash-continuous_tx" path="apps/continuous_tx" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>flash-continuous_tx</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="apps/continuous_tx" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="apps/continuous_tx" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] d7ap_test.axf" path="apps/d7ap_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>d7ap_test.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] d7ap_test.axf/fast" path="apps/d7ap_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>d7ap_test.axf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] d7ap_test.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>d7ap_test.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] d7ap_test.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/d7ap_test" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/d7ap_test.axf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] d7ap_test.elf" path="apps/d7ap_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>d7ap_test.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] d7ap_test.elf/fast" path="apps/d7ap_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>d7ap_test.elf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] d7ap_test.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>d7ap_test.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] d7ap_test.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/d7ap_test" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/d7ap_test.elf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": flash-d7ap_test" path="apps/d7ap_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>flash-d7ap_test</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="apps/d7ap_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="apps/d7ap_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] efm32_sensor.axf" path="apps/efm32_sensor" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>efm32_sensor.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] efm32_sensor.axf/fast" path="apps/efm32_sensor" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>efm32_sensor.axf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] efm32_sensor.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>efm32_sensor.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] efm32_sensor.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/efm32_sensor" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/efm32_sensor.axf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] efm32_sensor.elf" path="apps/efm32_sensor" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>efm32_sensor.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] efm32_sensor.elf/fast" path="apps/efm32_sensor" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>efm32_sensor.elf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] efm32_sensor.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>efm32_sensor.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] efm32_sensor.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/efm32_sensor" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/efm32_sensor.elf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": flash-efm32_sensor" path="apps/efm32_sensor" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>flash-efm32_sensor</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="apps/efm32_sensor" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="apps/efm32_sensor" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] gateway.axf" path="apps/gateway" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>gateway.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] gateway.axf/fast" path="apps/gateway" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>gateway.axf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] gateway.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>gateway.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] gateway.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/gateway" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/gateway.axf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] gateway.elf" path="apps/gateway" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>gateway.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] gateway.elf/fast" path="apps/gateway" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>gateway.elf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] gateway.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>gateway.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] gateway.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/gateway" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/gateway.elf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": flash-gateway" path="apps/gateway" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>flash-gateway</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="apps/gateway" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="apps/gateway" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] noise_logger.axf" path="apps/noise_logger" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>noise_logger.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] noise_logger.axf/fast" path="apps/noise_logger" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>noise_logger.axf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] noise_logger.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>noise_logger.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] noise_logger.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/noise_logger" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/noise_logger.axf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] noise_logger.elf" path="apps/noise_logger" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>noise_logger.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] noise_logger.elf/fast" path="apps/noise_logger" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>noise_logger.elf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] noise_logger.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>noise_logger.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] noise_logger.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/noise_logger" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/noise_logger.elf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": flash-noise_logger" path="apps/noise_logger" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>flash-noise_logger</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="apps/noise_logger" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="apps/noise_logger" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] per_test.axf" path="apps/per_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>per_test.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] per_test.axf/fast" path="apps/per_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>per_test.axf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] per_test.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>per_test.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] per_test.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/per_test" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/per_test.axf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] per_test.elf" path="apps/per_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>per_test.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] per_test.elf/fast" path="apps/per_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>per_test.elf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] per_test.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>per_test.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] per_test.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/per_test" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/per_test.elf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": flash-per_test" path="apps/per_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>flash-per_test</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="apps/per_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="apps/per_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] phy_test.axf" path="apps/phy_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>phy_test.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] phy_test.axf/fast" path="apps/phy_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>phy_test.axf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] phy_test.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>phy_test.axf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] phy_test.axf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/phy_test" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/phy_test.axf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] phy_test.elf" path="apps/phy_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>phy_test.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] phy_test.elf/fast" path="apps/phy_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>phy_test.elf/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] phy_test.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments>-C "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project" </buildArguments>
+<buildTarget>phy_test.elf</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] phy_test.elf" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/Program Files (x86)/CMake/bin/cmake.exe</buildCommand>
+<buildArguments>-E chdir "D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/phy_test" "C:/Program Files (x86)/CMake/bin/cmake.exe" -P "CMakeFiles/phy_test.elf.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": flash-phy_test" path="apps/phy_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>flash-phy_test</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="apps/phy_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
+<buildArguments></buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="apps/phy_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>C:/MinGW/bin/mingw32-make.exe</buildCommand>
 <buildArguments></buildArguments>
 <buildTarget>clean</buildTarget>

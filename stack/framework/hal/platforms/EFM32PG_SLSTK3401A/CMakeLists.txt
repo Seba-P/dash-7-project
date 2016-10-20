@@ -92,8 +92,8 @@ ADD_LIBRARY(PLATFORM OBJECT
     kits/common/bsp/bsp_trace.c
 )
 
-#Include the sources for the efm32pg chip
-ADD_CHIP("efm32pg")
+#Include the sources for the efm32pg1b chip
+ADD_CHIP("efm32pg1b")
 
 #Include the sources for the radio chip, if needed
 IF(NOT ("${${PLATFORM_PREFIX}_RADIO}" STREQUAL "none"))

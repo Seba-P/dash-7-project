@@ -32,7 +32,7 @@
 #include "fs.h"
 #include "log.h"
 
-#if (!defined PLATFORM_EFM32GG_STK3700 && !defined PLATFORM_EFM32HG_STK3400 && !defined PLATFORM_EZR32LG_WSTK6200A)
+#if (!defined PLATFORM_EFM32GG_STK3700 && !defined PLATFORM_EFM32HG_STK3400 && !defined PLATFORM_EZR32LG_WSTK6200A && !defined PLATFORM_EFM32WG_STK3800 && !defined PLATFORM_EFM32PG_SLSTK3401A)
 	#error Mismatch between the configured platform and the actual platform.
 #endif
 
@@ -58,7 +58,7 @@ void userbutton_callback(button_id_t button_id)
 
 void execute_sensor_measurement()
 {
-#ifdef PLATFORM_EFM32GG_STK3700
+#if (defined PLATFORM_EFM32GG_STK3700 || defined PLATFORM_EFM32WG_STK3800)
   float internal_temp = hw_get_internal_temperature();
   lcd_write_temperature(internal_temp*10, 1);
 
@@ -68,7 +68,7 @@ void execute_sensor_measurement()
   fs_write_file(SENSOR_FILE_ID, 0, (uint8_t*)&internal_temp, sizeof(internal_temp)); // File 0x40 is configured to use D7AActP trigger an ALP action which broadcasts this file data on Access Class 0
 #endif
 
-#if (defined PLATFORM_EFM32HG_STK3400  || defined PLATFORM_EZR32LG_WSTK6200A)
+#if (defined PLATFORM_EFM32HG_STK3400  || defined PLATFORM_EZR32LG_WSTK6200A || defined PLATFORM_EFM32PG_SLSTK3401A)
   char str[30];
 
   float internal_temp = hw_get_internal_temperature();
@@ -125,7 +125,7 @@ void init_user_files()
 
     // configure file notification using D7AActP: write ALP command to broadcast changes made to file 0x40 in file 0x41
     // first generate ALP command consisting of ALP Control header, ALP File Data Request operand and D7ASP interface configuration
-    alp_control_t alp_ctrl = {
+    alp_control_regular_t alp_ctrl = {
         .group = false,
         .response_requested = false,
         .operation = ALP_OP_READ_FILE_DATA
@@ -139,7 +139,7 @@ void init_user_files()
         .requested_data_length = SENSOR_FILE_SIZE,
     };
 
-    d7asp_fifo_config_t d7asp_fifo_config = {
+    d7asp_master_session_config_t d7asp_fifo_config = {
         .qos = {
             .qos_resp_mode = SESSION_RESP_MODE_NO,
             .qos_nls                 = false,

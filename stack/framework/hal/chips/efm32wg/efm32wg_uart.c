@@ -278,42 +278,42 @@ void uart_set_rx_interrupt_callback(uart_handle_t* uart,
 
 void uart_send_byte(uart_handle_t* uart, uint8_t data) {
 #ifdef PLATFORM_USE_USB_CDC
-		uint16_t timeout = 0;
-		while(USBD_EpIsBusy(0x81) && timeout < 100){
-			timeout++;
-			hw_busy_wait(1000);
-		};
-		uint32_t tempData = data;
-		int ret = USBD_Write( 0x81, (void*) &tempData, 1, NULL);
+    uint16_t timeout = 0;
+    while(USBD_EpIsBusy(0x81) && timeout < 100){
+      timeout++;
+      hw_busy_wait(1000);
+    };
+    uint32_t tempData = data;
+    int ret = USBD_Write( 0x81, (void*) &tempData, 1, NULL);
 #else
   while(!(uart->channel->STATUS & (1 << 6))); // wait for TX buffer to empty
-	uart->channel->TXDATA = data;
+  uart->channel->TXDATA = data;
 #endif
 }
 
 void uart_send_bytes(uart_handle_t* uart, void const *data, size_t length) {
 #ifdef PLATFORM_USE_USB_CDC
     // print misaliged bytes first as individual bytes.
-		int8_t* tempData = (int8_t*) data;
-		while(((uint32_t)tempData & 3) && (length > 0)) {
-			uart_send_byte(uart, tempData[0]);
-			tempData++;
-			length--;
-		}
+    int8_t* tempData = (int8_t*) data;
+    while(((uint32_t)tempData & 3) && (length > 0)) {
+      uart_send_byte(uart, tempData[0]);
+      tempData++;
+      length--;
+    }
 
-		if (length > 0)
-		{
-			uint16_t timeout = 0;
-			while(USBD_EpIsBusy(0x81) && timeout < 100){
-				timeout++;
-				hw_busy_wait(1000);
-			};
-			int ret = USBD_Write( 0x81, (void*) tempData, length, NULL);
-		}
+    if (length > 0)
+    {
+      uint16_t timeout = 0;
+      while(USBD_EpIsBusy(0x81) && timeout < 100){
+        timeout++;
+        hw_busy_wait(1000);
+      };
+      int ret = USBD_Write( 0x81, (void*) tempData, length, NULL);
+    }
 #else
-	for(uint8_t i=0; i<length; i++)	{
-		uart_send_byte(uart, ((uint8_t const*)data)[i]);
-	}
+  for(size_t i = 0; i < length; i++)  {
+    uart_send_byte(uart, ((uint8_t const*)data)[i]);
+  }
 #endif
 }
 

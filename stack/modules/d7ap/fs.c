@@ -34,11 +34,11 @@
 static fs_file_header_t NGDEF(_file_headers)[MODULE_D7AP_FS_FILE_COUNT] = { 0 };
 #define file_headers NG(_file_headers)
 
-static uint8_t NGDEF(_data)[MODULE_D7AP_FS_FILESYSTEM_SIZE] = { 0 };
-#define data NG(_data)
-
 static uint16_t NGDEF(_current_data_offset); // TODO we are using offset here instead of pointer because NG does not support pointers, fix later when NG is replaced
 #define current_data_offset NG(_current_data_offset)
+
+static uint8_t NGDEF(_data)[MODULE_D7AP_FS_FILESYSTEM_SIZE] = { 0 };
+#define data NG(_data)
 
 static uint16_t NGDEF(_file_offsets)[MODULE_D7AP_FS_FILE_COUNT] = { 0 };
 #define file_offsets NG(_file_offsets)
@@ -59,7 +59,7 @@ static void execute_alp_command(uint8_t command_file_id)
 
     // TODO refactor
     // parse ALP command
-    d7asp_fifo_config_t fifo_config;
+    d7asp_master_session_config_t fifo_config;
     assert((*data_ptr) == ALP_ITF_ID_D7ASP); // only D7ASP supported for now
     data_ptr++;
     fifo_config.qos.raw = (*data_ptr); data_ptr++;
@@ -133,8 +133,8 @@ void fs_init(fs_init_args_t* init_args)
         .length = D7A_FILE_UID_SIZE
     };
 
-    memset(data + current_data_offset, 0, D7A_FILE_DLL_CONF_SIZE);
-    current_data_offset += D7A_FILE_DLL_CONF_SIZE;
+    memset(data + current_data_offset, 0, 1); current_data_offset += 1; // active access class
+    memset(data + current_data_offset, 0xFF, 2); current_data_offset += 2; // VID; 0xFFFF means not valid
 
     // 0x20+n - Access Profiles
     assert(init_args->access_profiles_count > 0 && init_args->access_profiles_count < 16);
@@ -174,7 +174,7 @@ void fs_init_file(uint8_t file_id, const fs_file_header_t* file_header, const ui
         fs_write_file(file_id, 0, initial_data, file_header->length);
 }
 
-void fs_init_file_with_D7AActP(uint8_t file_id, const d7asp_fifo_config_t* fifo_config, const alp_control_t* alp_ctrl, const uint8_t* alp_operand)
+void fs_init_file_with_D7AActP(uint8_t file_id, const d7asp_master_session_config_t* fifo_config, const alp_control_t* alp_ctrl, const uint8_t* alp_operand)
 {
     uint8_t alp_command_buffer[40] = { 0 };
     uint8_t* ptr = alp_command_buffer;
@@ -232,6 +232,11 @@ alp_status_codes_t fs_write_file(uint8_t file_id, uint8_t offset, const uint8_t*
         execute_alp_command(file_headers[file_id].file_properties.action_file_id);
     }
 
+    if(file_id == D7A_FILE_DLL_CONF_FILE_ID)
+    {
+        dll_notify_dll_conf_file_changed();
+    }
+
     return ALP_STATUS_OK;
 }
 
@@ -278,7 +283,6 @@ uint8_t fs_read_dll_conf_active_access_class()
 void fs_write_dll_conf_active_access_class(uint8_t access_class)
 {
     fs_write_file(D7A_FILE_DLL_CONF_FILE_ID, 0, &access_class, 1);
-    dll_notify_dll_conf_file_changed();
 }
 
 uint8_t fs_get_file_length(uint8_t file_id)

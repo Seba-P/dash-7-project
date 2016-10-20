@@ -205,116 +205,123 @@ uint32_t ADC_Calibration(ADC_TypeDef *adc, ADC_Ref_TypeDef ref)
 
 void adc_calibrate()
 {
-	// Initialises clocks
-	CMU_ClockEnable(cmuClock_HFPER, true);
-	CMU_ClockEnable(cmuClock_ADC0, true);
+  // Initialises clocks
+  CMU_ClockEnable(cmuClock_HFPER, true);
+  CMU_ClockEnable(cmuClock_ADC0, true);
 
-	//todo: use new calibration values
-	//todo: make adaptable for other ref voltages
-	uint32_t old_gain_calibration_value =
-	(DEVINFO->ADC0CAL0 & _DEVINFO_ADC0CAL0_1V25_GAIN_MASK)
-	>> _DEVINFO_ADC0CAL0_1V25_GAIN_SHIFT;
+  //todo: use new calibration values
+  //todo: make adaptable for other ref voltages
+  uint32_t old_gain_calibration_value =
+  (DEVINFO->ADC0CAL0 & _DEVINFO_ADC0CAL0_1V25_GAIN_MASK)
+  >> _DEVINFO_ADC0CAL0_1V25_GAIN_SHIFT;
 
-	uint32_t old_offset_calibration_value =
-	(DEVINFO->ADC0CAL0 & _DEVINFO_ADC0CAL0_1V25_OFFSET_MASK)
-	>> _DEVINFO_ADC0CAL0_1V25_OFFSET_SHIFT;
+  uint32_t old_offset_calibration_value =
+  (DEVINFO->ADC0CAL0 & _DEVINFO_ADC0CAL0_1V25_OFFSET_MASK)
+  >> _DEVINFO_ADC0CAL0_1V25_OFFSET_SHIFT;
 
-	//RTCDRV_Trigger(100, NULL);
+  //RTCDRV_Trigger(100, NULL);
 
-	uint32_t calibration_value = ADC_Calibration(ADC0, adcRef1V25);
+  uint32_t calibration_value = ADC_Calibration(ADC0, adcRef1V25);
 
-	uint32_t offset_calibration_value = (calibration_value & _ADC_CAL_SINGLEOFFSET_MASK) >> _ADC_CAL_SINGLEOFFSET_SHIFT;
-	uint32_t gain_calibration_value   = (calibration_value & _ADC_CAL_SINGLEGAIN_MASK) >> _ADC_CAL_SINGLEGAIN_SHIFT;
-	log_print_stack_string(LOG_STACK_FWK, "ADC Calibration offset %d -> %d", old_offset_calibration_value, offset_calibration_value);
-	log_print_stack_string(LOG_STACK_FWK, "ADC Calibration gain %d -> %d", old_gain_calibration_value, gain_calibration_value);
+  uint32_t offset_calibration_value = (calibration_value & _ADC_CAL_SINGLEOFFSET_MASK) >> _ADC_CAL_SINGLEOFFSET_SHIFT;
+  uint32_t gain_calibration_value   = (calibration_value & _ADC_CAL_SINGLEGAIN_MASK) >> _ADC_CAL_SINGLEGAIN_SHIFT;
+  log_print_stack_string(LOG_STACK_FWK, "ADC Calibration offset %d -> %d", old_offset_calibration_value, offset_calibration_value);
+  log_print_stack_string(LOG_STACK_FWK, "ADC Calibration gain %d -> %d", old_gain_calibration_value, gain_calibration_value);
 }
 
 
 void adc_init(ADC_Reference reference, ADC_Input input, uint32_t adc_frequency)
 {
-	// Initialises clocks
-	CMU_ClockEnable(cmuClock_HFPER, true);
-	CMU_ClockEnable(cmuClock_ADC0, true);
+  // Initialises clocks
+  CMU_ClockEnable(cmuClock_HFPER, true);
+  CMU_ClockEnable(cmuClock_ADC0, true);
 
-	/* Base the ADC configuration on the default setup. */
-	ADC_Init_TypeDef init = ADC_INIT_DEFAULT;
-	//adcWarmupKeepADCWarm?
-	ADC_InitSingle_TypeDef sInit = ADC_INITSINGLE_DEFAULT;
+  /* Base the ADC configuration on the default setup. */
+  ADC_Init_TypeDef init = ADC_INIT_DEFAULT;
+  //adcWarmupKeepADCWarm?
+  ADC_InitSingle_TypeDef sInit = ADC_INITSINGLE_DEFAULT;
 
-	/* Initialize timebases */
-	init.timebase = ADC_TimebaseCalc(0);
-	init.prescale = ADC_PrescaleCalc(adc_frequency,0);
-	ADC_Init(ADC0, &init);
+  /* Initialize timebases */
+  init.timebase = ADC_TimebaseCalc(0);
+  init.prescale = ADC_PrescaleCalc(adc_frequency,0);
+  ADC_Init(ADC0, &init);
 
-	switch (reference)
-	{
-	/** Internal 1.25V reference. */
-	case adcReference1V25:
-		sInit.reference = adcRef1V25;
-		break;
+  switch (reference)
+  {
+  /** Internal 1.25V reference. */
+  case adcReference1V25:
+    sInit.reference = adcRef1V25;
+    break;
 
-	/** Internal 2.5V reference. */
-	case adcReference2V5:
-		sInit.reference = adcRef2V5;
-		break;
+  /** Internal 2.5V reference. */
+  case adcReference2V5:
+    sInit.reference = adcRef2V5;
+    break;
 
-	/** Buffered VDD. */
-	case adcReferenceVDD:
-		sInit.reference = adcRefVDD;
-		break;
+  /** Buffered VDD. */
+  case adcReferenceVDD:
+    sInit.reference = adcRefVDD;
+    break;
 
-	/** Internal differential 5V reference. */
-	case adcReference5VDIFF:
-		sInit.reference = adcRef5VDIFF;
-		break;
+  /** Internal differential 5V reference. */
+  case adcReference5VDIFF:
+    sInit.reference = adcRef5VDIFF;
+    break;
 
-	/** Single ended ext. ref. from 1 pin. */
-	case adcReferenceExtSingle:
-		sInit.reference = adcRefExtSingle;
-		break;
+  /** Single ended ext. ref. from 1 pin. */
+  case adcReferenceExtSingle:
+    sInit.reference = adcRefExtSingle;
+    break;
 
-	/** Differential ext. ref. from 2 pins */
-	case adcReference2xExtDiff:
-		sInit.reference = adcRef2xExtDiff;
-		break;
+  /** Differential ext. ref. from 2 pins */
+  case adcReference2xExtDiff:
+    sInit.reference = adcRef2xExtDiff;
+    break;
 
-	/** Unbuffered 2xVDD. */
-	case adcReference2xVDD:
-		sInit.reference = adcRef2xVDD;
-		break;
-	}
+  /** Unbuffered 2xVDD. */
+  case adcReference2xVDD:
+    sInit.reference = adcRef2xVDD;
+    break;
+  }
 
-	switch (input)
-	{
-		/** Temperature reference. */
-	case adcInputSingleTemp:
-		sInit.input = adcSingleInpTemp;
-		break;
-	/** VDD / 3. */
-	case adcInputSingleVDDDiv3:
-		sInit.input = adcSingleInpVDDDiv3;
-		break;
-		/** Positive Ch4, negative Ch5. */
-	case adcInputSingleCh4Ch5:
-		sInit.input = adcSingleInpCh4Ch5;
-		sInit.diff = true;
-		break;
-	}
+  switch (input)
+  {
+    /** Temperature reference. */
+  case adcInputSingleTemp:
+    sInit.input = adcSingleInpTemp;
+    break;
+  /** VDD / 3. */
+  case adcInputSingleVDDDiv3:
+    sInit.input = adcSingleInpVDDDiv3;
+    break;
+    /** Positive Ch4, negative Ch5. */
+  case adcInputSingleCh4Ch5:
+    sInit.input = adcSingleInpCh4Ch5;
+    sInit.diff = true;
+    break;
+  case adcInputSingleInputCh2:
+    sInit.input = adcSingleInputCh2;
+    break;
+  case adcInputSingleInputCh6:
+    sInit.input = adcSingleInputCh6;
+    break;
+  }
 
-	ADC_InitSingle(ADC0, &sInit);
+  ADC_InitSingle(ADC0, &sInit);
 
-	/* Setup interrupt generation on completed conversion. */
-	ADC_IntEnable(ADC0, ADC_IF_SINGLE);
+  /* Setup interrupt generation on completed conversion. */
+  ADC_IntEnable(ADC0, ADC_IF_SINGLE);
+  NVIC_EnableIRQ(ADC0_IRQn);
 }
 
 void adc_start()
 {
-	ADC_Start(ADC0, adcStartSingle);
+  ADC_Start(ADC0, adcStartSingle);
 }
 
 uint32_t adc_get_value()
 {
-	return ADC_DataSingleGet(ADC0);
+  return ADC_DataSingleGet(ADC0);
 }
 
 uint32_t adc_read_single( void )
@@ -327,11 +334,11 @@ uint32_t adc_read_single( void )
 
 bool adc_ready()
 {
-	return ADC0->STATUS;
+  return ADC0->STATUS;
 }
 
 void adc_clear_interrupt()
 {
-	ADC_IntClear(ADC0, ADC_IFC_SINGLEOF);
+  ADC_IntClear(ADC0, ADC_IF_SINGLE);
 }
 

@@ -44,6 +44,8 @@ typedef enum {
 static state_t NGDEF(_d7anp_state);
 #define d7anp_state NG(_d7anp_state)
 
+static dae_access_profile_t NGDEF(_own_access_profile);
+#define own_access_profile NG(_own_access_profile)
 
 static void switch_state(state_t next_state)
 {
@@ -98,6 +100,13 @@ static void start_foreground_scan(uint8_t timeout_ct)
     dll_start_foreground_scan();
 }
 
+static void cancel_foreground_scan_task()
+{
+    // task can be scheduled now or in the future, try to cancel both // TODO refactor scheduler API
+    timer_cancel_task(&foreground_scan_expired);
+    sched_cancel_task(&foreground_scan_expired);
+}
+
 void d7anp_init()
 {
     d7anp_state = D7ANP_STATE_IDLE;
@@ -108,12 +117,13 @@ void d7anp_tx_foreground_frame(packet_t* packet, bool should_include_origin_temp
 {
     if(d7anp_state == D7ANP_STATE_FOREGROUND_SCAN)
     {
-        // task can be scheduled now or in the future, try to cancel both // TODO refactor scheduler API
-        timer_cancel_task(&foreground_scan_expired);
-        sched_cancel_task(&foreground_scan_expired);
+        cancel_foreground_scan_task();
     }
 
-    packet->d7anp_timeout = access_profile->transmission_timeout_period; // TODO get calculated value from SP
+    uint8_t own_access_class = fs_read_dll_conf_active_access_class();
+    fs_read_access_class(own_access_class, &own_access_profile);
+
+    packet->d7anp_timeout = own_access_profile.transmission_timeout_period; // TODO get calculated value from SP
     packet->d7anp_ctrl.origin_addressee_ctrl_nls_enabled = false;
     packet->d7anp_ctrl.origin_addressee_ctrl_hop_enabled = false;
     if(!should_include_origin_template)
@@ -122,7 +132,7 @@ void d7anp_tx_foreground_frame(packet_t* packet, bool should_include_origin_temp
     {
         uint8_t vid[2];
         fs_read_vid(vid);
-        if(memcmp(vid, (uint8_t[2]){0x00, 0x00},2) == 0)
+        if(memcmp(vid, (uint8_t[2]){ 0xFF, 0xFF }, 2) == 0)
             packet->d7anp_ctrl.origin_addressee_ctrl_id_type = ID_TYPE_UID;
         else
             packet->d7anp_ctrl.origin_addressee_ctrl_id_type = ID_TYPE_VID;
@@ -149,9 +159,13 @@ uint8_t d7anp_assemble_packet_header(packet_t *packet, uint8_t *data_ptr)
         {
             fs_read_uid(data_ptr); data_ptr += 8;
         }
-        else
+        else if(packet->d7anp_ctrl.origin_addressee_ctrl_id_type == ID_TYPE_VID)
         {
             fs_read_vid(data_ptr); data_ptr += 2;
+        }
+        else
+        {
+            assert(false);
         }
     }
 
@@ -194,8 +208,9 @@ void d7anp_signal_packet_transmitted(packet_t* packet)
 {
     // even when no ack is requested we still need to wait for a possible dormant session which might have been waiting
     // for us on the other side.
-    // TODO if we only want to beacon without listening afterwards we can configure our own Tc to be 0
-    start_foreground_scan(packet->d7anp_timeout);
+    // we listen for the timeout defined in our own access profile
+
+    start_foreground_scan(own_access_profile.transmission_timeout_period);
     d7atp_signal_packet_transmitted(packet);
 }
 
@@ -204,7 +219,7 @@ void d7anp_process_received_packet(packet_t* packet)
     if(d7anp_state == D7ANP_STATE_FOREGROUND_SCAN)
     {
         DPRINT("Received packet while in D7ANP_STATE_FOREGROUND_SCAN, extending foreground scan period");
-        assert(timer_cancel_task(&foreground_scan_expired) == SUCCESS);
+        cancel_foreground_scan_task();
         schedule_foreground_scan_expired_timer(packet->d7anp_timeout);
     }
     else

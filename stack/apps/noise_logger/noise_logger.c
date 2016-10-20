@@ -35,7 +35,7 @@
 #include <platform_sensors.h>
 #include <hwwatchdog.h>
 
-#ifdef PLATFORM_EFM32GG_STK3700
+#if (defined PLATFORM_EFM32GG_STK3700 || defined PLATFORM_EFM32WG_STK3800)
 #include "platform_lcd.h"
 #endif
 
@@ -283,7 +283,7 @@ void read_rssi()
     sprintf(str, "%7s,%i%s\n", channel_str, rssi_measurement.tick, rssi_samples_str);
     console_print(str);
 
-#ifdef PLATFORM_EFM32GG_STK3700
+#if (defined PLATFORM_EFM32GG_STK3700 || defined PLATFORM_EFM32WG_STK3800)
     //lcd_all_on();
     lcd_write_number(max_rssi_sample);
 #elif defined HAS_LCD
@@ -352,7 +352,7 @@ void measureTemperature()
 
 	int temperature = (int)(temp * 10);
 
-#ifdef PLATFORM_EFM32GG_STK3700
+#if (defined PLATFORM_EFM32GG_STK3700 || defined PLATFORM_EFM32WG_STK3800)
 
 	int ring_segments = temperature/100;
 	ring_segments = ring_segments > 8 ? 8 : ring_segments;

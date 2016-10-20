@@ -22,11 +22,9 @@ IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
     EXPORT_GLOBAL_COMPILE_DEFINITIONS("-DDEBUG_EFM=1" "-DDEBUG=1")
 ENDIF()
 
-#Add the linker script to use to the linker flags
-INSERT_LINKER_FLAGS(BEFORE OBJECTS INSERT "-T${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/device/linker/efm32gg.ld")
+SET(LINKER_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/device/linker/efm32gg.ld" CACHE FILEPATH "")
 
-
-INSERT_LINKER_FLAGS(AFTER OBJECTS INSERT "-Xlinker  -Map=.map")
+SET(LINKER_FLAGS "-Xlinker  -Map=.map" CACHE STRING "")
 
 ENABLE_LANGUAGE(ASM)
 SET_PROPERTY(SOURCE efm32gg/CMSIS/device/src/startup_efm32gg.S PROPERTY LANGUAGE ASM)
@@ -75,6 +73,8 @@ ADD_LIBRARY (${CHIP_LIBRARY_NAME} OBJECT
                     emlib/src/em_i2c.c
                     emlib/src/em_wdog.c
                     emlib/inc/em_wdog.h
+                    emlib/src/em_prs.c
+                    emlib/inc/em_prs.h
                     efm32gg_adc.c 
                     efm32gg_mcu.c
                     efm32gg_uart.c

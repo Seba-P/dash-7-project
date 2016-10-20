@@ -58,7 +58,7 @@
 #define SENSOR_FILE_SIZE         4
 #define ACTION_FILE_ID           0x41
 
-#define REPORTING_INTERVAL       5 // seconds
+#define REPORTING_INTERVAL       1 // seconds
 #define REPORTING_INTERVAL_TICKS TIMER_TICKS_PER_SEC * REPORTING_INTERVAL
 
 void execute_sensor_measurement() {
@@ -67,6 +67,7 @@ void execute_sensor_measurement() {
 #endif
     // use the counter value for now instead of 'real' sensor
     uint32_t val = timer_get_counter_value();
+    DPRINT("\nval = %d", val);
     // file 0x40 is configured to use D7AActP trigger an ALP action which 
     // broadcasts this file data on Access Class 0
     fs_write_file(0x40, 0, (uint8_t*)&val, 4);
@@ -103,7 +104,7 @@ void init_user_files() {
     // broadcast changes made to file 0x40 in file 0x41
     // first generate ALP command consisting of ALP Control header, ALP File 
     // Data Request operand and D7ASP interface configuration
-    alp_control_t alp_ctrl = {
+    alp_control_regular_t alp_ctrl = {
         .group                            = false,
         .response_requested               = false,
         .operation                        = ALP_OP_READ_FILE_DATA
@@ -117,7 +118,7 @@ void init_user_files() {
         .requested_data_length            = SENSOR_FILE_SIZE,
     };
 
-    d7asp_fifo_config_t d7asp_fifo_config = {
+    d7asp_master_session_config_t session_config = {
         .qos = {
             .qos_resp_mode                = SESSION_RESP_MODE_ANY,
             .qos_nls                      = false,
@@ -135,7 +136,7 @@ void init_user_files() {
     };
 
     // finally, register D7AActP file
-    fs_init_file_with_D7AActP(ACTION_FILE_ID, &d7asp_fifo_config, &alp_ctrl,
+    fs_init_file_with_D7AActP(ACTION_FILE_ID, &session_config, (alp_control_t*)&alp_ctrl,
                               (uint8_t*)&file_data_request_operand);
 }
 
@@ -161,12 +162,11 @@ void bootstrap() {
             .control_number_of_subbands = 1,
             .subnet = 0x00,
             .scan_automation_period = 0,
-            .transmission_timeout_period = 20,
+            .transmission_timeout_period = 50,
             .subbands[0] = (subband_t){
                 .channel_header = {
                     .ch_coding = PHY_CODING_PN9,
                     .ch_class = PHY_CLASS_NORMAL_RATE,
-                    //.ch_freq_band = PHY_BAND_868
                     .ch_freq_band = PHY_BAND_433
                 },
                 .channel_index_start = 0,
