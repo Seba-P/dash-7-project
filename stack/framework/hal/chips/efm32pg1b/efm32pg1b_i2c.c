@@ -18,8 +18,8 @@
 // TODO use other ways to avoid long polling
 #define I2C_POLLING  100000
 
-#define I2CS       2
-#define LOCATIONS  5
+#define I2CS       1
+#define LOCATIONS  32
 
 typedef struct {
   uint32_t location;
@@ -38,52 +38,165 @@ static i2c_pins_t location[I2CS][LOCATIONS] = {
   {
     // I2C 0
     {
-      .location = I2C_ROUTE_LOCATION_LOC0,
+      .location = 0,
       .scl      = { .port = gpioPortA, .pin =  1 },
       .sda      = { .port = gpioPortA, .pin =  0 }
     },
     {
-      .location = I2C_ROUTE_LOCATION_LOC1,
-      .scl      = { .port = gpioPortD, .pin =  7 },
-      .sda      = { .port = gpioPortD, .pin =  6 }
+      .location = 1,
+      .scl      = { .port = gpioPortA, .pin =  2 },
+      .sda      = { .port = gpioPortA, .pin =  1 }
     },
     {
-      .location = I2C_ROUTE_LOCATION_LOC2,
+      .location = 2,
+      .scl      = { .port = gpioPortA, .pin =  3 },
+      .sda      = { .port = gpioPortA, .pin =  2 }
+    },
+    {
+      .location = 3,
+      .scl      = { .port = gpioPortA, .pin =  4 },
+      .sda      = { .port = gpioPortA, .pin =  3 }
+    },
+    {
+      .location = 4,
+      .scl      = { .port = gpioPortA, .pin =  5 },
+      .sda      = { .port = gpioPortA, .pin =  4 }
+    },
+    {
+      .location = 5,
+      .scl      = { .port = gpioPortB, .pin =  11 },
+      .sda      = { .port = gpioPortA, .pin =  5 }
+    },
+    {
+      .location = 6,
+      .scl      = { .port = gpioPortB, .pin =  12 },
+      .sda      = { .port = gpioPortB, .pin =  11 }
+    },
+    {
+      .location = 7,
+      .scl      = { .port = gpioPortB, .pin =  13 },
+      .sda      = { .port = gpioPortB, .pin =  12 }
+    },
+    {
+      .location = 8,
+      .scl      = { .port = gpioPortB, .pin =  14 },
+      .sda      = { .port = gpioPortB, .pin =  13 }
+    },
+    {
+      .location = 9,
+      .scl      = { .port = gpioPortB, .pin =  15 },
+      .sda      = { .port = gpioPortB, .pin =  14 }
+    },
+    {
+      .location = 10,
+      .scl      = { .port = gpioPortC, .pin =  6 },
+      .sda      = { .port = gpioPortB, .pin =  15 }
+    },
+    {
+      .location = 11,
       .scl      = { .port = gpioPortC, .pin =  7 },
       .sda      = { .port = gpioPortC, .pin =  6 }
     },
     {
-      .location = I2C_ROUTE_LOCATION_LOC3,
-      .scl      = { .port = gpioPortD, .pin = 15 },
-      .sda      = { .port = gpioPortD, .pin = 14 }
+      .location = 12,
+      .scl      = { .port = gpioPortC, .pin =  8 },
+      .sda      = { .port = gpioPortC, .pin =  7 }
     },
     {
-      .location = I2C_ROUTE_LOCATION_LOC4,
-      .scl      = { .port = gpioPortC, .pin =  1 },
-      .sda      = { .port = gpioPortC, .pin =  0 }
+      .location = 13,
+      .scl      = { .port = gpioPortC, .pin =  9 },
+      .sda      = { .port = gpioPortC, .pin =  8 }
+    },
+    {
+      .location = 14,
+      .scl      = { .port = gpioPortC, .pin =  10 },
+      .sda      = { .port = gpioPortC, .pin =  9 }
+    },
+    {
+      .location = 15,
+      .scl      = { .port = gpioPortC, .pin =  11 },
+      .sda      = { .port = gpioPortC, .pin =  10 }
+    },
+    {
+      .location = 16,
+      .scl      = { .port = gpioPortD, .pin =  9 },
+      .sda      = { .port = gpioPortC, .pin =  11 }
+    },
+    {
+      .location = 17,
+      .scl      = { .port = gpioPortD, .pin =  10 },
+      .sda      = { .port = gpioPortD, .pin =  9 }
+    },
+    {
+      .location = 18,
+      .scl      = { .port = gpioPortD, .pin =  11 },
+      .sda      = { .port = gpioPortD, .pin =  10 }
+    },
+    {
+      .location = 19,
+      .scl      = { .port = gpioPortD, .pin =  12 },
+      .sda      = { .port = gpioPortD, .pin =  11 }
+    },
+    {
+      .location = 20,
+      .scl      = { .port = gpioPortD, .pin =  13 },
+      .sda      = { .port = gpioPortD, .pin =  12 }
+    },
+    {
+      .location = 21,
+      .scl      = { .port = gpioPortD, .pin =  14 },
+      .sda      = { .port = gpioPortD, .pin =  13 }
+    },
+    {
+      .location = 22,
+      .scl      = { .port = gpioPortD, .pin =  15 },
+      .sda      = { .port = gpioPortD, .pin =  14 }
+    },
+    {
+      .location = 23,
+      .scl      = { .port = gpioPortF, .pin =  0 },
+      .sda      = { .port = gpioPortD, .pin =  15 }
+    },
+    {
+      .location = 24,
+      .scl      = { .port = gpioPortF, .pin =  1 },
+      .sda      = { .port = gpioPortF, .pin =  0 }
+    },
+    {
+      .location = 25,
+      .scl      = { .port = gpioPortF, .pin =  2 },
+      .sda      = { .port = gpioPortF, .pin =  1 }
+    },
+    {
+      .location = 26,
+      .scl      = { .port = gpioPortF, .pin =  3 },
+      .sda      = { .port = gpioPortF, .pin =  2 }
+    },
+    {
+      .location = 27,
+      .scl      = { .port = gpioPortF, .pin =  4 },
+      .sda      = { .port = gpioPortF, .pin =  3 }
+    },
+    {
+      .location = 28,
+      .scl      = { .port = gpioPortF, .pin =  5 },
+      .sda      = { .port = gpioPortF, .pin =  4 }
+    },
+    {
+      .location = 29,
+      .scl      = { .port = gpioPortF, .pin =  6 },
+      .sda      = { .port = gpioPortF, .pin =  5 }
+    },
+    {
+      .location = 30,
+      .scl      = { .port = gpioPortF, .pin =  7 },
+      .sda      = { .port = gpioPortF, .pin =  6 }
+    },
+    {
+      .location = 31,
+      .scl      = { .port = gpioPortA, .pin =  0 },
+      .sda      = { .port = gpioPortF, .pin =  7 }
     }
-  },
-  {
-    // I2C 1
-    {
-      .location = I2C_ROUTE_LOCATION_LOC0,
-      .scl      = { .port = gpioPortC, .pin =  5 },
-      .sda      = { .port = gpioPortC, .pin =  4 }
-    },
-    {
-      .location = I2C_ROUTE_LOCATION_LOC1,
-      .scl      = { .port = gpioPortB, .pin = 12 },
-      .sda      = { .port = gpioPortB, .pin = 11 }
-    },
-    {
-      .location = I2C_ROUTE_LOCATION_LOC2,
-      .scl      = { .port = gpioPortE, .pin =  1 },
-      .sda      = { .port = gpioPortE, .pin =  0 }
-    },
-    // no LOCATION 3
-    UNDEFINED_LOCATION,
-    // no LOCATION 4
-    UNDEFINED_LOCATION
   }
 };
 
@@ -99,12 +212,7 @@ static i2c_handle_t handle[I2CS] = {
     .idx     = 0,
     .channel = I2C0,
     .clock   = cmuClock_I2C0
-  },
-  {
-    .idx     = 1,
-    .channel = I2C1,
-    .clock   = cmuClock_I2C1
-  }  
+  } 
 };
 
 i2c_handle_t* i2c_init(uint8_t idx, uint8_t pins) {
@@ -127,9 +235,8 @@ i2c_handle_t* i2c_init(uint8_t idx, uint8_t pins) {
 	}
 
 	// enable pins and set location
-	handle[idx].channel->ROUTE = I2C_ROUTE_SDAPEN
-                             | I2C_ROUTE_SCLPEN
-                             | handle[idx].pins->location;
+	handle[idx].channel->ROUTEPEN = I2C_ROUTEPEN_SDAPEN | I2C_ROUTEPEN_SCLPEN;
+  handle[idx].channel->ROUTELOC0 = (handle[idx].pins->location << _I2C_ROUTELOC0_SDALOC_SHIFT) | (handle[idx].pins->location << _I2C_ROUTELOC0_SCLLOC_SHIFT);
   
   I2C_Init_TypeDef i2cInit = {
     .enable  = true,

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-/*! \file efm32gg_atomic.c
+/*! \file efm32pg1b_atomic.c
  *
  *  \author daniel.vandenakker@uantwerpen.be
  *

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-/*! \file efm32gg_watchdog.c
+/*! \file efm32pg1b_watchdog.c
  *
  *  \author glenn.ergeerts@uantwerpen.be
  *

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-/*! \file efm32gg_adc.c
+/*! \file efm32pg1b_adc.c
  *
  *  \author maarten.weyn@uantwerpen.be
  *
@@ -89,7 +89,8 @@ uint32_t ADC_Calibration(ADC_TypeDef *adc, ADC_Ref_TypeDef ref)
 
   /* Init for single conversion use, measure diff 0 with selected reference. */
   singleInit.reference = ref;
-  singleInit.input     = adcSingleInpDiff0;
+  singleInit.posSel    = adcPosSelDEFAULT;    // insert correct value
+  singleInit.negSel    = adcNegSelDEFAULT;    //
   singleInit.acqTime   = adcAcqTime16;
   singleInit.diff      = true;
   /* Enable oversampling rate */
@@ -146,8 +147,8 @@ uint32_t ADC_Calibration(ADC_TypeDef *adc, ADC_Ref_TypeDef ref)
   }
 
   /* Now do gain calibration, only input and diff settings needs to be changed */
-  adc->SINGLECTRL &= ~(_ADC_SINGLECTRL_INPUTSEL_MASK | _ADC_SINGLECTRL_DIFF_MASK);
-  adc->SINGLECTRL |= (adcSingleInpCh4 << _ADC_SINGLECTRL_INPUTSEL_SHIFT);
+  adc->SINGLECTRL &= ~(_ADC_SINGLECTRL_POSSEL_MASK | _ADC_SINGLECTRL_NEGSEL_MASK | _ADC_SINGLECTRL_DIFF_MASK);
+  adc->SINGLECTRL |= (adcPosSelTESTP << _ADC_SINGLECTRL_POSSEL_SHIFT) | (adcNegSelTESTN << _ADC_SINGLECTRL_NEGSEL_SHIFT);
   adc->SINGLECTRL |= (false << _ADC_SINGLECTRL_DIFF_SHIFT);
 
   /* ADC is now set up for gain calibration */
@@ -212,12 +213,12 @@ void adc_calibrate()
 	//todo: use new calibration values
 	//todo: make adaptable for other ref voltages
 	uint32_t old_gain_calibration_value =
-	(DEVINFO->ADC0CAL0 & _DEVINFO_ADC0CAL0_1V25_GAIN_MASK)
-	>> _DEVINFO_ADC0CAL0_1V25_GAIN_SHIFT;
+	(DEVINFO->ADC0CAL0 & _DEVINFO_ADC0CAL0_GAIN1V25_MASK)
+	>> _DEVINFO_ADC0CAL0_GAIN1V25_SHIFT;
 
 	uint32_t old_offset_calibration_value =
-	(DEVINFO->ADC0CAL0 & _DEVINFO_ADC0CAL0_1V25_OFFSET_MASK)
-	>> _DEVINFO_ADC0CAL0_1V25_OFFSET_SHIFT;
+	(DEVINFO->ADC0CAL0 & _DEVINFO_ADC0CAL0_OFFSET1V25_MASK)
+	>> _DEVINFO_ADC0CAL0_OFFSET1V25_SHIFT;
 
 	//RTCDRV_Trigger(100, NULL);
 
@@ -288,23 +289,35 @@ void adc_init(ADC_Reference reference, ADC_Input input, uint32_t adc_frequency)
 	{
 		/** Temperature reference. */
 	case adcInputSingleTemp:
-		sInit.input = adcSingleInpTemp;
+		sInit.posSel = adcPosSelTEMP;
+    sInit.negSel = adcNegSelDEFAULT;
 		break;
 	/** VDD / 3. */
 	case adcInputSingleVDDDiv3:
-		sInit.input = adcSingleInpVDDDiv3;
+		sInit.posSel = adcPosSelDEFAULT;
+    sInit.negSel = adcNegSelDEFAULT;
 		break;
 		/** Positive Ch4, negative Ch5. */
 	case adcInputSingleCh4Ch5:
-		sInit.input = adcSingleInpCh4Ch5;
+		sInit.posSel = adcPosSelDEFAULT;
+    sInit.negSel = adcNegSelDEFAULT;
 		sInit.diff = true;
 		break;
+  case adcInputSingleInputCh2:
+    sInit.posSel = adcPosSelDEFAULT;
+    sInit.negSel = adcNegSelDEFAULT;
+    break;
+  case adcInputSingleInputCh6:
+    sInit.posSel = adcPosSelDEFAULT;
+    sInit.negSel = adcNegSelDEFAULT;
+    break;
 	}
 
 	ADC_InitSingle(ADC0, &sInit);
 
 	/* Setup interrupt generation on completed conversion. */
-	ADC_IntEnable(ADC0, ADC_IF_SINGLE);
+  ADC_IntEnable(ADC0, ADC_IF_SINGLE);
+  NVIC_EnableIRQ(ADC0_IRQn);
 }
 
 void adc_start()
@@ -332,6 +345,6 @@ bool adc_ready()
 
 void adc_clear_interrupt()
 {
-	ADC_IntClear(ADC0, ADC_IFC_SINGLEOF);
+  ADC_IntClear(ADC0, ADC_IF_SINGLE);
 }
 

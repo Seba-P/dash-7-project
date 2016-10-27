@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-/*! \file efm32gg_uart.c
+/*! \file efm32pg1b_uart.c
  *
  *  \author jeremie@wizzilab.com
  *  \author maarten.weyn@uantwerpen.be
@@ -28,20 +28,18 @@
 #include "em_usart.h"
 #include "em_cmu.h"
 #include "em_gpio.h"
-#include "em_usbd.h"
-
+//#include "em_usbd.h"
 #include "em_gpio.h"
-
 #include "hwgpio.h"
 #include "hwuart.h"
 #include <assert.h>
 #include "hwsystem.h"
-#include "efm32gg_pins.h"
+#include "efm32pg1b_pins.h"
 
 #include "platform.h"
 
-#define UARTS     5   // 2 UARTs + 3 USARTs
-#define LOCATIONS 4
+#define UARTS     3   // 2 USARTs + 1 LEUART
+#define LOCATIONS 32
 
 typedef struct {
   IRQn_Type  tx;
@@ -61,107 +59,495 @@ typedef struct {
 }
 
 // configuration of uart/location mapping to tx and rx pins
-// TODO to be completed with all documented locations
 static uart_pins_t location[UARTS][LOCATIONS] = {
-  {
-    // UART 0
-    {
-      .location = UART_ROUTE_LOCATION_LOC0,
-      .tx       = { .port = gpioPortF, .pin =  6 },
-      .rx       = { .port = gpioPortF, .pin =  7 }
-    },
-    {
-      .location = UART_ROUTE_LOCATION_LOC1,
-      .tx       = { .port = gpioPortE, .pin =  0 },
-      .rx       = { .port = gpioPortE, .pin =  1 }
-    },
-    {
-      .location = UART_ROUTE_LOCATION_LOC2,
-      .tx       = { .port = gpioPortA, .pin =  3 },
-      .rx       = { .port = gpioPortA, .pin =  4 }
-    },
-    // no LOCATION 3
-    UNDEFINED_LOCATION
-  },
-  {
-    // UART 1
-    // no LOCATION 0
-    UNDEFINED_LOCATION,
-    {
-      .location = UART_ROUTE_LOCATION_LOC1,
-      .tx       = { .port = gpioPortF, .pin = 10 },
-      .rx       = { .port = gpioPortF, .pin = 11 }
-    },
-    {
-      .location = UART_ROUTE_LOCATION_LOC2,
-      .tx       = { .port = gpioPortB, .pin =  9 },
-      .rx       = { .port = gpioPortB, .pin = 10 }
-    },
-    {
-      .location = UART_ROUTE_LOCATION_LOC3,
-      .tx       = { .port = gpioPortE, .pin =  2 },
-      .rx       = { .port = gpioPortE, .pin =  3 }
-    }
-  },
   {
     // USART 0
     {
-      .location = USART_ROUTE_LOCATION_LOC0,
-      .tx       = { .port = gpioPortE, .pin = 10 },
-      .rx       = { .port = gpioPortE, .pin = 11 }
+      .location = 0,
+      .tx     = { .port = gpioPortA, .pin = 0 },
+      .rx     = { .port = gpioPortA, .pin = 1 }
     },
     {
-      .location = USART_ROUTE_LOCATION_LOC1,
-      .tx       = { .port = gpioPortE, .pin =  7 },
-      .rx       = { .port = gpioPortE, .pin =  6 }
+      .location = 1,
+      .tx     = { .port = gpioPortA, .pin = 1 },
+      .rx     = { .port = gpioPortA, .pin = 2 }
     },
     {
-      .location = USART_ROUTE_LOCATION_LOC2,
-      .tx       = { .port = gpioPortC, .pin = 11 },
-      .rx       = { .port = gpioPortC, .pin = 10 }
+      .location = 2,
+      .tx     = { .port = gpioPortA, .pin = 2 },
+      .rx     = { .port = gpioPortA, .pin = 3 }
     },
     {
-      .location = USART_ROUTE_LOCATION_LOC3,
-      .tx       = { .port = gpioPortE, .pin = 13 },
-      .rx       = { .port = gpioPortE, .pin = 12 }
+      .location = 3,
+      .tx     = { .port = gpioPortA, .pin = 3 },
+      .rx     = { .port = gpioPortA, .pin = 4 }
+    },
+    {
+      .location = 4,
+      .tx     = { .port = gpioPortA, .pin = 4 },
+      .rx     = { .port = gpioPortA, .pin = 5 }
+    },
+    {
+      .location = 5,
+      .tx     = { .port = gpioPortA, .pin = 5 },
+      .rx     = { .port = gpioPortB, .pin = 11 }
+    },
+    {
+      .location = 6,
+      .tx     = { .port = gpioPortB, .pin = 11 },
+      .rx     = { .port = gpioPortB, .pin = 12 }
+    },
+    {
+      .location = 7,
+      .tx     = { .port = gpioPortB, .pin = 12 },
+      .rx     = { .port = gpioPortB, .pin = 13 }
+    },
+    {
+      .location = 8,
+      .tx     = { .port = gpioPortB, .pin = 13 },
+      .rx     = { .port = gpioPortB, .pin = 14 }
+    },
+    {
+      .location = 9,
+      .tx     = { .port = gpioPortB, .pin = 14 },
+      .rx     = { .port = gpioPortB, .pin = 15 }
+    },
+    {
+      .location = 10,
+      .tx     = { .port = gpioPortB, .pin = 15 },
+      .rx     = { .port = gpioPortC, .pin = 6 }
+    },
+    {
+      .location = 11,
+      .tx     = { .port = gpioPortC, .pin = 6 },
+      .rx     = { .port = gpioPortC, .pin = 7 }
+    },
+    {
+      .location = 12,
+      .tx     = { .port = gpioPortC, .pin = 7 },
+      .rx     = { .port = gpioPortC, .pin = 8 }
+    },
+    {
+      .location = 13,
+      .tx     = { .port = gpioPortC, .pin = 8 },
+      .rx     = { .port = gpioPortC, .pin = 9 }
+    },
+    {
+      .location = 14,
+      .tx     = { .port = gpioPortC, .pin = 9 },
+      .rx     = { .port = gpioPortC, .pin = 10 }
+    },
+    {
+      .location = 15,
+      .tx     = { .port = gpioPortC, .pin = 10 },
+      .rx     = { .port = gpioPortC, .pin = 11 }
+    },
+    {
+      .location = 16,
+      .tx     = { .port = gpioPortC, .pin = 11 },
+      .rx     = { .port = gpioPortD, .pin = 9 }
+    },
+    {
+      .location = 17,
+      .tx     = { .port = gpioPortD, .pin = 9 },
+      .rx     = { .port = gpioPortD, .pin = 10 }
+    },
+    {
+      .location = 18,
+      .tx     = { .port = gpioPortD, .pin = 10 },
+      .rx     = { .port = gpioPortD, .pin = 11 }
+    },
+    {
+      .location = 19,
+      .tx     = { .port = gpioPortD, .pin = 11 },
+      .rx     = { .port = gpioPortD, .pin = 12 }
+    },
+    {
+      .location = 20,
+      .tx     = { .port = gpioPortD, .pin = 12 },
+      .rx     = { .port = gpioPortD, .pin = 13 }
+    },
+    {
+      .location = 21,
+      .tx     = { .port = gpioPortD, .pin = 13 },
+      .rx     = { .port = gpioPortD, .pin = 14 }
+    },
+    {
+      .location = 22,
+      .tx     = { .port = gpioPortD, .pin = 14 },
+      .rx     = { .port = gpioPortD, .pin = 15 }
+    },
+    {
+      .location = 23,
+      .tx     = { .port = gpioPortD, .pin = 15 },
+      .rx     = { .port = gpioPortF, .pin = 0 }
+    },
+    {
+      .location = 24,
+      .tx     = { .port = gpioPortF, .pin = 0 },
+      .rx     = { .port = gpioPortF, .pin = 1 }
+    },
+    {
+      .location = 25,
+      .tx     = { .port = gpioPortF, .pin = 1 },
+      .rx     = { .port = gpioPortF, .pin = 2 }
+    },
+    {
+      .location = 26,
+      .tx     = { .port = gpioPortF, .pin = 2 },
+      .rx     = { .port = gpioPortF, .pin = 3 }
+    },
+    {
+      .location = 27,
+      .tx     = { .port = gpioPortF, .pin = 3 },
+      .rx     = { .port = gpioPortF, .pin = 4 }
+    },
+    {
+      .location = 28,
+      .tx     = { .port = gpioPortF, .pin = 4 },
+      .rx     = { .port = gpioPortF, .pin = 5 }
+    },
+    {
+      .location = 29,
+      .tx     = { .port = gpioPortF, .pin = 5 },
+      .rx     = { .port = gpioPortF, .pin = 6 }
+    },
+    {
+      .location = 30,
+      .tx     = { .port = gpioPortF, .pin = 6 },
+      .rx     = { .port = gpioPortF, .pin = 7 }
+    },
+    {
+      .location = 31,
+      .tx     = { .port = gpioPortF, .pin = 7 },
+      .rx     = { .port = gpioPortA, .pin = 0 }
     }
   },
   {
     // USART 1
     {
-      .location = USART_ROUTE_LOCATION_LOC0,
-      .tx       = { .port = gpioPortC, .pin =  0 },
-      .rx       = { .port = gpioPortC, .pin =  1 }
+      .location = 0,
+      .tx     = { .port = gpioPortA, .pin = 0 },
+      .rx     = { .port = gpioPortA, .pin = 1 }
     },
     {
-      .location = USART_ROUTE_LOCATION_LOC1,
-      .tx       = { .port = gpioPortD, .pin =  0 },
-      .rx       = { .port = gpioPortD, .pin =  1 }
+      .location = 1,
+      .tx     = { .port = gpioPortA, .pin = 1 },
+      .rx     = { .port = gpioPortA, .pin = 2 }
     },
     {
-      .location = USART_ROUTE_LOCATION_LOC2,
-      .tx       = { .port = gpioPortD, .pin =  7 },
-      .rx       = { .port = gpioPortD, .pin =  6 }
+      .location = 2,
+      .tx     = { .port = gpioPortA, .pin = 2 },
+      .rx     = { .port = gpioPortA, .pin = 3 }
     },
-    // no LOCATION 3
-    UNDEFINED_LOCATION
+    {
+      .location = 3,
+      .tx     = { .port = gpioPortA, .pin = 3 },
+      .rx     = { .port = gpioPortA, .pin = 4 }
+    },
+    {
+      .location = 4,
+      .tx     = { .port = gpioPortA, .pin = 4 },
+      .rx     = { .port = gpioPortA, .pin = 5 }
+    },
+    {
+      .location = 5,
+      .tx     = { .port = gpioPortA, .pin = 5 },
+      .rx     = { .port = gpioPortB, .pin = 11 }
+    },
+    {
+      .location = 6,
+      .tx     = { .port = gpioPortB, .pin = 11 },
+      .rx     = { .port = gpioPortB, .pin = 12 }
+    },
+    {
+      .location = 7,
+      .tx     = { .port = gpioPortB, .pin = 12 },
+      .rx     = { .port = gpioPortB, .pin = 13 }
+    },
+    {
+      .location = 8,
+      .tx     = { .port = gpioPortB, .pin = 13 },
+      .rx     = { .port = gpioPortB, .pin = 14 }
+    },
+    {
+      .location = 9,
+      .tx     = { .port = gpioPortB, .pin = 14 },
+      .rx     = { .port = gpioPortB, .pin = 15 }
+    },
+    {
+      .location = 10,
+      .tx     = { .port = gpioPortB, .pin = 15 },
+      .rx     = { .port = gpioPortC, .pin = 6 }
+    },
+    {
+      .location = 11,
+      .tx     = { .port = gpioPortC, .pin = 6 },
+      .rx     = { .port = gpioPortC, .pin = 7 }
+    },
+    {
+      .location = 12,
+      .tx     = { .port = gpioPortC, .pin = 7 },
+      .rx     = { .port = gpioPortC, .pin = 8 }
+    },
+    {
+      .location = 13,
+      .tx     = { .port = gpioPortC, .pin = 8 },
+      .rx     = { .port = gpioPortC, .pin = 9 }
+    },
+    {
+      .location = 14,
+      .tx     = { .port = gpioPortC, .pin = 9 },
+      .rx     = { .port = gpioPortC, .pin = 10 }
+    },
+    {
+      .location = 15,
+      .tx     = { .port = gpioPortC, .pin = 10 },
+      .rx     = { .port = gpioPortC, .pin = 11 }
+    },
+    {
+      .location = 16,
+      .tx     = { .port = gpioPortC, .pin = 11 },
+      .rx     = { .port = gpioPortD, .pin = 9 }
+    },
+    {
+      .location = 17,
+      .tx     = { .port = gpioPortD, .pin = 9 },
+      .rx     = { .port = gpioPortD, .pin = 10 }
+    },
+    {
+      .location = 18,
+      .tx     = { .port = gpioPortD, .pin = 10 },
+      .rx     = { .port = gpioPortD, .pin = 11 }
+    },
+    {
+      .location = 19,
+      .tx     = { .port = gpioPortD, .pin = 11 },
+      .rx     = { .port = gpioPortD, .pin = 12 }
+    },
+    {
+      .location = 20,
+      .tx     = { .port = gpioPortD, .pin = 12 },
+      .rx     = { .port = gpioPortD, .pin = 13 }
+    },
+    {
+      .location = 21,
+      .tx     = { .port = gpioPortD, .pin = 13 },
+      .rx     = { .port = gpioPortD, .pin = 14 }
+    },
+    {
+      .location = 22,
+      .tx     = { .port = gpioPortD, .pin = 14 },
+      .rx     = { .port = gpioPortD, .pin = 15 }
+    },
+    {
+      .location = 23,
+      .tx     = { .port = gpioPortD, .pin = 15 },
+      .rx     = { .port = gpioPortF, .pin = 0 }
+    },
+    {
+      .location = 24,
+      .tx     = { .port = gpioPortF, .pin = 0 },
+      .rx     = { .port = gpioPortF, .pin = 1 }
+    },
+    {
+      .location = 25,
+      .tx     = { .port = gpioPortF, .pin = 1 },
+      .rx     = { .port = gpioPortF, .pin = 2 }
+    },
+    {
+      .location = 26,
+      .tx     = { .port = gpioPortF, .pin = 2 },
+      .rx     = { .port = gpioPortF, .pin = 3 }
+    },
+    {
+      .location = 27,
+      .tx     = { .port = gpioPortF, .pin = 3 },
+      .rx     = { .port = gpioPortF, .pin = 4 }
+    },
+    {
+      .location = 28,
+      .tx     = { .port = gpioPortF, .pin = 4 },
+      .rx     = { .port = gpioPortF, .pin = 5 }
+    },
+    {
+      .location = 29,
+      .tx     = { .port = gpioPortF, .pin = 5 },
+      .rx     = { .port = gpioPortF, .pin = 6 }
+    },
+    {
+      .location = 30,
+      .tx     = { .port = gpioPortF, .pin = 6 },
+      .rx     = { .port = gpioPortF, .pin = 7 }
+    },
+    {
+      .location = 31,
+      .tx     = { .port = gpioPortF, .pin = 7 },
+      .rx     = { .port = gpioPortA, .pin = 0 }
+    }
   },
   {
-    // USART 2
+    // LEUART0
     {
-      .location = UART_ROUTE_LOCATION_LOC0,
-      .tx       = { .port = gpioPortC, .pin =  2 },
-      .rx       = { .port = gpioPortC, .pin =  3 }
+      .location = 0,
+      .tx     = { .port = gpioPortA, .pin = 0 },
+      .rx     = { .port = gpioPortA, .pin = 1 }
     },
     {
-      .location = UART_ROUTE_LOCATION_LOC1,
-      .tx       = { .port = gpioPortB, .pin =  3 },
-      .rx       = { .port = gpioPortB, .pin =  4 }
+      .location = 1,
+      .tx     = { .port = gpioPortA, .pin = 1 },
+      .rx     = { .port = gpioPortA, .pin = 2 }
     },
-    // no LOCATION 2
-    UNDEFINED_LOCATION,
-    // no LOCATION 3
-    UNDEFINED_LOCATION
+    {
+      .location = 2,
+      .tx     = { .port = gpioPortA, .pin = 2 },
+      .rx     = { .port = gpioPortA, .pin = 3 }
+    },
+    {
+      .location = 3,
+      .tx     = { .port = gpioPortA, .pin = 3 },
+      .rx     = { .port = gpioPortA, .pin = 4 }
+    },
+    {
+      .location = 4,
+      .tx     = { .port = gpioPortA, .pin = 4 },
+      .rx     = { .port = gpioPortA, .pin = 5 }
+    },
+    {
+      .location = 5,
+      .tx     = { .port = gpioPortA, .pin = 5 },
+      .rx     = { .port = gpioPortB, .pin = 11 }
+    },
+    {
+      .location = 6,
+      .tx     = { .port = gpioPortB, .pin = 11 },
+      .rx     = { .port = gpioPortB, .pin = 12 }
+    },
+    {
+      .location = 7,
+      .tx     = { .port = gpioPortB, .pin = 12 },
+      .rx     = { .port = gpioPortB, .pin = 13 }
+    },
+    {
+      .location = 8,
+      .tx     = { .port = gpioPortB, .pin = 13 },
+      .rx     = { .port = gpioPortB, .pin = 14 }
+    },
+    {
+      .location = 9,
+      .tx     = { .port = gpioPortB, .pin = 14 },
+      .rx     = { .port = gpioPortB, .pin = 15 }
+    },
+    {
+      .location = 10,
+      .tx     = { .port = gpioPortB, .pin = 15 },
+      .rx     = { .port = gpioPortC, .pin = 6 }
+    },
+    {
+      .location = 11,
+      .tx     = { .port = gpioPortC, .pin = 6 },
+      .rx     = { .port = gpioPortC, .pin = 7 }
+    },
+    {
+      .location = 12,
+      .tx     = { .port = gpioPortC, .pin = 7 },
+      .rx     = { .port = gpioPortC, .pin = 8 }
+    },
+    {
+      .location = 13,
+      .tx     = { .port = gpioPortC, .pin = 8 },
+      .rx     = { .port = gpioPortC, .pin = 9 }
+    },
+    {
+      .location = 14,
+      .tx     = { .port = gpioPortC, .pin = 9 },
+      .rx     = { .port = gpioPortC, .pin = 10 }
+    },
+    {
+      .location = 15,
+      .tx     = { .port = gpioPortC, .pin = 10 },
+      .rx     = { .port = gpioPortC, .pin = 11 }
+    },
+    {
+      .location = 16,
+      .tx     = { .port = gpioPortC, .pin = 11 },
+      .rx     = { .port = gpioPortD, .pin = 9 }
+    },
+    {
+      .location = 17,
+      .tx     = { .port = gpioPortD, .pin = 9 },
+      .rx     = { .port = gpioPortD, .pin = 10 }
+    },
+    {
+      .location = 18,
+      .tx     = { .port = gpioPortD, .pin = 10 },
+      .rx     = { .port = gpioPortD, .pin = 11 }
+    },
+    {
+      .location = 19,
+      .tx     = { .port = gpioPortD, .pin = 11 },
+      .rx     = { .port = gpioPortD, .pin = 12 }
+    },
+    {
+      .location = 20,
+      .tx     = { .port = gpioPortD, .pin = 12 },
+      .rx     = { .port = gpioPortD, .pin = 13 }
+    },
+    {
+      .location = 21,
+      .tx     = { .port = gpioPortD, .pin = 13 },
+      .rx     = { .port = gpioPortD, .pin = 14 }
+    },
+    {
+      .location = 22,
+      .tx     = { .port = gpioPortD, .pin = 14 },
+      .rx     = { .port = gpioPortD, .pin = 15 }
+    },
+    {
+      .location = 23,
+      .tx     = { .port = gpioPortD, .pin = 15 },
+      .rx     = { .port = gpioPortF, .pin = 0 }
+    },
+    {
+      .location = 24,
+      .tx     = { .port = gpioPortF, .pin = 0 },
+      .rx     = { .port = gpioPortF, .pin = 1 }
+    },
+    {
+      .location = 25,
+      .tx     = { .port = gpioPortF, .pin = 1 },
+      .rx     = { .port = gpioPortF, .pin = 2 }
+    },
+    {
+      .location = 26,
+      .tx     = { .port = gpioPortF, .pin = 2 },
+      .rx     = { .port = gpioPortF, .pin = 3 }
+    },
+    {
+      .location = 27,
+      .tx     = { .port = gpioPortF, .pin = 3 },
+      .rx     = { .port = gpioPortF, .pin = 4 }
+    },
+    {
+      .location = 28,
+      .tx     = { .port = gpioPortF, .pin = 4 },
+      .rx     = { .port = gpioPortF, .pin = 5 }
+    },
+    {
+      .location = 29,
+      .tx     = { .port = gpioPortF, .pin = 5 },
+      .rx     = { .port = gpioPortF, .pin = 6 }
+    },
+    {
+      .location = 30,
+      .tx     = { .port = gpioPortF, .pin = 6 },
+      .rx     = { .port = gpioPortF, .pin = 7 }
+    },
+    {
+      .location = 31,
+      .tx     = { .port = gpioPortF, .pin = 7 },
+      .rx     = { .port = gpioPortA, .pin = 0 }
+    }
   }
 };
 
@@ -182,34 +568,22 @@ struct uart_handle {
 static uart_handle_t handle[UARTS] = {
   {
     .idx     = 0,
-    .channel = UART0,
-    .clock   = cmuClock_UART0,
-    .irq     = { .tx = UART0_TX_IRQn,  .rx = UART0_RX_IRQn  }
-  },
-  {
-    .idx     = 1,
-    .channel = UART1,
-    .clock   = cmuClock_UART1,
-    .irq     = { .tx = UART1_TX_IRQn,  .rx = UART1_RX_IRQn  }
-  },
-  {
-    .idx     = 2,
     .channel = USART0,
     .clock   = cmuClock_USART0,
     .irq     = { .tx = USART0_TX_IRQn, .rx = USART0_RX_IRQn }
   },
   {
-    .idx     = 3,
+    .idx     = 1,
     .channel = USART1,
     .clock   = cmuClock_USART1,
     .irq     = { .tx = USART1_TX_IRQn, .rx = USART1_RX_IRQn }
   },
   {
-    .idx     = 4,
-    .channel = USART2,
-    .clock   = cmuClock_USART2,
-    .irq     = { .tx = USART2_TX_IRQn, .rx = USART2_RX_IRQn }
-  }
+    .idx     = 2,
+    .channel = (USART_TypeDef *)LEUART0,
+    .clock   = cmuClock_LEUART0,
+    .irq     = { .tx = LEUART0_IRQn, .rx = LEUART0_IRQn }
+  },
 };
 
 uart_handle_t* uart_init(uint8_t idx, uint32_t baudrate, uint8_t pins) {
@@ -218,7 +592,7 @@ uart_handle_t* uart_init(uint8_t idx, uint32_t baudrate, uint8_t pins) {
   handle[idx].baudrate = baudrate;
   
   // configure UART TX pin as digital output
-  hw_gpio_configure_pin(handle[idx].pins->tx, false, gpioModePushPullDrive, 0);
+  hw_gpio_configure_pin(handle[idx].pins->tx, false, gpioModePushPull, 0);
   // configure UART RX pin as input (no filter)
   hw_gpio_configure_pin(handle[idx].pins->rx, false, gpioModeInput, 0);
 
@@ -247,10 +621,9 @@ bool uart_enable(uart_handle_t* uart) {
   USART_InitAsync(uart->channel, &uartInit);
   
   // clear RX/TX buffers and shift regs, enable transmitter and receiver pins
-  uart->channel->ROUTE = UART_ROUTE_RXPEN
-                       | UART_ROUTE_TXPEN
-                       | uart->pins->location;
-  USART_IntClear(uart->channel, _UART_IF_MASK);
+  uart->channel->ROUTEPEN = USART_ROUTEPEN_RXPEN | USART_ROUTEPEN_TXPEN;
+  uart->channel->ROUTELOC0 = (uart->pins->location << _USART_ROUTELOC0_RXLOC_SHIFT) | (uart->pins->location << _USART_ROUTELOC0_TXLOC_SHIFT);
+  USART_IntClear(uart->channel, (uart->idx == 2) ? _LEUART_IF_MASK : _USART_IF_MASK);
   NVIC_ClearPendingIRQ(uart->irq.rx);
   NVIC_ClearPendingIRQ(uart->irq.tx);
 
@@ -261,7 +634,7 @@ bool uart_enable(uart_handle_t* uart) {
 
 bool uart_disable(uart_handle_t* uart) {
   // reset route to make sure that TX pin will become low after disable
-  uart->channel->ROUTE = _UART_ROUTE_RESETVALUE;
+  uart->channel->ROUTEPEN = _USART_ROUTEPEN_RESETVALUE;
 
   USART_Enable(uart->channel, usartDisable);
   CMU_ClockEnable(uart->clock, false);
@@ -311,7 +684,7 @@ void uart_send_bytes(uart_handle_t* uart, void const *data, size_t length) {
 			int ret = USBD_Write( 0x81, (void*) tempData, length, NULL);
 		}
 #else
-	for(uint8_t i=0; i<length; i++)	{
+  for(size_t i = 0; i < length; i++)	{
 		uart_send_byte(uart, ((uint8_t const*)data)[i]);
 	}
 #endif
@@ -323,8 +696,8 @@ void uart_send_string(uart_handle_t* uart, const char *string) {
 
 error_t uart_rx_interrupt_enable(uart_handle_t* uart) {
   if(handler[uart->idx] == NULL) { return EOFF; }
-  USART_IntClear(uart->channel, _UART_IF_MASK);
-  USART_IntEnable(uart->channel, UART_IF_RXDATAV);
+  USART_IntClear(uart->channel, (uart->idx == 2) ? _LEUART_IF_MASK : _USART_IF_MASK);
+  USART_IntEnable(uart->channel, (uart->idx == 2) ? _LEUART_IF_RXDATAV_MASK : _USART_IF_RXDATAV_MASK);
   NVIC_ClearPendingIRQ(uart->irq.tx);
   NVIC_ClearPendingIRQ(uart->irq.rx);
   NVIC_EnableIRQ(uart->irq.rx);
@@ -332,44 +705,30 @@ error_t uart_rx_interrupt_enable(uart_handle_t* uart) {
 }
 
 void uart_rx_interrupt_disable(uart_handle_t* uart) {
-  USART_IntClear(uart->channel, _UART_IF_MASK);
-  USART_IntDisable(uart->channel, UART_IF_RXDATAV);
+  USART_IntClear(uart->channel, (uart->idx == 2) ? _LEUART_IF_MASK : _USART_IF_MASK);
+  USART_IntDisable(uart->channel, (uart->idx == 2) ? _LEUART_IF_RXDATAV_MASK : _USART_IF_RXDATAV_MASK);
   NVIC_ClearPendingIRQ(uart->irq.rx);
   NVIC_ClearPendingIRQ(uart->irq.tx);
   NVIC_DisableIRQ(uart->irq.rx);
 }
 
-void UART0_RX_IRQHandler(void) {
-  if(handle[0].channel->STATUS & UART_STATUS_RXDATAV) {
-    handler[0](USART_Rx(handle[0].channel));
-    USART_IntClear(handle[0].channel, UART_IF_RXDATAV);
-  }
-}
-
-void UART1_RX_IRQHandler(void) {
-  if(handle[1].channel->STATUS & UART_STATUS_RXDATAV) {
-    handler[1](USART_Rx(handle[1].channel));
-    USART_IntClear(handle[1].channel, UART_IF_RXDATAV);
-  }
-}
-
 void USART0_RX_IRQHandler(void) {
-  if(handle[2].channel->STATUS & UART_STATUS_RXDATAV) {
+  if(handle[2].channel->STATUS & USART_STATUS_RXDATAV) {
     handler[2](USART_Rx(handle[2].channel));
-    USART_IntClear(handle[2].channel, UART_IF_RXDATAV);
+    USART_IntClear(handle[2].channel, USART_IF_RXDATAV);
   }
 }
 
 void USART1_RX_IRQHandler(void) {
-  if(handle[3].channel->STATUS & UART_STATUS_RXDATAV) {
+  if(handle[3].channel->STATUS & USART_STATUS_RXDATAV) {
     handler[3](USART_Rx(handle[3].channel));
-    USART_IntClear(handle[3].channel, UART_IF_RXDATAV);
+    USART_IntClear(handle[3].channel, USART_IF_RXDATAV);
   }
 }
 
-void USART2_RX_IRQHandler(void) {
-  if(handle[4].channel->STATUS & UART_STATUS_RXDATAV) {
-    handler[4](USART_Rx(handle[4].channel));
-    USART_IntClear(handle[4].channel, UART_IF_RXDATAV);
+void LEUART0_RX_IRQHandler(void) {
+  if(handle[0].channel->STATUS & LEUART_STATUS_RXDATAV) {
+    handler[0](USART_Rx(handle[0].channel));
+    USART_IntClear(handle[0].channel, LEUART_IF_RXDATAV);
   }
 }

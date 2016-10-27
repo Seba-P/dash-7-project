@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-/*! \file efm32gg_system.c
+/*! \file efm32pg1b_system.c
  *
  *
  */
@@ -50,6 +50,7 @@ void hw_enter_lowpower_mode(uint8_t mode)
 	}
 	case 4:
 	{
+		//TODO: use EMU_EnterEM4H() or EMU_EnterEM4S()
 	    EMU_EnterEM4();
 	    break;
 	}
@@ -87,10 +88,10 @@ void hw_reset()
 #define CAL_TEMP_0 (float)((DEVINFO->CAL & _DEVINFO_CAL_TEMP_MASK) >> _DEVINFO_CAL_TEMP_SHIFT)
 
 // Factory ADC readout at CAL_TEMP_0 temperature (from device information page)
-#define ADC_TEMP_0_READ_1V25 (float)((DEVINFO->ADC0CAL2 & _DEVINFO_ADC0CAL2_TEMP1V25_MASK) >> _DEVINFO_ADC0CAL2_TEMP1V25_SHIFT)
+#define ADC_TEMP_0_READ_1V25 (float)((DEVINFO->ADC0CAL3 & _DEVINFO_ADC0CAL3_TEMPREAD1V25_MASK) >> _DEVINFO_ADC0CAL3_TEMPREAD1V25_SHIFT)
 
 // temperature gradient (from datasheet)
-#define T_GRAD -6.3f
+#define T_GRAD -6.03f
 
 float hw_get_internal_temperature()
 {
@@ -99,7 +100,8 @@ float hw_get_internal_temperature()
   // TODO take into account warmup time
   uint32_t value = adc_read_single();
 
-  return (CAL_TEMP_0 - ((ADC_TEMP_0_READ_1V25 - value)  / T_GRAD));
+  return (CAL_TEMP_0 - ((float)(ADC_TEMP_0_READ_1V25 - value) * 1250 / (float)(4096 * -1.835)));
+  // GRAD = (4096*(-1,84))/1250
 }
 
 

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-/*! \file efm32gg_gpio.c
+/*! \file efm32pg1b_gpio.c
  *
  *  \author daniel.vandenakker@uantwerpen.be
  *  \author glenn.ergeerts@uantwerpen.be
@@ -25,7 +25,7 @@
 
 
 #include "hwgpio.h"
-#include "efm32gg_chip.h"
+#include "efm32pg1b_chip.h"
 #include <em_gpio.h>
 #include <em_cmu.h>
 #include <em_bitband.h>
@@ -57,7 +57,6 @@ __LINK_C void __gpio_init()
 
     /* Initialize GPIO interrupt dispatcher */
     GPIOINT_Init();
-
 }
 
 __LINK_C error_t hw_gpio_configure_pin(pin_id_t pin_id, bool int_allowed, uint8_t mode, unsigned int out)
@@ -84,7 +83,7 @@ __LINK_C error_t hw_gpio_configure_pin(pin_id_t pin_id, bool int_allowed, uint8_
 __LINK_C error_t hw_gpio_set(pin_id_t pin_id)
 {
     if(!(gpio_pins_configured[pin_id.port] & (1<<pin_id.pin)))
-	return EOFF;
+	   return EOFF;
     GPIO_PinOutSet(pin_id.port, pin_id.pin);
     return SUCCESS;
 }
@@ -92,7 +91,7 @@ __LINK_C error_t hw_gpio_set(pin_id_t pin_id)
 __LINK_C error_t hw_gpio_clr(pin_id_t pin_id)
 {
     if(!(gpio_pins_configured[pin_id.port] & (1<<pin_id.pin)))
-	return EOFF;
+	   return EOFF;
     GPIO_PinOutClear(pin_id.port, pin_id.pin);
     return SUCCESS;
 }
@@ -100,7 +99,7 @@ __LINK_C error_t hw_gpio_clr(pin_id_t pin_id)
 __LINK_C error_t hw_gpio_toggle(pin_id_t pin_id)
 {
     if(!(gpio_pins_configured[pin_id.port] & (1<<pin_id.pin)))
-	return EOFF;
+	   return EOFF;
     GPIO_PinOutToggle(pin_id.port, pin_id.pin);
     return SUCCESS;
 }
@@ -177,7 +176,7 @@ __LINK_C error_t hw_gpio_disable_interrupt(pin_id_t pin_id)
     //interrupts[..].interrupt_port && interrupts[..].callback will never change once they've
     //been properly set so I think we can risk it and avoid the overhead
     if(interrupts[pin_id.pin].interrupt_port != pin_id.port || interrupts[pin_id.pin].callback == 0x0)
-	return EOFF;
+	   return EOFF;
 
     BITBAND_Peripheral(&(GPIO->IEN), pin_id.pin, 0);
     return SUCCESS;

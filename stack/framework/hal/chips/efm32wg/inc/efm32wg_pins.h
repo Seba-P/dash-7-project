@@ -68,6 +68,10 @@ extern pin_id_t const C8;
 extern pin_id_t const C9;
 extern pin_id_t const C10;
 extern pin_id_t const C11;
+extern pin_id_t const C12;
+extern pin_id_t const C13;
+extern pin_id_t const C14;
+extern pin_id_t const C15;
 //port D
 extern pin_id_t const D0;
 extern pin_id_t const D1;
@@ -106,6 +110,8 @@ extern pin_id_t const E15;
 extern pin_id_t const F0;
 extern pin_id_t const F1;
 extern pin_id_t const F2;
+extern pin_id_t const F3;
+extern pin_id_t const F4;
 extern pin_id_t const F5;
 extern pin_id_t const F6;
 extern pin_id_t const F7;
@@ -114,6 +120,5 @@ extern pin_id_t const F9;
 extern pin_id_t const F10;
 extern pin_id_t const F11;
 extern pin_id_t const F12;
-
 
 #endif //__EFM32WG_PINS_H_

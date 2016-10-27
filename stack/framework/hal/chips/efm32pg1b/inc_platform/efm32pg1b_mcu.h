@@ -16,8 +16,8 @@
  * limitations under the License.
  */
 
-#ifndef __EFM32GG_MCU_H_
-#define __EFM32GG_MCU_H_
+#ifndef __EFM32PG1B_MCU_H_
+#define __EFM32PG1B_MCU_H_
 
 #include "em_int.h"
 
@@ -26,6 +26,6 @@
     void handler(){INT_Disable();__ ## handler();INT_Enable();}\
     static inline void __ ## handler()
 
-void __efm32gg_mcu_init();
+void __efm32pg1b_mcu_init();
 
 #endif

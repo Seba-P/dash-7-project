@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-/*! \file efm32gg_spi.c
+/*! \file efm32pg1b_spi.c
  *
  * \author jeremie@wizzilab.com
  * \author daniel.vandenakker@uantwerpen.be
@@ -42,8 +42,8 @@
 
 #include "platform.h"
 
-#define USARTS    3
-#define LOCATIONS 2
+#define USARTS    2
+#define LOCATIONS 32
 
 typedef struct {
   uint32_t location;
@@ -52,51 +52,395 @@ typedef struct {
   pin_id_t clk;
 } spi_pins_t;
 
-// TODO to be completed with all documented locations
 static spi_pins_t location[USARTS][LOCATIONS] = {
   {
     // USART 0
     {
-      .location = USART_ROUTE_LOCATION_LOC0,
-      .mosi     = { .port = gpioPortE, .pin = 10 },
-      .miso     = { .port = gpioPortE, .pin = 11 },
-      .clk      = { .port = gpioPortE, .pin = 12 }
+      .location = 0,
+      .mosi     = { .port = gpioPortA, .pin = 0 },
+      .miso     = { .port = gpioPortA, .pin = 1 },
+      .clk      = { .port = gpioPortA, .pin = 2 }
     },
     {
-      .location = USART_ROUTE_LOCATION_LOC1,
-      .mosi     = { .port = gpioPortE, .pin = 7 },
-      .miso     = { .port = gpioPortE, .pin = 6 },
-      .clk      = { .port = gpioPortE, .pin = 5 }
+      .location = 1,
+      .mosi     = { .port = gpioPortA, .pin = 1 },
+      .miso     = { .port = gpioPortA, .pin = 2 },
+      .clk      = { .port = gpioPortA, .pin = 3 }
+    },
+    {
+      .location = 2,
+      .mosi     = { .port = gpioPortA, .pin = 2 },
+      .miso     = { .port = gpioPortA, .pin = 3 },
+      .clk      = { .port = gpioPortA, .pin = 4 }
+    },
+    {
+      .location = 3,
+      .mosi     = { .port = gpioPortA, .pin = 3 },
+      .miso     = { .port = gpioPortA, .pin = 4 },
+      .clk      = { .port = gpioPortA, .pin = 5 }
+    },
+    {
+      .location = 4,
+      .mosi     = { .port = gpioPortA, .pin = 4 },
+      .miso     = { .port = gpioPortA, .pin = 5 },
+      .clk      = { .port = gpioPortB, .pin = 11 }
+    },
+    {
+      .location = 5,
+      .mosi     = { .port = gpioPortA, .pin = 5 },
+      .miso     = { .port = gpioPortB, .pin = 11 },
+      .clk      = { .port = gpioPortB, .pin = 12 }
+    },
+    {
+      .location = 6,
+      .mosi     = { .port = gpioPortB, .pin = 11 },
+      .miso     = { .port = gpioPortB, .pin = 12 },
+      .clk      = { .port = gpioPortB, .pin = 13 }
+    },
+    {
+      .location = 7,
+      .mosi     = { .port = gpioPortB, .pin = 12 },
+      .miso     = { .port = gpioPortB, .pin = 13 },
+      .clk      = { .port = gpioPortB, .pin = 14 }
+    },
+    {
+      .location = 8,
+      .mosi     = { .port = gpioPortB, .pin = 13 },
+      .miso     = { .port = gpioPortB, .pin = 14 },
+      .clk      = { .port = gpioPortB, .pin = 15 }
+    },
+    {
+      .location = 9,
+      .mosi     = { .port = gpioPortB, .pin = 14 },
+      .miso     = { .port = gpioPortB, .pin = 15 },
+      .clk      = { .port = gpioPortC, .pin = 6 }
+    },
+    {
+      .location = 10,
+      .mosi     = { .port = gpioPortB, .pin = 15 },
+      .miso     = { .port = gpioPortC, .pin = 6 },
+      .clk      = { .port = gpioPortC, .pin = 7 }
+    },
+    {
+      .location = 11,
+      .mosi     = { .port = gpioPortC, .pin = 6 },
+      .miso     = { .port = gpioPortC, .pin = 7 },
+      .clk      = { .port = gpioPortC, .pin = 8 }
+    },
+    {
+      .location = 12,
+      .mosi     = { .port = gpioPortC, .pin = 7 },
+      .miso     = { .port = gpioPortC, .pin = 8 },
+      .clk      = { .port = gpioPortC, .pin = 9 }
+    },
+    {
+      .location = 13,
+      .mosi     = { .port = gpioPortC, .pin = 8 },
+      .miso     = { .port = gpioPortC, .pin = 9 },
+      .clk      = { .port = gpioPortC, .pin = 10 }
+    },
+    {
+      .location = 14,
+      .mosi     = { .port = gpioPortC, .pin = 9 },
+      .miso     = { .port = gpioPortC, .pin = 10 },
+      .clk      = { .port = gpioPortC, .pin = 11 }
+    },
+    {
+      .location = 15,
+      .mosi     = { .port = gpioPortC, .pin = 10 },
+      .miso     = { .port = gpioPortC, .pin = 11 },
+      .clk      = { .port = gpioPortD, .pin = 9 }
+    },
+    {
+      .location = 16,
+      .mosi     = { .port = gpioPortC, .pin = 11 },
+      .miso     = { .port = gpioPortD, .pin = 9 },
+      .clk      = { .port = gpioPortD, .pin = 10 }
+    },
+    {
+      .location = 17,
+      .mosi     = { .port = gpioPortD, .pin = 9 },
+      .miso     = { .port = gpioPortD, .pin = 10 },
+      .clk      = { .port = gpioPortD, .pin = 11 }
+    },
+    {
+      .location = 18,
+      .mosi     = { .port = gpioPortD, .pin = 10 },
+      .miso     = { .port = gpioPortD, .pin = 11 },
+      .clk      = { .port = gpioPortD, .pin = 12 }
+    },
+    {
+      .location = 19,
+      .mosi     = { .port = gpioPortD, .pin = 11 },
+      .miso     = { .port = gpioPortD, .pin = 12 },
+      .clk      = { .port = gpioPortD, .pin = 13 }
+    },
+    {
+      .location = 20,
+      .mosi     = { .port = gpioPortD, .pin = 12 },
+      .miso     = { .port = gpioPortD, .pin = 13 },
+      .clk      = { .port = gpioPortD, .pin = 14 }
+    },
+    {
+      .location = 21,
+      .mosi     = { .port = gpioPortD, .pin = 13 },
+      .miso     = { .port = gpioPortD, .pin = 14 },
+      .clk      = { .port = gpioPortD, .pin = 15 }
+    },
+    {
+      .location = 22,
+      .mosi     = { .port = gpioPortD, .pin = 14 },
+      .miso     = { .port = gpioPortD, .pin = 15 },
+      .clk      = { .port = gpioPortF, .pin = 0 }
+    },
+    {
+      .location = 23,
+      .mosi     = { .port = gpioPortD, .pin = 15 },
+      .miso     = { .port = gpioPortF, .pin = 0 },
+      .clk      = { .port = gpioPortF, .pin = 1 }
+    },
+    {
+      .location = 24,
+      .mosi     = { .port = gpioPortF, .pin = 0 },
+      .miso     = { .port = gpioPortF, .pin = 1 },
+      .clk      = { .port = gpioPortF, .pin = 2 }
+    },
+    {
+      .location = 25,
+      .mosi     = { .port = gpioPortF, .pin = 1 },
+      .miso     = { .port = gpioPortF, .pin = 2 },
+      .clk      = { .port = gpioPortF, .pin = 3 }
+    },
+    {
+      .location = 26,
+      .mosi     = { .port = gpioPortF, .pin = 2 },
+      .miso     = { .port = gpioPortF, .pin = 3 },
+      .clk      = { .port = gpioPortF, .pin = 4 }
+    },
+    {
+      .location = 27,
+      .mosi     = { .port = gpioPortF, .pin = 3 },
+      .miso     = { .port = gpioPortF, .pin = 4 },
+      .clk      = { .port = gpioPortF, .pin = 5 }
+    },
+    {
+      .location = 28,
+      .mosi     = { .port = gpioPortF, .pin = 4 },
+      .miso     = { .port = gpioPortF, .pin = 5 },
+      .clk      = { .port = gpioPortF, .pin = 6 }
+    },
+    {
+      .location = 29,
+      .mosi     = { .port = gpioPortF, .pin = 5 },
+      .miso     = { .port = gpioPortF, .pin = 6 },
+      .clk      = { .port = gpioPortF, .pin = 7 }
+    },
+    {
+      .location = 30,
+      .mosi     = { .port = gpioPortF, .pin = 6 },
+      .miso     = { .port = gpioPortF, .pin = 7 },
+      .clk      = { .port = gpioPortA, .pin = 0 }
+    },
+    {
+      .location = 31,
+      .mosi     = { .port = gpioPortF, .pin = 7 },
+      .miso     = { .port = gpioPortA, .pin = 0 },
+      .clk      = { .port = gpioPortA, .pin = 1 }
     }
   },
   {
     // USART 1
     {
-      .location = USART_ROUTE_LOCATION_LOC0,
-      .mosi     = { .port = gpioPortC, .pin = 0 },
-      .miso     = { .port = gpioPortC, .pin = 1 },
-      .clk      = { .port = gpioPortB, .pin = 7 }
+      .location = 0,
+      .mosi     = { .port = gpioPortA, .pin = 0 },
+      .miso     = { .port = gpioPortA, .pin = 1 },
+      .clk      = { .port = gpioPortA, .pin = 2 }
     },
     {
-      .location = USART_ROUTE_LOCATION_LOC1,
-      .mosi     = { .port = gpioPortD, .pin = 0 },
-      .miso     = { .port = gpioPortD, .pin = 1 },
-      .clk      = { .port = gpioPortD, .pin = 2 }
-    }
-  },
-  {
-    // USART 2
-    {
-      .location = USART_ROUTE_LOCATION_LOC0,
-      .mosi     = { .port = gpioPortC, .pin = 2 },
-      .miso     = { .port = gpioPortC, .pin = 3 },
-      .clk      = { .port = gpioPortC, .pin = 4 }
+      .location = 1,
+      .mosi     = { .port = gpioPortA, .pin = 1 },
+      .miso     = { .port = gpioPortA, .pin = 2 },
+      .clk      = { .port = gpioPortA, .pin = 3 }
     },
     {
-      .location = USART_ROUTE_LOCATION_LOC1,
-      .mosi     = { .port = gpioPortB, .pin = 3 },
-      .miso     = { .port = gpioPortB, .pin = 4 },
-      .clk      = { .port = gpioPortB, .pin = 5 }
+      .location = 2,
+      .mosi     = { .port = gpioPortA, .pin = 2 },
+      .miso     = { .port = gpioPortA, .pin = 3 },
+      .clk      = { .port = gpioPortA, .pin = 4 }
+    },
+    {
+      .location = 3,
+      .mosi     = { .port = gpioPortA, .pin = 3 },
+      .miso     = { .port = gpioPortA, .pin = 4 },
+      .clk      = { .port = gpioPortA, .pin = 5 }
+    },
+    {
+      .location = 4,
+      .mosi     = { .port = gpioPortA, .pin = 4 },
+      .miso     = { .port = gpioPortA, .pin = 5 },
+      .clk      = { .port = gpioPortB, .pin = 11 }
+    },
+    {
+      .location = 5,
+      .mosi     = { .port = gpioPortA, .pin = 5 },
+      .miso     = { .port = gpioPortB, .pin = 11 },
+      .clk      = { .port = gpioPortB, .pin = 12 }
+    },
+    {
+      .location = 6,
+      .mosi     = { .port = gpioPortB, .pin = 11 },
+      .miso     = { .port = gpioPortB, .pin = 12 },
+      .clk      = { .port = gpioPortB, .pin = 13 }
+    },
+    {
+      .location = 7,
+      .mosi     = { .port = gpioPortB, .pin = 12 },
+      .miso     = { .port = gpioPortB, .pin = 13 },
+      .clk      = { .port = gpioPortB, .pin = 14 }
+    },
+    {
+      .location = 8,
+      .mosi     = { .port = gpioPortB, .pin = 13 },
+      .miso     = { .port = gpioPortB, .pin = 14 },
+      .clk      = { .port = gpioPortB, .pin = 15 }
+    },
+    {
+      .location = 9,
+      .mosi     = { .port = gpioPortB, .pin = 14 },
+      .miso     = { .port = gpioPortB, .pin = 15 },
+      .clk      = { .port = gpioPortC, .pin = 6 }
+    },
+    {
+      .location = 10,
+      .mosi     = { .port = gpioPortB, .pin = 15 },
+      .miso     = { .port = gpioPortC, .pin = 6 },
+      .clk      = { .port = gpioPortC, .pin = 7 }
+    },
+    {
+      .location = 11,
+      .mosi     = { .port = gpioPortC, .pin = 6 },
+      .miso     = { .port = gpioPortC, .pin = 7 },
+      .clk      = { .port = gpioPortC, .pin = 8 }
+    },
+    {
+      .location = 12,
+      .mosi     = { .port = gpioPortC, .pin = 7 },
+      .miso     = { .port = gpioPortC, .pin = 8 },
+      .clk      = { .port = gpioPortC, .pin = 9 }
+    },
+    {
+      .location = 13,
+      .mosi     = { .port = gpioPortC, .pin = 8 },
+      .miso     = { .port = gpioPortC, .pin = 9 },
+      .clk      = { .port = gpioPortC, .pin = 10 }
+    },
+    {
+      .location = 14,
+      .mosi     = { .port = gpioPortC, .pin = 9 },
+      .miso     = { .port = gpioPortC, .pin = 10 },
+      .clk      = { .port = gpioPortC, .pin = 11 }
+    },
+    {
+      .location = 15,
+      .mosi     = { .port = gpioPortC, .pin = 10 },
+      .miso     = { .port = gpioPortC, .pin = 11 },
+      .clk      = { .port = gpioPortD, .pin = 9 }
+    },
+    {
+      .location = 16,
+      .mosi     = { .port = gpioPortC, .pin = 11 },
+      .miso     = { .port = gpioPortD, .pin = 9 },
+      .clk      = { .port = gpioPortD, .pin = 10 }
+    },
+    {
+      .location = 17,
+      .mosi     = { .port = gpioPortD, .pin = 9 },
+      .miso     = { .port = gpioPortD, .pin = 10 },
+      .clk      = { .port = gpioPortD, .pin = 11 }
+    },
+    {
+      .location = 18,
+      .mosi     = { .port = gpioPortD, .pin = 10 },
+      .miso     = { .port = gpioPortD, .pin = 11 },
+      .clk      = { .port = gpioPortD, .pin = 12 }
+    },
+    {
+      .location = 19,
+      .mosi     = { .port = gpioPortD, .pin = 11 },
+      .miso     = { .port = gpioPortD, .pin = 12 },
+      .clk      = { .port = gpioPortD, .pin = 13 }
+    },
+    {
+      .location = 20,
+      .mosi     = { .port = gpioPortD, .pin = 12 },
+      .miso     = { .port = gpioPortD, .pin = 13 },
+      .clk      = { .port = gpioPortD, .pin = 14 }
+    },
+    {
+      .location = 21,
+      .mosi     = { .port = gpioPortD, .pin = 13 },
+      .miso     = { .port = gpioPortD, .pin = 14 },
+      .clk      = { .port = gpioPortD, .pin = 15 }
+    },
+    {
+      .location = 22,
+      .mosi     = { .port = gpioPortD, .pin = 14 },
+      .miso     = { .port = gpioPortD, .pin = 15 },
+      .clk      = { .port = gpioPortF, .pin = 0 }
+    },
+    {
+      .location = 23,
+      .mosi     = { .port = gpioPortD, .pin = 15 },
+      .miso     = { .port = gpioPortF, .pin = 0 },
+      .clk      = { .port = gpioPortF, .pin = 1 }
+    },
+    {
+      .location = 24,
+      .mosi     = { .port = gpioPortF, .pin = 0 },
+      .miso     = { .port = gpioPortF, .pin = 1 },
+      .clk      = { .port = gpioPortF, .pin = 2 }
+    },
+    {
+      .location = 25,
+      .mosi     = { .port = gpioPortF, .pin = 1 },
+      .miso     = { .port = gpioPortF, .pin = 2 },
+      .clk      = { .port = gpioPortF, .pin = 3 }
+    },
+    {
+      .location = 26,
+      .mosi     = { .port = gpioPortF, .pin = 2 },
+      .miso     = { .port = gpioPortF, .pin = 3 },
+      .clk      = { .port = gpioPortF, .pin = 4 }
+    },
+    {
+      .location = 27,
+      .mosi     = { .port = gpioPortF, .pin = 3 },
+      .miso     = { .port = gpioPortF, .pin = 4 },
+      .clk      = { .port = gpioPortF, .pin = 5 }
+    },
+    {
+      .location = 28,
+      .mosi     = { .port = gpioPortF, .pin = 4 },
+      .miso     = { .port = gpioPortF, .pin = 5 },
+      .clk      = { .port = gpioPortF, .pin = 6 }
+    },
+    {
+      .location = 29,
+      .mosi     = { .port = gpioPortF, .pin = 5 },
+      .miso     = { .port = gpioPortF, .pin = 6 },
+      .clk      = { .port = gpioPortF, .pin = 7 }
+    },
+    {
+      .location = 30,
+      .mosi     = { .port = gpioPortF, .pin = 6 },
+      .miso     = { .port = gpioPortF, .pin = 7 },
+      .clk      = { .port = gpioPortA, .pin = 0 }
+    },
+    {
+      .location = 31,
+      .mosi     = { .port = gpioPortF, .pin = 7 },
+      .miso     = { .port = gpioPortA, .pin = 0 },
+      .clk      = { .port = gpioPortA, .pin = 1 }
     }
   }
 };
@@ -115,10 +459,6 @@ static spi_usart_t usart[USARTS] = {
   {
     .channel = USART1,
     .clock   = cmuClock_USART1
-  },
-  {
-    .channel = USART2,
-    .clock   = cmuClock_USART2
   },
 };
 
@@ -187,12 +527,12 @@ void spi_enable(spi_handle_t* spi) {
   usartInit.clockMode = usartClockMode0;
   
   USART_InitSync(spi->usart->channel, &usartInit);
-  USART_Enable  (spi->usart->channel, usartEnable);
+  USART_Enable(spi->usart->channel, usartEnable);
 
-  spi->usart->channel->ROUTE = USART_ROUTE_TXPEN
-                             | USART_ROUTE_RXPEN
-                             | USART_ROUTE_CLKPEN
-                             | spi->pins->location;
+  spi->usart->channel->ROUTEPEN = USART_ROUTEPEN_RXPEN | USART_ROUTEPEN_TXPEN | USART_ROUTEPEN_CLKPEN;
+  spi->usart->channel->ROUTELOC0 = (spi->pins->location << _USART_ROUTELOC0_RXLOC_SHIFT) 
+                                  | (spi->pins->location << _USART_ROUTELOC0_TXLOC_SHIFT)
+                                  | (spi->pins->location << _USART_ROUTELOC0_CLKLOC_SHIFT);
 
   spi->active = true;
 }
@@ -202,7 +542,7 @@ void spi_disable(spi_handle_t* spi) {
   if( ! spi->active ) { return; }
   
   // reset route to make sure that TX pin will become low after disable
-  spi->usart->channel->ROUTE = _USART_ROUTE_RESETVALUE;
+  spi->usart->channel->ROUTEPEN = _USART_ROUTEPEN_RESETVALUE;
 
   USART_Enable(spi->usart->channel, usartDisable);
   CMU_ClockEnable(spi->usart->clock, false);

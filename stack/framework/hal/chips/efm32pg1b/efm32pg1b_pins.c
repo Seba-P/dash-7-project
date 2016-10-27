@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-/*! \file efm32gg_pins.c
+/*! \file efm32pg1b_pins.c
  *
  *  \author daniel.vandenakker@uantwerpen.be
  *
@@ -25,7 +25,7 @@
 
 #include <em_gpio.h>
 #include "hwgpio.h"
-//Definition of the pin_id's for the GPIO ports of the EFM32gg
+//Definition of the pin_id's for the GPIO ports of the EFM32PG1B
 pin_id_t const A0 = {.port = gpioPortA, .pin = 0};
 pin_id_t const A1 = {.port = gpioPortA, .pin = 1};
 pin_id_t const A2 = {.port = gpioPortA, .pin = 2};
@@ -94,22 +94,22 @@ pin_id_t const D13 = {.port = gpioPortD, .pin = 13};
 pin_id_t const D14 = {.port = gpioPortD, .pin = 14};
 pin_id_t const D15 = {.port = gpioPortD, .pin = 15};
 
-pin_id_t const E0 = {.port = gpioPortE, .pin = 0};
-pin_id_t const E1 = {.port = gpioPortE, .pin = 1};
-pin_id_t const E2 = {.port = gpioPortE, .pin = 2};
-pin_id_t const E3 = {.port = gpioPortE, .pin = 3};
-pin_id_t const E4 = {.port = gpioPortE, .pin = 4};
-pin_id_t const E5 = {.port = gpioPortE, .pin = 5};
-pin_id_t const E6 = {.port = gpioPortE, .pin = 6};
-pin_id_t const E7 = {.port = gpioPortE, .pin = 7};
-pin_id_t const E8 = {.port = gpioPortE, .pin = 8};
-pin_id_t const E9 = {.port = gpioPortE, .pin = 9};
-pin_id_t const E10 = {.port = gpioPortE, .pin = 10};
-pin_id_t const E11 = {.port = gpioPortE, .pin = 11};
-pin_id_t const E12 = {.port = gpioPortE, .pin = 12};
-pin_id_t const E13 = {.port = gpioPortE, .pin = 13};
-pin_id_t const E14 = {.port = gpioPortE, .pin = 14};
-pin_id_t const E15 = {.port = gpioPortE, .pin = 15};
+// pin_id_t const E0 = {.port = gpioPortE, .pin = 0};
+// pin_id_t const E1 = {.port = gpioPortE, .pin = 1};
+// pin_id_t const E2 = {.port = gpioPortE, .pin = 2};
+// pin_id_t const E3 = {.port = gpioPortE, .pin = 3};
+// pin_id_t const E4 = {.port = gpioPortE, .pin = 4};
+// pin_id_t const E5 = {.port = gpioPortE, .pin = 5};
+// pin_id_t const E6 = {.port = gpioPortE, .pin = 6};
+// pin_id_t const E7 = {.port = gpioPortE, .pin = 7};
+// pin_id_t const E8 = {.port = gpioPortE, .pin = 8};
+// pin_id_t const E9 = {.port = gpioPortE, .pin = 9};
+// pin_id_t const E10 = {.port = gpioPortE, .pin = 10};
+// pin_id_t const E11 = {.port = gpioPortE, .pin = 11};
+// pin_id_t const E12 = {.port = gpioPortE, .pin = 12};
+// pin_id_t const E13 = {.port = gpioPortE, .pin = 13};
+// pin_id_t const E14 = {.port = gpioPortE, .pin = 14};
+// pin_id_t const E15 = {.port = gpioPortE, .pin = 15};
 
 pin_id_t const F0 = {.port = gpioPortF, .pin = 0};
 pin_id_t const F1 = {.port = gpioPortF, .pin = 1};
