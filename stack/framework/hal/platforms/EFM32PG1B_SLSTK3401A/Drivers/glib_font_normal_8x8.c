@@ -1,30 +1,23 @@
-/***************************************************************************//**
- * @file displayfont8x8.h
- * @brief 8x8 font with all characters
- *
- * @version 4.4.0
- *******************************************************************************
+ /*************************************************************************//**
+ * @file glib_font_normal_8x8.c
+ * @brief Silicon Labs Graphics Library: GLIB font normal 8x8
+ ******************************************************************************
  * @section License
- * <b>Copyright 2015 Silicon Labs, Inc. http://www.silabs.com</b>
+ * <b>Copyright 2015 Silicon Labs, http://www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
+ * This file is licensensed under the Silabs License Agreement. See the file
  * "Silabs_License_Agreement.txt" for details. Before using this software for
  * any purpose, you must agree to the terms of that agreement.
  *
  ******************************************************************************/
 
 
+/* Standard C header files */
+#include <stdint.h>
+#include "glib.h"
 
-
-/** @cond DO_NOT_INCLUDE_WITH_DOXYGEN */
-
-#define NUMBERS_FONT_8x8_WIDTH  (8)
-#define NUMBERS_FONT_8x8_HEIGHT (8)
-
-typedef uint8_t FontBits_t;
-
-static const FontBits_t chars_8x8_bits[] =
+static const uint8_t GLIB_FontNormal8x8PixMap[] =
 {
   0x00, 0x18, 0x6c, 0x6c, 0x10, 0xce, 0x38, 0x08, 0x60, 0x0c, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0x7c, 0x30, 0x7c, 0x7c, 0xc6, 0xfe, 0x7c, 0xfe,
@@ -95,4 +88,9 @@ static const FontBits_t chars_8x8_bits[] =
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-/** @endcond */
+const GLIB_Font_t GLIB_FontNormal8x8 = {(void *)GLIB_FontNormal8x8PixMap,
+                                        sizeof(GLIB_FontNormal8x8PixMap),
+                                        sizeof(GLIB_FontNormal8x8PixMap[0]),
+                                        100, 8, 8, 2, 0, FullFont};
+
+

@@ -46,7 +46,7 @@
 #include "console.h"
 
 
-#if (!defined PLATFORM_EFM32GG_STK3700  && !defined PLATFORM_EZR32LG_WSTK6200A && !defined PLATFORM_CORTUS_FPGA && !defined PLATFORM_EFM32WG_STK3800 && !defined PLATFORM_EFM32PG_SLSTK3401A)
+#if (!defined PLATFORM_EFM32GG_STK3700  && !defined PLATFORM_EZR32LG_WSTK6200A && !defined PLATFORM_CORTUS_FPGA && !defined PLATFORM_EFM32WG_STK3800 && !defined PLATFORM_EFM32PG1B_SLSTK3401A)
 	#error Mismatch between the configured platform and the actual platform.
 #endif
 

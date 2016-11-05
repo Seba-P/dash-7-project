@@ -1,10 +1,10 @@
 /***************************************************************************//**
  * @file displayconfigapp.h
  * @brief Display application specific configuration file.
- * @version 3.20.13
+ * @version 4.4.0
  *******************************************************************************
  * @section License
- * <b>(C) Copyright 2014 Silicon Labs, http://www.silabs.com</b>
+ * <b>Copyright 2015 Silicon Labs, Inc. http://www.silabs.com</b>
  *******************************************************************************
  *
  * This file is licensed under the Silabs License Agreement. See the file
@@ -13,29 +13,34 @@
  *
  ******************************************************************************/
 
-#ifndef _DISPLAY_CONFIG_APP_H_
-#define _DISPLAY_CONFIG_APP_H_
+#ifndef __DISPLAYCONFIGAPP_H__
+#define __DISPLAYCONFIGAPP_H__
 
-/* Include TEXTDISPLAY support because this example prints text to the
-   display. */
+#include <em_gpio.h>
+
+/* We must include TEXTDISPLAY support because this example prints
+ * text to the display */
 #define INCLUDE_TEXTDISPLAY_SUPPORT
 
-/* Enable/disable video terminal escape sequences. */
+
+/* Include escape sequence support: */
 #define INCLUDE_VIDEO_TERMINAL_ESCAPE_SEQUENCE_SUPPORT
+
 
 /* Select one of the fonts listed below:
    TEXTDISPLAY_FONT_6x8
    TEXTDISPLAY_FONT_8x8
 */
-#define TEXTDISPLAY_FONT_8x8
+#define  TEXTDISPLAY_FONT_6x8
+
 
 /* Enable or disable scroll mode on the text display. */
 #define RETARGETTEXTDISPLAY_SCROLL_MODE  (false)
+
 
 /* Enable or disable adding Carriage Return (CR) to Line Feed (LF) characters
    on the text display. */
 #define RETARGETTEXTDISPLAY_LINE_FEED_MODE  (true)
 
-#include "em_gpio.h"
 
-#endif /* _DISPLAY_CONFIG_APP_H_ */
+#endif /* __DISPLAYCONFIGAPP_H__ */

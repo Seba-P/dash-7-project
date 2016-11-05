@@ -1,10 +1,10 @@
 /***************************************************************************//**
  * @file displayconfigall.h
  * @brief Main configuration file for the DISPLAY driver software stack.
- * @version 3.20.12
+ * @version 4.4.0
  *******************************************************************************
  * @section License
- * <b>(C) Copyright 2014 Silicon Labs, http://www.silabs.com</b>
+ * <b>Copyright 2015 Silicon Labs, Inc. http://www.silabs.com</b>
  *******************************************************************************
  *
  * This file is licensed under the Silabs License Agreement. See the file
@@ -24,14 +24,13 @@
  */
 #define INCLUDE_PAL_GPIO_PIN_AUTO_TOGGLE
 
-
 /* Then include the kit specific display configuration files which also includes
    the application specific configuration file and further selects which modules
    modules to include below. */
+#include "displaypalconfig.h"
 #include "displayconfig.h"
 
 #ifdef INCLUDE_DISPLAY_SHARP_LS013B7DH03
-#include "displaypalconfig.h"
 #include "displayls013b7dh03config.h"
 #endif
 

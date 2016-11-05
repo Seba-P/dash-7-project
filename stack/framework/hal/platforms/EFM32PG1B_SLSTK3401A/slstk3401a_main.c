@@ -43,7 +43,11 @@ void __platform_init()
     __gpio_init();
     __led_init();    // uses ports assigned to UART1 LOC3
     __lcd_init();
+    
+#if defined(FRAMEWORK_LOG_ENABLED) || defined(FRAMEWORK_SHELL_ENABLED)
+    // framework does not need console, if app needs it app should init this
     console_init();
+#endif
 
 #ifdef USE_CC1101
     // configure the interrupt pins here, since hw_gpio_configure_pin() is MCU
@@ -57,25 +61,23 @@ void __platform_init()
     err = hw_gpio_configure_pin(BUTTON0, true, gpioModeInput, 0); assert(err == SUCCESS); // TODO pull up or pull down to prevent floating
     err = hw_gpio_configure_pin(BUTTON1, true, gpioModeInput, 0); assert(err == SUCCESS); // TODO pull up or pull down to prevent floating
 
-    __watchdog_init(); // TODO configure from cmake?
+   // __watchdog_init(); // TODO configure from cmake?
 }
 
 void __platform_post_framework_init()
 {
     __ubutton_init();
-	#ifdef PLATFORM_USE_USB_CDC
 
-    //Moved here to make sure LF XO is set in timer.
-    __usb_init_cdc();
-	#endif
+    #ifdef PLATFORM_EFM32PG1B_SLSTK3401A_LCD_ENABLED
+        uint64_t id = hw_get_unique_id();
+        // nano spec of newlib does not support 64bit ...
+        lcd_write_string("%.8x", (uint32_t)(id >> 32));
+        lcd_write_string("%.8x", (uint32_t)id);
+    #endif
 }
 
 int main()
 {
-	//BSP_TraceProfilerSetup();
-    // Only when using bootloader
-	//SCB->VTOR=0x4000;
-
     //initialise the platform itself
 	__platform_init();
     //do not initialise the scheduler, this is done by __framework_bootstrap()

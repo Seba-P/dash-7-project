@@ -38,6 +38,7 @@ PLATFORM_PARAM(${PLATFORM_PREFIX}_CONSOLE_BAUDRATE "115200" STRING "The baudrate
 
 PLATFORM_OPTION(${PLATFORM_PREFIX}_DEBUGPINS "Enable/Disable Hardware Debug Pins support (see 'hwdebug.h')" TRUE)
 PLATFORM_OPTION(PLATFORM_USE_USB_CDC "Enable/Disable the use of CDC (UART Communication using USB" FALSE)
+PLATFORM_OPTION(${PLATFORM_PREFIX}_LCD_ENABLED "Enable/Disable LCD usage" TRUE)
 #Restrict the number of possible options for the radio option in the usual manner...
 SET_PROPERTY(CACHE ${PLATFORM_PREFIX}_RADIO PROPERTY STRINGS "cc1101;none")
 
@@ -57,6 +58,7 @@ EXPORT_GLOBAL_INCLUDE_DIRECTORIES(config)
 INCLUDE_DIRECTORIES(
   inc
   kits/common/bsp
+  config
 )
 
 #Make the 'binary platform dir' available so the 'platform_defs.h' file

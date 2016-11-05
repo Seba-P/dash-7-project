@@ -37,6 +37,16 @@ static uint32_t temp_offset;
 
 void initSensors()
 {
+	
+}
+
+void getHumidityAndTemperature(uint32_t *rhData, int32_t *tData)
+{
+	static int32_t next;
+
+	next = (next + 1000) % 10000;
+
+	*tData = next;
 }
 
 //void lightsensor_init()

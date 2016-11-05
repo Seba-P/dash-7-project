@@ -1,31 +1,24 @@
-/***************************************************************************//**
- * @file displayfont16x20.h
- * @brief 16x20 font with only number characters and the colon':' and
- *        space ' ' signs.
- * @version 4.4.0
- *******************************************************************************
+ /*************************************************************************//**
+ * @file glib_font_bold_16x20.c
+* @brief Silicon Labs Graphics Library: GLIB font number '0'-'9', ':' and ' ', 16x20 pixels
+ ******************************************************************************
  * @section License
- * <b>Copyright 2015 Silicon Labs, Inc. http://www.silabs.com</b>
+ * <b>Copyright 2015 Silicon Labs, http://www.silabs.com</b>
  *******************************************************************************
  *
- * This file is licensed under the Silabs License Agreement. See the file
+ * This file is licensensed under the Silabs License Agreement. See the file
  * "Silabs_License_Agreement.txt" for details. Before using this software for
  * any purpose, you must agree to the terms of that agreement.
  *
  ******************************************************************************/
 
 
+/* Standard C header files */
+#include <stdint.h>
+#include "glib.h"
 
-
-/** @cond DO_NOT_INCLUDE_WITH_DOXYGEN */
-
-#define NUMBERS_FONT_16x20_WIDTH  (16)
-#define NUMBERS_FONT_16x20_HEIGHT (20)
-
-typedef uint16_t FontBits_t;
-
-static const FontBits_t numbers_16x20_bits[] =
-{ /* 0       1       2       3       4       5       6       7       8       9       :     ' ' */
+static const uint16_t GLIB_FontNumber16x20PixMap[] =
+{
   0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
   0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
   0x03c0, 0x0300, 0x07c0, 0x03e0, 0x0f00, 0x1ff8, 0x1f00, 0x1ffc, 0x07e0, 0x03e0, 0x0000, 0x0000,
@@ -48,4 +41,9 @@ static const FontBits_t numbers_16x20_bits[] =
   0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
 };
 
-/** @endcond */
+const GLIB_Font_t GLIB_FontNumber16x20 = {(void *)GLIB_FontNumber16x20PixMap,
+                                          sizeof(GLIB_FontNumber16x20PixMap),
+                                          sizeof(GLIB_FontNumber16x20PixMap[0]),
+                                          12, 16, 20, 5, 0, NumbersOnlyFont};
+
+

@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file displayls013b7dh03.c
  * @brief Display driver for the Sharp Memory LCD LS013B7DH03
- * @version 3.20.12
+ * @version 4.4.0
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2014 Silicon Labs, http://www.silabs.com</b>
+ * <b>Copyright 2015 Silicon Labs, Inc. http://www.silabs.com</b>
  *******************************************************************************
  *
  * This file is licensed under the Silabs License Agreement. See the file
@@ -21,8 +21,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "hwspi.h"
-#include "hwgpio.h"
+#include "em_gpio.h"
 
 /* DISPLAY driver inclustions */
 #include "displayconfigall.h"
@@ -42,7 +41,7 @@
 
 /* Frequency of LCD polarity inversion. */
 #ifndef LS013B7DH03_POLARITY_INVERSION_FREQUENCY
-#define LS013B7DH03_POLARITY_INVERSION_FREQUENCY (64)
+#define LS013B7DH03_POLARITY_INVERSION_FREQUENCY (128)
 #endif
 
 #ifdef USE_CONTROL_BYTES
@@ -106,8 +105,6 @@ static PixelMatrixAlign_t* pixelMatrixPool = pixelMatrixPoolBase;
 #endif
 #endif
 
-static spi_handle_t* spi_handle;
-static spi_slave_handle_t* lcd_spi_handle;
 
 /*******************************************************************************
  ************************   STATIC FUNCTION PROTOTYPES   ***********************
@@ -162,19 +159,28 @@ EMSTATUS DISPLAY_Ls013b7dh03Init(void)
   EMSTATUS              status;
 
   /* Initialize the Platform Abstraction Layer (PAL) interface.  */
-  PAL_TimerInit(); // TODO
+  PAL_TimerInit();
+  PAL_SpiInit();
+  PAL_GpioInit();
 
-  spi_handle = spi_init(0, PAL_SPI_BAUDRATE, 8, false, 0); // TODO defines from platform
-  spi_enable(spi_handle);
-  lcd_spi_handle = spi_init_slave(spi_handle, (pin_id_t){.port = LCD_PORT_SCS, .pin = LCD_PIN_SCS}, false);
+  /* Setup GPIOs */
+  PAL_GpioPinModeSet(LCD_PORT_SCLK,    LCD_PIN_SCLK,    palGpioModePushPull,0);
+  PAL_GpioPinModeSet(LCD_PORT_SI,      LCD_PIN_SI,      palGpioModePushPull,0);
+  PAL_GpioPinModeSet(LCD_PORT_SCS,     LCD_PIN_SCS,     palGpioModePushPull,0);
+#if defined( LCD_PORT_DISP_SEL  )
+  PAL_GpioPinModeSet(LCD_PORT_DISP_SEL,LCD_PIN_DISP_SEL,palGpioModePushPull,0);
+#endif
 
 #if defined( LCD_PORT_DISP_PWR )
   PAL_GpioPinModeSet(LCD_PORT_DISP_PWR,LCD_PIN_DISP_PWR,palGpioModePushPull,0);
 #endif
-  // TODO needed?
-  //PAL_GpioPinModeSet(LCD_PORT_EXTMODE, LCD_PIN_EXTMODE, palGpioModePushPull,0);
-  PAL_GpioPinModeSet(LCD_PORT_EXTCOMIN,LCD_PIN_EXTCOMIN,palGpioModePushPull,0);
 
+#if defined( LCD_PORT_EXTMODE )
+  PAL_GpioPinModeSet(LCD_PORT_EXTMODE, LCD_PIN_EXTMODE, palGpioModePushPull,0);
+#endif
+#if defined (LCD_PORT_EXTCOMIN)
+  PAL_GpioPinModeSet(LCD_PORT_EXTCOMIN,LCD_PIN_EXTCOMIN,palGpioModePushPull,0);
+#endif
 #ifdef PAL_TIMER_REPEAT_FUNCTION
   /* If the platform specifies to use a timer repeat function we should
      register the DisplayPolarityInverse to be called every second in
@@ -252,10 +258,7 @@ static EMSTATUS DriverRefresh(DISPLAY_Device_t* device)
 
   /* Reinitialize the timer and SPI configuration.  */
   PAL_TimerInit();
-
-  spi_handle = spi_init(0, PAL_SPI_BAUDRATE, 8, false, 0); // TODO defines from platform
-  spi_enable(spi_handle);
-  lcd_spi_handle = spi_init_slave(spi_handle, D14, false);
+  PAL_SpiInit();
 
   return status;
 }
@@ -281,8 +284,10 @@ static EMSTATUS DisplayEnable(DISPLAY_Device_t* device,
 
   if (enable)
   {
+#if defined( LCD_PORT_DISP_SEL )
     /* Set EFM_DISP_SELECT pin. */
-    //PAL_GpioPinOutSet(LCD_PORT_DISP_SEL, LCD_PIN_DISP_SEL);
+    PAL_GpioPinOutSet(LCD_PORT_DISP_SEL, LCD_PIN_DISP_SEL);
+#endif
 
 #if defined( LCD_PORT_DISP_PWR )
     /* Drive voltage on EFM_DISP_PWR_EN pin. */
@@ -296,8 +301,10 @@ static EMSTATUS DisplayEnable(DISPLAY_Device_t* device,
     PAL_GpioPinOutClear(LCD_PORT_DISP_PWR, LCD_PIN_DISP_PWR);
 #endif
 
+#if defined( LCD_PORT_DISP_SEL )
     /* Clear EFM_DISP_SELECT pin. */
-    //PAL_GpioPinOutClear(LCD_PORT_DISP_SEL, LCD_PIN_DISP_SEL);
+    PAL_GpioPinOutClear(LCD_PORT_DISP_SEL, LCD_PIN_DISP_SEL);
+#endif
   }
 
   return DISPLAY_EMSTATUS_OK;
@@ -315,19 +322,22 @@ static EMSTATUS DisplayClear ( void )
 {
   uint16_t cmd;
 
-  spi_select(lcd_spi_handle);
+  /* Set SCS */
+  PAL_GpioPinOutSet( LCD_PORT_SCS, LCD_PIN_SCS );
 
   /* SCS setup time: min 6us */
   PAL_TimerMicroSecondsDelay(6);
 
   /* Send command */
   cmd = LS013B7DH03_CMD_ALL_CLEAR | lcdPolarity;
-  spi_exchange_bytes(lcd_spi_handle, (uint8_t*)&cmd, NULL, 2);
+  PAL_SpiTransmit ((uint8_t*) &cmd, 2 );
 
   /* SCS hold time: min 2us */
   PAL_TimerMicroSecondsDelay(2);
 
-  spi_deselect(lcd_spi_handle);
+  /* Clear SCS */
+  PAL_GpioPinOutClear( LCD_PORT_SCS, LCD_PIN_SCS );
+
   return DISPLAY_EMSTATUS_OK;
 }
 
@@ -346,9 +356,10 @@ static EMSTATUS DisplayPolarityInverse (void)
 {
 #ifdef POLARITY_INVERSION_EXTCOMIN
 
+#if defined(LCD_PORT_EXTCOMIN)
   /* Toggle extcomin gpio */
   PAL_GpioPinOutToggle( LCD_PORT_EXTCOMIN, LCD_PIN_EXTCOMIN );
-
+#endif
 #else /* POLARITY_INVERSION_EXTCOMIN */
 
   /* Send a packet with inverted com */
@@ -652,21 +663,20 @@ static EMSTATUS PixelMatrixDraw( DISPLAY_Device_t*      device,
 #endif
 
   /* Assert SCS */
-  spi_select(lcd_spi_handle);
-  //PAL_GpioPinOutSet( LCD_PORT_SCS, LCD_PIN_SCS );
+  PAL_GpioPinOutSet( LCD_PORT_SCS, LCD_PIN_SCS );
 
   /* SCS setup time: min 6us */
   PAL_TimerMicroSecondsDelay(6);
 
   /* Send update command and first line address */
   cmd = LS013B7DH03_CMD_UPDATE | (startRow << 8);
-  spi_exchange_bytes(lcd_spi_handle, (uint8_t*) &cmd, NULL, 2 );
+  PAL_SpiTransmit((uint8_t*) &cmd, 2 );
 
   /* Get start address to draw from */
   for ( i=0; i<height; i++ ) {
 
     /* Send pixels for this line */
-    spi_exchange_bytes(lcd_spi_handle, (uint8_t*) p, NULL,
+    PAL_SpiTransmit((uint8_t*) p,
                     LS013B7DH03_WIDTH/8 + LS013B7DH03_CONTROL_BYTES);
     p+=(LS013B7DH03_WIDTH/8 + LS013B7DH03_CONTROL_BYTES) / sizeof(uint16_t);
 
@@ -679,8 +689,7 @@ static EMSTATUS PixelMatrixDraw( DISPLAY_Device_t*      device,
     {
       cmd = 0xff | ((startRow+i+1) << 8);
     }
-
-    spi_exchange_bytes(lcd_spi_handle, (uint8_t*) &cmd, NULL, 2 );
+    PAL_SpiTransmit((uint8_t*) &cmd, 2 );
 #endif
 
 #ifdef EMWIN_WORKAROUND
@@ -693,7 +702,7 @@ static EMSTATUS PixelMatrixDraw( DISPLAY_Device_t*      device,
   PAL_TimerMicroSecondsDelay(2);
 
   /* De-assert SCS */
-  spi_deselect(lcd_spi_handle);
+  PAL_GpioPinOutClear( LCD_PORT_SCS, LCD_PIN_SCS );
 
   return DISPLAY_EMSTATUS_OK;
 }

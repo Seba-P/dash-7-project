@@ -439,6 +439,11 @@
 			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/displayls013b7dh03.c.obj</location>
 		</link>
 		<link>
+			<name>[Targets]/[lib] framework/Object Files/displaypalemlib.c.obj</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/displaypalemlib.c.obj</location>
+		</link>
+		<link>
 			<name>[Targets]/[lib] framework/Object Files/dmactrl.c.obj</name>
 			<type>1</type>
 			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/dmactrl.c.obj</location>
@@ -452,6 +457,11 @@
 			<name>[Targets]/[lib] framework/Object Files/textdisplay.c.obj</name>
 			<type>1</type>
 			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/textdisplay.c.obj</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] framework/Object Files/udelay.c.obj</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/udelay.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/cc1101.c.obj</name>
@@ -814,6 +824,11 @@
 			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/displayls013b7dh03.c</location>
 		</link>
 		<link>
+			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/displaypalemlib.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/displaypalemlib.c</location>
+		</link>
+		<link>
 			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/dmactrl.c</name>
 			<type>1</type>
 			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/dmactrl.c</location>
@@ -827,6 +842,11 @@
 			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/textdisplay.c</name>
 			<type>1</type>
 			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/textdisplay.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/udelay.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/udelay.c</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] CHIP_EFM32PG1B/Header Files</name>

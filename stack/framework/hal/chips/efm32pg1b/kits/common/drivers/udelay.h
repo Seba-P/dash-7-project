@@ -1,6 +1,6 @@
 /**************************************************************************//**
- * @file displaybackend.h
- * @brief Display device backend interface
+ * @file udelay.h
+ * @brief Microsecond delay routine.
  * @version 4.4.0
  ******************************************************************************
  * @section License
@@ -14,12 +14,10 @@
  ******************************************************************************/
 
 
+#ifndef __UDELAY_H
+#define __UDELAY_H
 
-
-#ifndef _DISPLAY_BACKEND_H_
-#define _DISPLAY_BACKEND_H_
-
-#include "display.h"
+#include <stdint.h>
 
 /***************************************************************************//**
  * @addtogroup kitdrv
@@ -27,7 +25,7 @@
  ******************************************************************************/
 
 /***************************************************************************//**
- * @addtogroup Display
+ * @addtogroup Udelay
  * @{
  ******************************************************************************/
 
@@ -35,18 +33,14 @@
 extern "C" {
 #endif
 
-/*******************************************************************************
- **************************    FUNCTION PROTOTYPES    **************************
- ******************************************************************************/
-
-EMSTATUS DISPLAY_DeviceRegister(DISPLAY_Device_t *device);
-
+void UDELAY_Calibrate(void);
+void UDELAY_Delay(uint32_t usecs);
 
 #ifdef __cplusplus
 }
 #endif
 
-/** @} (end group Display) */
+/** @} (end group Udelay) */
 /** @} (end group Drivers) */
 
-#endif /* _DISPLAY_BACKEND_H_ */
+#endif
