@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>dash-7-project-Release@dash-7-project</name>
+	<name>OSS-7-Debug@dash-7-project</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -119,7 +119,7 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Subprojects]/dash-7-project</name>
+			<name>[Subprojects]/OSS-7</name>
 			<type>2</type>
 			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack</location>
 		</link>

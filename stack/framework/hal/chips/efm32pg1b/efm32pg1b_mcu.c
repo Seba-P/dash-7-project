@@ -40,6 +40,7 @@ void __efm32pg1b_mcu_init()
 #ifdef HW_USE_HFXO //40MHz
     // init clock with HFXO (external)
     CMU_HFXOInit_TypeDef hfxoInit = CMU_HFXOINIT_DEFAULT;
+    hfxoInit.ctuneSteadyState = 0x142;
 
     //CMU_ClockDivSet(cmuClock_HF, cmuClkDiv_2);		// 20 MHZ
     CMU_HFXOInit(&hfxoInit);    //40MHz

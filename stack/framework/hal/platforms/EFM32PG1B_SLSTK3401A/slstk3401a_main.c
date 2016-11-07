@@ -36,6 +36,7 @@
 #include "bsp_trace.h"
 
 #include "console.h"
+#include "log.h"
 
 void __platform_init()
 {
@@ -43,7 +44,7 @@ void __platform_init()
     __gpio_init();
     __led_init();    // uses ports assigned to UART1 LOC3
     __lcd_init();
-    
+
 #if defined(FRAMEWORK_LOG_ENABLED) || defined(FRAMEWORK_SHELL_ENABLED)
     // framework does not need console, if app needs it app should init this
     console_init();
@@ -55,7 +56,7 @@ void __platform_init()
     hw_gpio_configure_pin(CC1101_GDO0_PIN, true, gpioModeInput, 0);
     // hw_gpio_configure_pin(CC1101_SPI_PIN_CS, false, gpioModePushPull, 1);
 #endif
-    __hw_debug_init();
+    // __hw_debug_init();
 
     error_t err;
     err = hw_gpio_configure_pin(BUTTON0, true, gpioModeInput, 0); assert(err == SUCCESS); // TODO pull up or pull down to prevent floating
@@ -79,11 +80,74 @@ void __platform_post_framework_init()
 int main()
 {
     //initialise the platform itself
-	__platform_init();
+    __platform_init();
+    log_print_string("__platform_init(): DONE\n");
+    lcd_write_string("__platform_init(): DONE\n");
     //do not initialise the scheduler, this is done by __framework_bootstrap()
     __framework_bootstrap();
+    log_print_string("__framework_bootstrap(): DONE\n");
+    lcd_write_string("__framework_bootstrap(): DONE\n");
     //initialise platform functionality that depends on the framework
     __platform_post_framework_init();
+    log_print_string("__platform_post_framework_init(): DONE\n");
+    lcd_write_string("__platform_post_framework_init(): DONE\n");
+
     scheduler_run();
+    log_print_string("scheduler_run(): DONE\n");
+    lcd_write_string("scheduler_run(): DONE\n");
     return 0;
 }
+
+// int main()
+// {
+//         // #include "display.h"
+//         // #include "textdisplay.h"
+//         // #include "displaypal.h"
+//         // #include "emstatus.h"
+//         // TEXTDISPLAY_Handle_t h;
+
+//         // if(DISPLAY_EMSTATUS_OK != DISPLAY_Init())
+//         // {
+//         //     led_on(0);
+//         //     led_on(1);
+//         //     while(1){;}
+//         // }
+
+//         // TEXTDISPLAY_Config_t config  = {0, false, true};
+//         // EMSTATUS status = TEXTDISPLAY_New(&config, &h);
+//         // //lcd_enable(1);
+//         // TEXTDISPLAY_WriteString(h, "TEST");
+//     #include "userbutton.h"
+//     __efm32pg1b_mcu_init();
+//     __gpio_init();
+//     __led_init();    // uses ports assigned to UART1 LOC3
+//     __lcd_init();
+
+//     error_t err;
+//     err = hw_gpio_configure_pin(BUTTON0, true, gpioModeInput, 0); assert(err == SUCCESS); // TODO pull up or pull down to prevent floating
+//     err = hw_gpio_configure_pin(BUTTON1, true, gpioModeInput, 0); assert(err == SUCCESS); // TODO pull up or pull down to prevent floating
+
+//     console_init();
+
+//     volatile int i;
+
+//     while(1)
+//     {
+//         for(i = 0; i < 4000000; i++){;}
+//         log_print_string("TEST\n");
+//         for(i = 0; i < 4000000; i++){;}
+//         lcd_write_string("TEST\n");
+//         led_toggle(0);
+//         if(ubutton_pressed(1))
+//         {
+//             led_on(1);
+//         }else if(ubutton_pressed(0))
+//         {
+//             led_off(1);
+//         }
+//     }
+
+//     while(1){;}
+//     return 0;
+// }
+

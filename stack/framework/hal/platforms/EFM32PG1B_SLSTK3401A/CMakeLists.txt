@@ -31,9 +31,9 @@ SET(JLINK_DEVICE ${${PLATFORM_PREFIX}_MCU} CACHE STRING "The device passed to JL
 # )
 
 # CONSOLE
-# uses USART1, location 22
-PLATFORM_PARAM(${PLATFORM_PREFIX}_CONSOLE_UART     "1"      STRING "The UART channel used by the console UART configuration."   )
-PLATFORM_PARAM(${PLATFORM_PREFIX}_CONSOLE_LOCATION "22"     STRING "The route location used by the console UART configuration." )
+# uses USART0, location 19
+PLATFORM_PARAM(${PLATFORM_PREFIX}_CONSOLE_UART     "0"      STRING "The UART channel used by the console UART configuration."   )
+PLATFORM_PARAM(${PLATFORM_PREFIX}_CONSOLE_LOCATION "19"     STRING "The route location used by the console UART configuration." )
 PLATFORM_PARAM(${PLATFORM_PREFIX}_CONSOLE_BAUDRATE "115200" STRING "The baudrate used by the second console configuration."       )
 
 PLATFORM_OPTION(${PLATFORM_PREFIX}_DEBUGPINS "Enable/Disable Hardware Debug Pins support (see 'hwdebug.h')" TRUE)

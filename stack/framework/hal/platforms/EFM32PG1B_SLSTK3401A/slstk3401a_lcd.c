@@ -45,10 +45,17 @@
 static char NGDEF(buffer)[BUFFER_SIZE];
 
 static TEXTDISPLAY_Handle_t h;
+// TEXTDISPLAY_Handle_t h;
 
 void __lcd_init()
 {
-	DISPLAY_Init();
+	if(DISPLAY_EMSTATUS_OK != DISPLAY_Init())
+	{
+		void led_on(uint8_t led_id);
+		led_on(0);
+		led_on(1);
+		while(1){;}
+	}
 
 	TEXTDISPLAY_Config_t config  = {0, false, true};
 	EMSTATUS status = TEXTDISPLAY_New(&config, &h);

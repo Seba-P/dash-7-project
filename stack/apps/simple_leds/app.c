@@ -49,7 +49,6 @@ void led_on_callback()
 	log_print_string("Toggled on %d", 0);
 
 	hw_watchdog_feed();
-
 }
 
 
