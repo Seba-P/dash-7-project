@@ -43,7 +43,7 @@
 #endif
 
 #ifdef INCLUDE_PAL_GPIO_PIN_AUTO_TOGGLE_HW_ONLY
-#include "em_prs.h"
+//#include "em_prs.h"
 #endif
 
 #endif
@@ -435,45 +435,45 @@ EMSTATUS PAL_GpioPinAutoToggle (unsigned int gpioPort,
   /* Setup PRS to drive the GPIO pin which is connected to the
      display com inversion pin (EXTCOMIN) using the RTC COMP0 signal or
      RTCC CCV1 signal as source. */
-#if defined(PAL_CLOCK_RTCC)
-  uint32_t  source  = PRS_CH_CTRL_SOURCESEL_RTCC;
-  uint32_t  signal  = PRS_CH_CTRL_SIGSEL_RTCCCCV1;
-#else
-  uint32_t  source  = PRS_CH_CTRL_SOURCESEL_RTC;
-  uint32_t  signal  = PRS_CH_CTRL_SIGSEL_RTCCOMP0;
-#endif
+// #if defined(PAL_CLOCK_RTCC)
+//   uint32_t  source  = PRS_CH_CTRL_SOURCESEL_RTCC;
+//   uint32_t  signal  = PRS_CH_CTRL_SIGSEL_RTCCCCV1;
+// #else
+//   uint32_t  source  = PRS_CH_CTRL_SOURCESEL_RTC;
+//   uint32_t  signal  = PRS_CH_CTRL_SIGSEL_RTCCOMP0;
+// #endif
 
-  /* Enable PRS clock */
-  CMU_ClockEnable(cmuClock_PRS, true);
+//   /* Enable PRS clock */
+//   CMU_ClockEnable(cmuClock_PRS, true);
 
-  /* Set up PRS to trigger from an RTC compare match */
-  PRS_SourceAsyncSignalSet(LCD_AUTO_TOGGLE_PRS_CH, source, signal);
+//   /* Set up PRS to trigger from an RTC compare match */
+//   PRS_SourceAsyncSignalSet(LCD_AUTO_TOGGLE_PRS_CH, source, signal);
 
-  /* This outputs the PRS pulse on the EXTCOMIN pin */
-#if defined(_SILICON_LABS_32B_PLATFORM_2)
-  LCD_AUTO_TOGGLE_PRS_ROUTELOC();
-  PRS->ROUTEPEN |= LCD_AUTO_TOGGLE_PRS_ROUTEPEN;
-#else
-  PRS->ROUTE = ( PRS->ROUTE & ~_PRS_ROUTE_LOCATION_MASK )
-               | LCD_AUTO_TOGGLE_PRS_ROUTE_LOC;
-  PRS->ROUTE |= LCD_AUTO_TOGGLE_PRS_ROUTE_PEN;
-#endif
+//   /* This outputs the PRS pulse on the EXTCOMIN pin */
+// #if defined(_SILICON_LABS_32B_PLATFORM_2)
+//   LCD_AUTO_TOGGLE_PRS_ROUTELOC();
+//   PRS->ROUTEPEN |= LCD_AUTO_TOGGLE_PRS_ROUTEPEN;
+// #else
+//   PRS->ROUTE = ( PRS->ROUTE & ~_PRS_ROUTE_LOCATION_MASK )
+//                | LCD_AUTO_TOGGLE_PRS_ROUTE_LOC;
+//   PRS->ROUTE |= LCD_AUTO_TOGGLE_PRS_ROUTE_PEN;
+// #endif
 
-#else
-  /* Store GPIO pin data. */
-  gpioPortNo = gpioPort;
-  gpioPinNo  = gpioPin;
-#endif
+// #else
+//   /* Store GPIO pin data. */
+//   gpioPortNo = gpioPort;
+//   gpioPinNo  = gpioPin;
+// #endif
 
-  /* Setup GPIO pin. */
-  GPIO_PinModeSet((GPIO_Port_TypeDef)gpioPort, gpioPin, gpioModePushPull, 0 );
+//   /* Setup GPIO pin. */
+//   GPIO_PinModeSet((GPIO_Port_TypeDef)gpioPort, gpioPin, gpioModePushPull, 0 );
 
-#if defined(PAL_CLOCK_RTCC)
-  /* Setup RTCC to to toggle PRS or generate interrupts at given frequency. */
-  rtccSetup(frequency);
-#else
-  /* Setup RTC to to toggle PRS or generate interrupts at given frequency. */
-  rtcSetup(frequency);
+// #if defined(PAL_CLOCK_RTCC)
+//   /* Setup RTCC to to toggle PRS or generate interrupts at given frequency. */
+//   rtccSetup(frequency);
+// #else
+//   /* Setup RTC to to toggle PRS or generate interrupts at given frequency. */
+//   rtcSetup(frequency);
 #endif
 
   return status;
@@ -503,14 +503,14 @@ void RTC_IRQHandler(void)
  *
  * @return  N/A
  *****************************************************************************/
-void RTCC_IRQHandler(void)
-{
-  /* Clear interrupt source */
-  RTCC_IntClear(RTCC_IF_CC1);
+// void RTCC_IRQHandler(void)
+// {
+//   /* Clear interrupt source */
+//   RTCC_IntClear(RTCC_IF_CC1);
 
-  /* Toggle GPIO pin. */
-  GPIO_PinOutToggle((GPIO_Port_TypeDef)gpioPortNo, gpioPinNo );
-}
+//   /* Toggle GPIO pin. */
+//   GPIO_PinOutToggle((GPIO_Port_TypeDef)gpioPortNo, gpioPinNo );
+// }
 #endif  /* PAL_CLOCK_RTCC */
 #endif  /* INCLUDE_PAL_GPIO_PIN_AUTO_TOGGLE_HW_ONLY */
 
@@ -522,32 +522,32 @@ void RTCC_IRQHandler(void)
  *****************************************************************************/
 static void palClockSetup(CMU_Clock_TypeDef clock)
 {
-  /* Enable LE domain registers */
-  CMU_ClockEnable(cmuClock_CORELE, true);
+//   /* Enable LE domain registers */
+//   CMU_ClockEnable(cmuClock_CORELE, true);
 
-#if ( defined(PAL_CLOCK_RTC) && defined(PAL_RTC_CLOCK_LFXO) ) \
-    || ( defined(PAL_CLOCK_RTCC) && defined(PAL_RTCC_CLOCK_LFXO) )
-  /* LFA with LFXO setup is relatively time consuming. Therefore, check if it
-     already enabled before calling. */
-  if ( !(CMU->STATUS & CMU_STATUS_LFXOENS) )
-  {
-    CMU_OscillatorEnable(cmuOsc_LFXO, true, true);
-  }
-  if ( cmuSelect_LFXO != CMU_ClockSelectGet(clock) )
-  {
-    CMU_ClockSelectSet(clock, cmuSelect_LFXO);
-  }
-#elif ( defined(PAL_CLOCK_RTC) && defined(PAL_RTC_CLOCK_LFRCO) ) \
-    || ( defined(PAL_CLOCK_RTCC) && defined(PAL_RTCC_CLOCK_LFRCO) )
-  /* Enable LF(A|E)CLK in CMU (will also enable LFRCO oscillator if not enabled) */
-  CMU_ClockSelectSet(clock, cmuSelect_LFRCO);
-#elif ( defined(PAL_CLOCK_RTC) && defined(PAL_RTC_CLOCK_ULFRCO) ) \
-    || ( defined(PAL_CLOCK_RTCC) && defined(PAL_RTCC_CLOCK_ULFRCO) )
-  /* Enable LF(A|E)CLK in CMU (will also enable ULFRCO oscillator if not enabled) */
-  CMU_ClockSelectSet(clock, cmuSelect_ULFRCO);
-#else
-#error No clock source for RTC defined.
-#endif
+// #if ( defined(PAL_CLOCK_RTC) && defined(PAL_RTC_CLOCK_LFXO) ) \
+//     || ( defined(PAL_CLOCK_RTCC) && defined(PAL_RTCC_CLOCK_LFXO) )
+//   /* LFA with LFXO setup is relatively time consuming. Therefore, check if it
+//      already enabled before calling. */
+//   if ( !(CMU->STATUS & CMU_STATUS_LFXOENS) )
+//   {
+//     CMU_OscillatorEnable(cmuOsc_LFXO, true, true);
+//   }
+//   if ( cmuSelect_LFXO != CMU_ClockSelectGet(clock) )
+//   {
+//     CMU_ClockSelectSet(clock, cmuSelect_LFXO);
+//   }
+// #elif ( defined(PAL_CLOCK_RTC) && defined(PAL_RTC_CLOCK_LFRCO) ) \
+//     || ( defined(PAL_CLOCK_RTCC) && defined(PAL_RTCC_CLOCK_LFRCO) )
+//   /* Enable LF(A|E)CLK in CMU (will also enable LFRCO oscillator if not enabled) */
+//   CMU_ClockSelectSet(clock, cmuSelect_LFRCO);
+// #elif ( defined(PAL_CLOCK_RTC) && defined(PAL_RTC_CLOCK_ULFRCO) ) \
+//     || ( defined(PAL_CLOCK_RTCC) && defined(PAL_RTCC_CLOCK_ULFRCO) )
+//   /* Enable LF(A|E)CLK in CMU (will also enable ULFRCO oscillator if not enabled) */
+//   CMU_ClockSelectSet(clock, cmuSelect_ULFRCO);
+// #else
+// #error No clock source for RTC defined.
+// #endif
 }
 
 
@@ -597,34 +597,34 @@ static void rtcSetup(unsigned int frequency)
  *****************************************************************************/
 static void rtccSetup(unsigned int frequency)
 {
-  RTCC_Init_TypeDef rtccInit = RTCC_INIT_DEFAULT;
-  rtccInit.presc = rtccCntPresc_1;
+  // RTCC_Init_TypeDef rtccInit = RTCC_INIT_DEFAULT;
+  // rtccInit.presc = rtccCntPresc_1;
 
-  palClockSetup(cmuClock_LFE);
-  /* Enable RTCC clock */
-  CMU_ClockEnable(cmuClock_RTCC, true);
+  // palClockSetup(cmuClock_LFE);
+  // /* Enable RTCC clock */
+  // CMU_ClockEnable(cmuClock_RTCC, true);
 
-  /* Initialize RTC */
-  rtccInit.enable   = false;  /* Do not start RTC after initialization is complete. */
-  rtccInit.debugRun = false;  /* Halt RTC when debugging. */
-  rtccInit.cntWrapOnCCV1 = true;   /* Wrap around on CCV1 match. */
-  RTCC_Init(&rtccInit);
+  // /* Initialize RTC */
+  // rtccInit.enable   = false;  /* Do not start RTC after initialization is complete. */
+  // rtccInit.debugRun = false;  /* Halt RTC when debugging. */
+  // rtccInit.cntWrapOnCCV1 = true;   /* Wrap around on CCV1 match. */
+  // RTCC_Init(&rtccInit);
 
   /* Interrupt at given frequency. */
-  RTCC_CCChConf_TypeDef ccchConf = RTCC_CH_INIT_COMPARE_DEFAULT;
-  ccchConf.compMatchOutAction = rtccCompMatchOutActionToggle;
-  RTCC_ChannelInit(1, &ccchConf);
-  RTCC_ChannelCCVSet(1, (CMU_ClockFreqGet(cmuClock_RTCC) / frequency) - 1);
+  // RTCC_CCChConf_TypeDef ccchConf = RTCC_CH_INIT_COMPARE_DEFAULT;
+  // ccchConf.compMatchOutAction = rtccCompMatchOutActionToggle;
+  // RTCC_ChannelInit(2, &ccchConf);
+  // RTCC_ChannelCCVSet(2, (CMU_ClockFreqGet(cmuClock_RTCC) / (frequency)) - 1);
 
-#ifndef INCLUDE_PAL_GPIO_PIN_AUTO_TOGGLE_HW_ONLY
+// #ifndef INCLUDE_PAL_GPIO_PIN_AUTO_TOGGLE_HW_ONLY
   /* Enable interrupt */
-  NVIC_EnableIRQ(RTCC_IRQn);
-  RTCC_IntEnable(RTCC_IEN_CC1);
-#endif
+  //NVIC_EnableIRQ(RTCC_IRQn);
+  //RTCC_IntEnable(RTCC_IEN_CC2);
+// #endif
 
-  RTCC->CNT = _RTCC_CNT_RESETVALUE;
+  //RTCC->CNT = _RTCC_CNT_RESETVALUE;
   /* Start Counter */
-  RTCC_Enable(true);
+  //RTCC_Enable(true);
 }
 #endif  /* PAL_CLOCK_RTCC */
 #endif  /* INCLUDE_PAL_GPIO_PIN_AUTO_TOGGLE */

@@ -23,6 +23,8 @@
 #include "debug.h"
 #include "framework_defs.h"
 
+#include "log.h"
+
 #ifdef NODE_GLOBALS
     #warning Default Timer implementation used when NODE_GLOBALS is active. Are you sure this is what you want ??
 #endif
@@ -53,6 +55,7 @@ __LINK_C void timer_init()
     NG(hw_event_scheduled) = false;
 
     error_t err = hw_timer_init(HW_TIMER_ID, TIMER_RESOLUTION, &timer_fired, &timer_overflow);
+    log_print_string("\nerr = %d", err);
     assert(err == SUCCESS);
 
 }

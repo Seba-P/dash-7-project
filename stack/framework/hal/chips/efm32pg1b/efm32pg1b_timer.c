@@ -29,10 +29,13 @@
 #include "em_cmu.h"
 #include "em_rtcc.h"
 #include "em_int.h"
+#include "em_gpio.h"
 
 #include "hwtimer.h"
 #include "hwatomic.h"
 #include "efm32pg1b_mcu.h"
+
+#include "log.h"
 
 /**************************************************************************//**
  * @brief  Start LFRCO for RTC
@@ -40,31 +43,34 @@
  *****************************************************************************/
 void startLfxoForRtcc(uint8_t freq)
 {
-#ifdef HW_USE_LFXO
-	/* Starting LFXO and waiting until it is stable */
-	CMU_OscillatorEnable(cmuOsc_LFXO, true, true);
-	/* Routing the LFRCO clock to the RTC */
-    CMU_ClockSelectSet(cmuClock_LFE,cmuSelect_LFXO);
-#else
-    // init clock with LFRCO (internal)
-	/* Starting LFRCO and waiting until it is stable */
-	CMU_OscillatorEnable(cmuOsc_LFRCO, true, true);
-	/* Routing the LFRCO clock to the RTC */
-	CMU_ClockSelectSet(cmuClock_LFE,cmuSelect_LFRCO);
-#endif
+	log_print_string("\nHERE(): DONE");
+	/* Enabling clock to the interface of the low energy modules */
+	CMU_ClockEnable(cmuClock_CORELE, true);
+	log_print_string("\n2(): DONE");
+	#ifdef HW_USE_LFXO
+		/* Starting LFXO and waiting until it is stable */
+		CMU_OscillatorEnable(cmuOsc_LFXO, true, true);
+		/* Routing the LFRCO clock to the RTC */
+	    CMU_ClockSelectSet(cmuClock_LFE,cmuSelect_LFXO);
+	#else
+	    // init clock with LFRCO (internal)
+		/* Starting LFRCO and waiting until it is stable */
+		CMU_OscillatorEnable(cmuOsc_LFRCO, true, true);
+		/* Routing the LFRCO clock to the RTC */
+		CMU_ClockSelectSet(cmuClock_LFE,cmuSelect_LFRCO);
+	#endif
 
-    uint32_t lf = CMU_ClockFreqGet(cmuClock_LFE);
-
-    CMU_ClockEnable(cmuClock_RTCC, true);
+	    uint32_t lf = CMU_ClockFreqGet(cmuClock_LFE);
+	    log_print_string("\nCMU_ClockFreqGet(): DONE");
 
     /* Set Clock prescaler */
-    if(freq == HWTIMER_FREQ_1MS)
-    	CMU_ClockDivSet(cmuClock_RTCC, cmuClkDiv_32);
-    else
-    	CMU_ClockDivSet(cmuClock_RTCC, cmuClkDiv_1);
+    // if(freq == HWTIMER_FREQ_1MS)
+    // 	CMU_ClockDivSet(cmuClock_RTCC, cmuClkDiv_32);
+    // else
+    // 	CMU_ClockDivSet(cmuClock_RTCC, cmuClkDiv_1);
 
-    /* Enabling clock to the interface of the low energy modules */
-    CMU_ClockEnable(cmuClock_CORELE, true);
+    CMU_ClockEnable(cmuClock_RTCC, true);
+    log_print_string("\nCMU_ClockEnable(): DONE");
 
     uint32_t rtcc = CMU_ClockFreqGet(cmuClock_RTCC);
 }
@@ -95,6 +101,7 @@ error_t hw_timer_init(hwtimer_id_t timer_id, uint8_t frequency, timer_callback_t
 
 		/* Configuring clocks in the Clock Management Unit (CMU) */
 		startLfxoForRtcc(frequency);
+		log_print_string("\nstartLfxoForRtcc(): DONE");
 
 		RTCC_Init_TypeDef rtccInit = RTCC_INIT_DEFAULT;
 		rtccInit.enable   = false;   /* Don't enable RTC after init has run */
@@ -104,10 +111,14 @@ error_t hw_timer_init(hwtimer_id_t timer_id, uint8_t frequency, timer_callback_t
 
 		/* Initialize the RTC */
 		RTCC_Init(&rtccInit);
+		log_print_string("\nRTCC_Init(): DONE");
+
 
 		//disable all rtc interrupts while we're still configuring
 		RTCC_IntDisable(RTCC_IEN_OF | RTCC_IEN_CC0 | RTCC_IEN_CC1);
 		RTCC_IntClear(RTCC_IFC_OF | RTCC_IFC_CC0 | RTCC_IFC_CC1);
+		log_print_string("\nRTCC_IntClear(): DONE");
+
 		
 		//Set maximum value for the RTC
 		//RTC_CompareSet( 0, 0x0000FFFF );
@@ -115,6 +126,8 @@ error_t hw_timer_init(hwtimer_id_t timer_id, uint8_t frequency, timer_callback_t
 
 		RTCC_ChannelInit(0, &rtccChInit);
 		RTCC_ChannelCCVSet(0, 0x0000FFFF);
+		log_print_string("\nRTCC_ChannelCCVSet(): DONE");
+
 		//RTC_CounterReset();
 		RTCC_Unlock();
 		RTCC->PRECNT  = _RTCC_PRECNT_RESETVALUE;
@@ -126,7 +139,11 @@ error_t hw_timer_init(hwtimer_id_t timer_id, uint8_t frequency, timer_callback_t
 
 		NVIC_EnableIRQ(RTCC_IRQn);
 		RTCC_Enable(true);
+		log_print_string("\nRTCC_Enable(): DONE");
+
     end_atomic();
+
+    //hw_gpio_configure_pin({gpioPortD, 13}, 0, gpioModePushPull, 0);
     return SUCCESS;
 }
 
@@ -233,6 +250,12 @@ INT_HANDLER(RTCC_IRQHandler)
 	if((flags & RTCC_IFS_CC1))
 	{
 		RTCC_IntDisable(RTCC_IEN_CC1);
+		
+		static uint16_t lcd_toggle_pin;
+		lcd_toggle_pin = (lcd_toggle_pin + 1) & 0x3FF;
+		if(lcd_toggle_pin == 0)
+			GPIO_PinOutToggle(gpioPortD, 13); // LCD_PIN_EXTCOMIN
+
 		if(compare_f != 0x0)
 			compare_f();
 	}

@@ -50,7 +50,7 @@ void __platform_init()
     console_init();
 #endif
 
-#ifdef USE_CC1101
+#ifdef USE_CC1101______________
     // configure the interrupt pins here, since hw_gpio_configure_pin() is MCU
     // specific and not part of the common HAL API
     hw_gpio_configure_pin(CC1101_GDO0_PIN, true, gpioModeInput, 0);
@@ -69,7 +69,7 @@ void __platform_post_framework_init()
 {
     __ubutton_init();
 
-    #ifdef PLATFORM_EFM32PG1B_SLSTK3401A_LCD_ENABLED
+    #ifdef PLATFORM_EFM32PG1B_SLSTK3401A_LCD_ENABLED____________
         uint64_t id = hw_get_unique_id();
         // nano spec of newlib does not support 64bit ...
         lcd_write_string("%.8x", (uint32_t)(id >> 32));
@@ -93,8 +93,7 @@ int main()
     lcd_write_string("__platform_post_framework_init(): DONE\n");
 
     scheduler_run();
-    log_print_string("scheduler_run(): DONE\n");
-    lcd_write_string("scheduler_run(): DONE\n");
+    
     return 0;
 }
 

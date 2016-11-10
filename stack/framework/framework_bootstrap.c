@@ -20,7 +20,9 @@
 #include "timer.h"
 #include "hwsystem.h"
 #include "random.h"
+
 #include "log.h"
+
 void bootstrap();
 void __framework_bootstrap()
 {

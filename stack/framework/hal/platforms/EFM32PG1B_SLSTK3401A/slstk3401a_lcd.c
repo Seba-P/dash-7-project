@@ -53,7 +53,7 @@ void __lcd_init()
 	{
 		void led_on(uint8_t led_id);
 		led_on(0);
-		led_on(1);
+		led_off(1);
 		while(1){;}
 	}
 
