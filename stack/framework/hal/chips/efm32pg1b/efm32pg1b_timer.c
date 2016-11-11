@@ -43,10 +43,9 @@
  *****************************************************************************/
 void startLfxoForRtcc(uint8_t freq)
 {
-	log_print_string("\nHERE(): DONE");
 	/* Enabling clock to the interface of the low energy modules */
 	CMU_ClockEnable(cmuClock_CORELE, true);
-	log_print_string("\n2(): DONE");
+	
 	#ifdef HW_USE_LFXO
 		/* Starting LFXO and waiting until it is stable */
 		CMU_OscillatorEnable(cmuOsc_LFXO, true, true);
@@ -60,8 +59,7 @@ void startLfxoForRtcc(uint8_t freq)
 		CMU_ClockSelectSet(cmuClock_LFE,cmuSelect_LFRCO);
 	#endif
 
-	    uint32_t lf = CMU_ClockFreqGet(cmuClock_LFE);
-	    log_print_string("\nCMU_ClockFreqGet(): DONE");
+	uint32_t lf = CMU_ClockFreqGet(cmuClock_LFE);
 
     /* Set Clock prescaler */
     // if(freq == HWTIMER_FREQ_1MS)
@@ -70,7 +68,6 @@ void startLfxoForRtcc(uint8_t freq)
     // 	CMU_ClockDivSet(cmuClock_RTCC, cmuClkDiv_1);
 
     CMU_ClockEnable(cmuClock_RTCC, true);
-    log_print_string("\nCMU_ClockEnable(): DONE");
 
     uint32_t rtcc = CMU_ClockFreqGet(cmuClock_RTCC);
 }
@@ -101,32 +98,24 @@ error_t hw_timer_init(hwtimer_id_t timer_id, uint8_t frequency, timer_callback_t
 
 		/* Configuring clocks in the Clock Management Unit (CMU) */
 		startLfxoForRtcc(frequency);
-		log_print_string("\nstartLfxoForRtcc(): DONE");
 
 		RTCC_Init_TypeDef rtccInit = RTCC_INIT_DEFAULT;
 		rtccInit.enable   = false;   /* Don't enable RTC after init has run */
 		// rtccInit.comp0Top = true;   /* Clear counter on compare 0 match: cmp 0 is used to limit the value of the rtc to 0xffff */
 		// rtccInit.debugRun = false;   /* Counter shall not keep running during debug halt. */
 
-
 		/* Initialize the RTC */
 		RTCC_Init(&rtccInit);
-		log_print_string("\nRTCC_Init(): DONE");
-
 
 		//disable all rtc interrupts while we're still configuring
 		RTCC_IntDisable(RTCC_IEN_OF | RTCC_IEN_CC0 | RTCC_IEN_CC1);
 		RTCC_IntClear(RTCC_IFC_OF | RTCC_IFC_CC0 | RTCC_IFC_CC1);
-		log_print_string("\nRTCC_IntClear(): DONE");
-
 		
 		//Set maximum value for the RTC
 		//RTC_CompareSet( 0, 0x0000FFFF );
 		RTCC_CCChConf_TypeDef rtccChInit = RTCC_CH_INIT_COMPARE_DEFAULT;
-
 		RTCC_ChannelInit(0, &rtccChInit);
 		RTCC_ChannelCCVSet(0, 0x0000FFFF);
-		log_print_string("\nRTCC_ChannelCCVSet(): DONE");
 
 		//RTC_CounterReset();
 		RTCC_Unlock();
@@ -136,11 +125,8 @@ error_t hw_timer_init(hwtimer_id_t timer_id, uint8_t frequency, timer_callback_t
  		RTCC->DATE    = _RTCC_DATE_RESETVALUE;
 
 		RTCC_IntEnable(RTCC_IEN_CC0);
-
 		NVIC_EnableIRQ(RTCC_IRQn);
 		RTCC_Enable(true);
-		log_print_string("\nRTCC_Enable(): DONE");
-
     end_atomic();
 
     //hw_gpio_configure_pin({gpioPortD, 13}, 0, gpioModePushPull, 0);

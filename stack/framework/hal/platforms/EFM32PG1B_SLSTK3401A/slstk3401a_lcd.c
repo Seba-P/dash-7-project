@@ -39,6 +39,7 @@
   void lcd_clear() {}
   void lcd_write_string(const char* format, ...) {}
   void lcd_write_number(int val) {}
+  void lcd_write_line(int line_nr, const char* format, ...) {}
 #else
 
 #define BUFFER_SIZE 100

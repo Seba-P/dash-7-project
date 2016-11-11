@@ -523,10 +523,15 @@ void dll_notify_dll_conf_file_changed()
 void dll_init()
 {
     sched_register_task(&process_received_packets);
+    log_print_string("1\n");
     sched_register_task(&dll_start_foreground_scan);
+    log_print_string("2\n");
     sched_register_task(&execute_cca);
+    log_print_string("3\n");
     sched_register_task(&execute_csma_ca);
+    log_print_string("4\n");
     sched_register_task(&dll_execute_scan_automation);
+    log_print_string("5\n");
 
     hw_radio_init(&alloc_new_packet, &release_packet);
 

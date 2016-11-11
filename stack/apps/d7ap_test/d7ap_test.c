@@ -67,7 +67,7 @@ void execute_sensor_measurement() {
 #endif
     // use the counter value for now instead of 'real' sensor
     uint32_t val = timer_get_counter_value();
-    DPRINT("\nval = %d", val);
+    DPRINT("val = %d\n", val);
     // file 0x40 is configured to use D7AActP trigger an ALP action which 
     // broadcasts this file data on Access Class 0
     fs_write_file(0x40, 0, (uint8_t*)&val, 4);
@@ -187,6 +187,7 @@ void bootstrap() {
     d7asp_init_args.d7asp_received_unsollicited_data_cb = &on_unsollicited_response_received;
 
     d7ap_stack_init(&fs_init_args, &d7asp_init_args, true, NULL);
+    DPRINT("d7ap_stack_init(): DONE\n");
 
     sched_register_task(&execute_sensor_measurement);
     timer_post_task_delay(&execute_sensor_measurement, REPORTING_INTERVAL_TICKS);

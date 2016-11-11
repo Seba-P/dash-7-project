@@ -55,9 +55,7 @@ __LINK_C void timer_init()
     NG(hw_event_scheduled) = false;
 
     error_t err = hw_timer_init(HW_TIMER_ID, TIMER_RESOLUTION, &timer_fired, &timer_overflow);
-    log_print_string("\nerr = %d", err);
     assert(err == SUCCESS);
-
 }
 
 #ifdef FRAMEWORK_TIMER_RESET_COUNTER
