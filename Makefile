@@ -629,6 +629,45 @@ flash-simple_leds/fast:
 	$(MAKE) -f apps\simple_leds\CMakeFiles\flash-simple_leds.dir\build.make apps/simple_leds/CMakeFiles/flash-simple_leds.dir/build
 .PHONY : flash-simple_leds/fast
 
+#=============================================================================
+# Target rules for targets named TEST.axf
+
+# Build rule for target.
+TEST.axf: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 TEST.axf
+.PHONY : TEST.axf
+
+# fast build rule for target.
+TEST.axf/fast:
+	$(MAKE) -f apps\TEST\CMakeFiles\TEST.axf.dir\build.make apps/TEST/CMakeFiles/TEST.axf.dir/build
+.PHONY : TEST.axf/fast
+
+#=============================================================================
+# Target rules for targets named TEST.elf
+
+# Build rule for target.
+TEST.elf: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 TEST.elf
+.PHONY : TEST.elf
+
+# fast build rule for target.
+TEST.elf/fast:
+	$(MAKE) -f apps\TEST\CMakeFiles\TEST.elf.dir\build.make apps/TEST/CMakeFiles/TEST.elf.dir/build
+.PHONY : TEST.elf/fast
+
+#=============================================================================
+# Target rules for targets named flash-TEST
+
+# Build rule for target.
+flash-TEST: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 flash-TEST
+.PHONY : flash-TEST
+
+# fast build rule for target.
+flash-TEST/fast:
+	$(MAKE) -f apps\TEST\CMakeFiles\flash-TEST.dir\build.make apps/TEST/CMakeFiles/flash-TEST.dir/build
+.PHONY : flash-TEST/fast
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -677,6 +716,9 @@ help:
 	@echo ... simple_leds.axf
 	@echo ... simple_leds.elf
 	@echo ... flash-simple_leds
+	@echo ... TEST.axf
+	@echo ... TEST.elf
+	@echo ... flash-TEST
 .PHONY : help
 
 

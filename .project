@@ -2203,5 +2203,95 @@
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.axf</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.axf/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.axf/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.axf/Source Files/test.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/TEST/test.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.axf/Source Files/version.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/TEST/version.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.axf/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.axf/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.axf/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.axf/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.elf</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.elf/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.elf/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.elf/Source Files/test.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/TEST/test.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.elf/Source Files/version.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/TEST/version.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.elf/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.elf/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.elf/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] TEST.elf/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

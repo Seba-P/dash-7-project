@@ -187,7 +187,6 @@ void bootstrap() {
     d7asp_init_args.d7asp_received_unsollicited_data_cb = &on_unsollicited_response_received;
 
     d7ap_stack_init(&fs_init_args, &d7asp_init_args, true, NULL);
-    DPRINT("d7ap_stack_init(): DONE\n");
 
     sched_register_task(&execute_sensor_measurement);
     timer_post_task_delay(&execute_sensor_measurement, REPORTING_INTERVAL_TICKS);

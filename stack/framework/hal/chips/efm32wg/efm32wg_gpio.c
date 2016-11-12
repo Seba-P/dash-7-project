@@ -34,6 +34,8 @@
 #include <assert.h>
 #include "hwatomic.h"
 
+#include "log.h"
+
 typedef struct
 {
     gpio_inthandler_t callback;
