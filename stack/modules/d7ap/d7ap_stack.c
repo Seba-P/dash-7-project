@@ -44,17 +44,17 @@ void d7ap_stack_init(fs_init_args_t* fs_init_args, d7asp_init_args_t* d7asp_init
     assert(fs_init_args->access_profiles_count > 0); // there should be at least one access profile defined
 
     fs_init(fs_init_args);
-    DPRINT("fs_init(): DONE\n");
+    log_print_string("fs_init(): DONE\n");
     d7asp_init(d7asp_init_args);
-    DPRINT("d7asp_init(): DONE\n");
+    log_print_string("d7asp_init(): DONE\n");
     d7atp_init();
-    DPRINT("d7atp_init(): DONE\n");
+    log_print_string("d7atp_init(): DONE\n");
     d7anp_init();
-    DPRINT("d7anp_init(): DONE\n");
+    log_print_string("d7anp_init(): DONE\n");
     packet_queue_init();
-    DPRINT("packet_queue_init(): DONE\n");
+    log_print_string("packet_queue_init(): DONE\n");
     dll_init();
-    DPRINT("dll_init(): DONE\n");
+    log_print_string("dll_init(): DONE\n");
 
     uint8_t read_firmware_version_alp_command[] = { 0x01, D7A_FILE_FIRMWARE_VERSION_FILE_ID, 0, D7A_FILE_FIRMWARE_VERSION_SIZE };
 
@@ -62,11 +62,15 @@ void d7ap_stack_init(fs_init_args_t* fs_init_args, d7asp_init_args_t* d7asp_init
     {
 #ifdef FRAMEWORK_SHELL_ENABLED
         shell_init();
+        log_print_string("shell_init(): DONE\n");
         shell_register_handler((cmd_handler_registration_t){ .id = ALP_CMD_HANDLER_ID, .cmd_handler_callback = &alp_cmd_handler });
+        log_print_string("shell_register_handler(): DONE\n");
         alp_cmd_handler_set_appl_itf_callback(alp_cmd_handler_appl_itf_cb);
+        log_print_string("alp_cmd_handler_set_appl_itf_callback(): DONE\n");
 
         // notify booted to serial
         alp_process_command_console_output(read_firmware_version_alp_command, sizeof(read_firmware_version_alp_command));
+        log_print_string("alp_process_command_console_output(): DONE\n");
 #endif
     }
     else
@@ -94,6 +98,7 @@ void d7ap_stack_init(fs_init_args_t* fs_init_args, d7asp_init_args_t* d7asp_init
       uint8_t alp_response[ALP_PAYLOAD_MAX_SIZE] = { 0 };
       uint8_t alp_response_length = 0;
       alp_process_command_result_on_d7asp(&broadcast_fifo_config, read_firmware_version_alp_command, sizeof(read_firmware_version_alp_command), ALP_CMD_ORIGIN_APP); // TODO origin stack?
+      log_print_string("alp_process_command_result_on_d7asp(): DONE\n");
 #endif
     }
 }

@@ -81,13 +81,11 @@ int main()
 {
     //initialise the platform itself
     __platform_init();
-    log_print_string("__platform_init(): DONE\n");
     //do not initialise the scheduler, this is done by __framework_bootstrap()
     __framework_bootstrap();
-    log_print_string("__framework_bootstrap(): DONE\n");
     //initialise platform functionality that depends on the framework
     __platform_post_framework_init();
-    log_print_string("__platform_post_framework_init(): DONE\n");
+    log_print_string("\nSCHEDULER IS RUNNING\n");
 
     scheduler_run();
 

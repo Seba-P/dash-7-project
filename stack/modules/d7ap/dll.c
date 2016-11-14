@@ -211,10 +211,12 @@ static void process_received_packets()
         // make sure we don't start processing this packet before the TX is completed.
         // will be rescheduled by packet_transmitted() or an CSMA failed.
         process_received_packets_after_tx = true;
+        log_print_string("is_tx_busy()\n");
         return;
     }
 
     packet_t* packet = packet_queue_get_received_packet();
+    log_print_string("packet_queue_get_received_packet(): DONE\n");
     assert(packet != NULL);
     DPRINT("Processing received packet");
     packet_queue_mark_processing(packet);
@@ -481,7 +483,7 @@ void dll_execute_scan_automation()
         fs_read_access_class(scan_access_class, &scan_access_profile);
         active_access_class = scan_access_class;
     }
-
+    log_print_string("fs_read_dll_conf_active_access_class(): DONE\n");
     current_access_profile = &scan_access_profile;
 
     if(current_access_profile->control_scan_type_is_foreground && current_access_profile->control_number_of_subbands > 0) // TODO background scan
@@ -497,6 +499,7 @@ void dll_execute_scan_automation()
         };
 
         hw_radio_set_rx(&rx_cfg, &packet_received, NULL);
+        log_print_string("hw_radio_set_rx(): DONE\n");
 
         assert(current_access_profile->scan_automation_period == 0); // scan automation period, assuming 0 for now
     }
@@ -509,6 +512,7 @@ void dll_execute_scan_automation()
         if(dll_state != DLL_STATE_IDLE)
             switch_state(DLL_STATE_IDLE);
     }
+    log_print_string("dll_execute_scan_automation(): DONE\n");
 }
 
 void dll_notify_dll_conf_file_changed()
@@ -523,15 +527,10 @@ void dll_notify_dll_conf_file_changed()
 void dll_init()
 {
     sched_register_task(&process_received_packets);
-    log_print_string("1\n");
     sched_register_task(&dll_start_foreground_scan);
-    log_print_string("2\n");
     sched_register_task(&execute_cca);
-    log_print_string("3\n");
     sched_register_task(&execute_csma_ca);
-    log_print_string("4\n");
     sched_register_task(&dll_execute_scan_automation);
-    log_print_string("5\n");
 
     hw_radio_init(&alloc_new_packet, &release_packet);
 

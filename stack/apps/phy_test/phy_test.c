@@ -106,9 +106,7 @@ void transmit_packet()
 	counter++;
     DPRINT("%d tx %d bytes\n", counter, PACKET_LENGTH);
     memcpy(&tx_packet->data, data, PACKET_LENGTH);
-    DPRINT("memcpy(): DONE\n");
     hw_radio_send_packet(tx_packet, &packet_transmitted);
-    DPRINT("PACKET SENT\n");
 }
 
 hw_radio_packet_t* alloc_new_packet(uint8_t length)
@@ -137,6 +135,8 @@ void packet_received(hw_radio_packet_t* packet)
     {
         DPRINT("RX OK!\n");
     }
+
+    sched_post_task(&start_rx);
 
     hw_watchdog_feed();
 }

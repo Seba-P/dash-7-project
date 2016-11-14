@@ -430,11 +430,8 @@ error_t hw_radio_init(alloc_packet_callback_t alloc_packet_cb,
     current_state = HW_RADIO_STATE_IDLE;
 
     cc1101_interface_init(&end_of_packet_isr);
-    log_print_string("cc1101_interface_init(): DONE\n");
     cc1101_interface_reset_radio_core();
-    log_print_string("cc1101_interface_reset_radio_core(): DONE\n");
     cc1101_interface_write_rfsettings(&rf_settings);
-    log_print_string("cc1101_interface_write_rfsettings(): DONE\n");
 
     DPRINT("RF settings:");
     uint8_t* p = (uint8_t*) &rf_settings;
@@ -450,7 +447,6 @@ error_t hw_radio_init(alloc_packet_callback_t alloc_packet_cb,
     configure_syncword_class(current_syncword_class);
 
     cc1101_interface_strobe(RF_SCAL); // TODO use autocalibration instead of manual?
-    log_print_string("cc1101_interface_strobe(): DONE\n");
     wait_for_chip_state(CC1101_CHIPSTATE_IDLE);
 }
 
@@ -555,7 +551,6 @@ error_t hw_radio_send_packet(hw_radio_packet_t* packet, tx_packet_callback_t tx_
         wait_for_chip_state(CC1101_CHIPSTATE_IDLE); // TODO reading state sometimes returns illegal values such as 0x1F.
                                                 // polling for this seems to take 50-200us after a quick test, not sure why yet
     }
-    log_print_string("wait_for_chip_state(): DONE\n");
 
     current_state = HW_RADIO_STATE_TX;
     current_packet = packet;
@@ -568,11 +563,9 @@ error_t hw_radio_send_packet(hw_radio_packet_t* packet, tx_packet_callback_t tx_
 
     cc1101_interface_write_burst_reg(TXFIFO, packet->data, packet->length + 1);
     cc1101_interface_set_interrupts_enabled(true);
-    log_print_string("cc1101_interface_set_interrupts_enabled(): DONE\n");
     DEBUG_TX_START();
     DEBUG_RX_END();
     cc1101_interface_strobe(RF_STX);
-    log_print_string("cc1101_interface_strobe(): DONE\n");
 
     return SUCCESS;
 }

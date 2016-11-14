@@ -34,8 +34,10 @@
 #include "hwtimer.h"
 #include "hwatomic.h"
 #include "efm32pg1b_mcu.h"
+#include "platform_defs.h"
 
 #include "log.h"
+
 
 /**************************************************************************//**
  * @brief  Start LFRCO for RTC
@@ -237,10 +239,12 @@ INT_HANDLER(RTCC_IRQHandler)
 	{
 		RTCC_IntDisable(RTCC_IEN_CC1);
 		
-		static uint16_t lcd_toggle_pin;
-		lcd_toggle_pin = (lcd_toggle_pin + 1) & 0x3FF;
-		if(lcd_toggle_pin == 0)
-			GPIO_PinOutToggle(gpioPortD, 13); // LCD_PIN_EXTCOMIN
+		#ifdef PLATFORM_EFM32PG1B_SLSTK3401A_LCD_ENABLED
+		 static uint16_t lcd_toggle_pin;
+		 lcd_toggle_pin = (lcd_toggle_pin + 1) & 0x3FF;
+		 if(lcd_toggle_pin == 0)
+		 	GPIO_PinOutToggle(gpioPortD, 13); // LCD_PIN_EXTCOMIN
+		#endif
 
 		if(compare_f != 0x0)
 			compare_f();

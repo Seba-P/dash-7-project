@@ -78,8 +78,8 @@
 #define CC1101_SPI_USART    1
 #define CC1101_SPI_BAUDRATE 6000000
 #define CC1101_SPI_LOCATION 2
-#define CC1101_SPI_PIN_CS   D10
-#define CC1101_GDO0_PIN     C9
+#define CC1101_SPI_PIN_CS   C9
+#define CC1101_GDO0_PIN     D10
 #define CC1101_GDO2_PIN     C7
 #endif
 

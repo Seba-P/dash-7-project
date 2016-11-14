@@ -28,17 +28,12 @@ void __framework_bootstrap()
 {
     //initialise the scheduler & timers
     scheduler_init();
-    log_print_string("scheduler_init(): DONE\n");
     timer_init();
-    log_print_string("timer_init(): DONE\n");
     //initialise libc RNG with the unique device id
     set_rng_seed(hw_get_unique_id());
-    log_print_string("set_rng_seed(): DONE\n");
     //reset the log counter
     log_counter_reset();
-    log_print_string("log_counter_reset(): DONE\n");
     //register the user bootstrap function();
     sched_register_task(&bootstrap);
-    log_print_string("sched_register_task(): DONE\n");
     sched_post_task(&bootstrap);
 }
