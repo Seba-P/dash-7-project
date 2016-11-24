@@ -40,7 +40,7 @@
 #include "hwlcd.h"
 #endif
 
-#ifndef PLATFORM_EFM32PG1B_SLSTK3401A
+#ifdef PLATFORM_EFM32PG1B_SLSTK3401A
  #define RX_MODE
 #endif
 
@@ -55,7 +55,7 @@
 	#ifdef HAS_LCD
 		#define DPRINT(...) lcd_write_string(__VA_ARGS__)
 	#else
-		#define DPRINT(...)
+		#define DPRINT(...) (void)0
 	#endif
 #endif
 
@@ -86,22 +86,6 @@ hw_tx_cfg_t tx_cfg = {
     .syncword_class = PHY_SYNCWORD_CLASS0,
     .eirp = 10
 };
-
-// void packet_received(hw_radio_packet_t* packet);
-
-// void start_rx()
-// {
-//     hw_radio_set_rx(&rx_cfg, &packet_received, NULL);
-// }
-
-// void packet_received_(hw_radio_packet_t* packet)
-// {
-//     //lcd_clear();
-//     //lcd_write_string("\nval = %d", packet->data[1]);
-//     led_toggle(1);
-
-//     hw_watchdog_feed();
-// }
 
 void execute_sensor_measurement() {
 #if HW_NUM_LEDS >= 1
@@ -148,7 +132,7 @@ void init_user_files() {
     // Data Request operand and D7ASP interface configuration
     alp_control_regular_t alp_ctrl = {
         .group                            = false,
-        .response_requested               = false,
+        .response_requested               = true,
         .operation                        = ALP_OP_READ_FILE_DATA
     };
 
@@ -204,7 +188,7 @@ void bootstrap() {
             .control_number_of_subbands = 1,
             .subnet = 0x00,
             .scan_automation_period = 0,
-            .transmission_timeout_period = 0x10,
+            .transmission_timeout_period = 0xFF,
             .subbands[0] = (subband_t){
                 .channel_header = {
                     .ch_coding = PHY_CODING_PN9,
@@ -219,11 +203,7 @@ void bootstrap() {
         }
     };
     fs_init_args_t fs_init_args = (fs_init_args_t){
-        #ifdef RX_MODE
-         .fs_user_files_init_cb = NULL,
-        #else
-         .fs_user_files_init_cb = &init_user_files,
-        #endif
+        .fs_user_files_init_cb = &init_user_files,
         .access_profiles_count = 1,
         .access_profiles = access_classes
     };

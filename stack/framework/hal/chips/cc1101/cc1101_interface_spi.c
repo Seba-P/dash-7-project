@@ -39,7 +39,7 @@
 #include "log.h"
 #define DPRINT(...) log_print_string(__VA_ARGS__)
 #else
-#define DPRINT(...)
+#define DPRINT(...) (void)0
 #endif
 
 static end_of_packet_isr_t end_of_packet_isr_callback;

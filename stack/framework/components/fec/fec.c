@@ -62,8 +62,8 @@ static bool fec_decode(uint8_t* input);
 #define DPRINT(...) log_print_stack_string(LOG_STACK_PHY, __VA_ARGS__)
 #define DPRINT_DATA(...) log_print_data(__VA_ARGS__)
 #else
-#define DPRINT(...)
-#define DPRINT_DATA(...)
+#define DPRINT(...) 
+#define DPRINT_DATA(...) 
 #endif
 
 //void print_array(uint8_t* buffer, uint8_t length)

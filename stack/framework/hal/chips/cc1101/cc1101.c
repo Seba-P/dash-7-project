@@ -53,9 +53,9 @@
 #define DPRINT_PACKET(...) log_print_raw_phy_packet(__VA_ARGS__)
 #define DPRINT_DATA(...) log_print_data(__VA_ARGS__)
 #else
-#define DPRINT(...)
-#define DPRINT_PACKET(...)
-#define DPRINT_DATA(...)
+#define DPRINT(...) (void)0
+#define DPRINT_PACKET(...) (void)0
+#define DPRINT_DATA(...) (void)0
 #endif
 
 #define RSSI_OFFSET 74
@@ -66,10 +66,10 @@
     #define DEBUG_RX_START() hw_debug_set(1);
     #define DEBUG_RX_END() hw_debug_clr(1);
 #else
-    #define DEBUG_TX_START()
-    #define DEBUG_TX_END()
-    #define DEBUG_RX_START()
-    #define DEBUG_RX_END()
+    #define DEBUG_TX_START() (void)0
+    #define DEBUG_TX_END() (void)0
+    #define DEBUG_RX_START() (void)0
+    #define DEBUG_RX_END() (void)0
 #endif
 
 /** \brief The possible states the radio can be in

@@ -61,34 +61,35 @@ void __assert_func( const char *file, int line, const char *func, const char *fa
 	start_atomic();
 	led_on(0);
 	led_on(1);
-#ifdef PLATFORM_USE_USB_CDC
-	// Dissable all IRQs except the one for USB
-	for(uint32_t j=0;j < EMU_IRQn; j++)
-		NVIC_DisableIRQ(j);
-
-	NVIC_EnableIRQ( USB_IRQn );
-
-	end_atomic();
-#endif
 
 	lcd_clear();
 	lcd_write_string("ERROR");
 	lcd_write_number(timer_get_counter_value());
 
-    __asm__("BKPT"); // break into debugger
+	uint8_t i = 0;
+	while(file[i])
+		i++;
+	while(file[i-1] != '\\' && i != 0)
+		i--;
 
-	while(1)
-	{
-		printf("assertion \"%s\" failed: file \"%s\", line %d%s%s\n",failedexpr, file, line, func ? ", function: " : "", func ? func : "");
-
-		for(uint32_t j = 0; j < 20; j++)
-		{
-			//blink at twice the frequency of the _exit call, so we can identify which of the two events has occurred
-			for(uint32_t i = 0; i < 0xFFFFF; i++){}
-			led_toggle(0);
-			led_toggle(1);
-		}
-	}
+	printf("\nassertion \"%s\" failed: file \"%s\", line %d%s%s\n",failedexpr, (file + i), line, func ? ", function: " : "", func ? func : "");
 	end_atomic();
+	while(1){;}
+
+ //    __asm__("BKPT"); // break into debugger
+
+	// while(1)
+	// {
+	// 	printf("assertion \"%s\" failed: file \"%s\", line %d%s%s\n",failedexpr, file, line, func ? ", function: " : "", func ? func : "");
+
+	// 	for(uint32_t j = 0; j < 20; j++)
+	// 	{
+	// 		//blink at twice the frequency of the _exit call, so we can identify which of the two events has occurred
+	// 		for(uint32_t i = 0; i < 0xFFFFF; i++){}
+	// 		led_toggle(0);
+	// 		led_toggle(1);
+	// 	}
+	// }
+	// end_atomic();
 
 }

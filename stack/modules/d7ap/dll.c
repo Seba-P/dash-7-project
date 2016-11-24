@@ -483,7 +483,6 @@ void dll_execute_scan_automation()
         fs_read_access_class(scan_access_class, &scan_access_profile);
         active_access_class = scan_access_class;
     }
-    log_print_string("fs_read_dll_conf_active_access_class(): DONE\n");
     current_access_profile = &scan_access_profile;
 
     if(current_access_profile->control_scan_type_is_foreground && current_access_profile->control_number_of_subbands > 0) // TODO background scan
