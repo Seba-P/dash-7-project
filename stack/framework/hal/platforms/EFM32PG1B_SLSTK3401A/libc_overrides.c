@@ -73,7 +73,6 @@ void __assert_func( const char *file, int line, const char *func, const char *fa
 		i--;
 
 	printf("\nassertion \"%s\" failed: file \"%s\", line %d%s%s\n",failedexpr, (file + i), line, func ? ", function: " : "", func ? func : "");
-	end_atomic();
 	while(1){;}
 
  //    __asm__("BKPT"); // break into debugger

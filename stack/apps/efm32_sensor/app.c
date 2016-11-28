@@ -32,79 +32,33 @@
 #include "fs.h"
 #include "log.h"
 
-#if (!defined PLATFORM_EFM32GG_STK3700 && !defined PLATFORM_EFM32HG_STK3400 && !defined PLATFORM_EZR32LG_WSTK6200A && !defined PLATFORM_EFM32WG_STK3800 && !defined PLATFORM_EFM32PG1B_SLSTK3401A)
-	#error Mismatch between the configured platform and the actual platform.
-#endif
-
 #include "userbutton.h"
 #include "platform_sensors.h"
 #include "platform_lcd.h"
 
 #define SENSOR_FILE_ID           0x40
-#define SENSOR_FILE_SIZE         8
+#define SENSOR_FILE_SIZE         4
 #define ACTION_FILE_ID           0x41
 
-#define SENSOR_UPDATE	TIMER_TICKS_PER_SEC * 1
+#define SENSOR_UPDATE	TIMER_TICKS_PER_SEC * 3
 
 // Toggle different operational modes
 void userbutton_callback(button_id_t button_id)
 {
-	#ifdef PLATFORM_EFM32GG_STK3700
-	lcd_write_string("Butt %d", button_id);
-	#else
-	  lcd_write_string("button: %d\n", button_id);
-	#endif
+  log_print_string("\nButton: %d", button_id);
+	// lcd_write_line(4, "Button: %d\n", button_id);
 }
 
 void execute_sensor_measurement()
 {
-#if (defined PLATFORM_EFM32GG_STK3700 || defined PLATFORM_EFM32WG_STK3800)
-  float internal_temp = hw_get_internal_temperature();
-  lcd_write_temperature(internal_temp*10, 1);
+  static uint32_t val;
+  val++;
 
-  uint32_t vdd = hw_get_battery();
+  led_toggle(1);
+  log_print_string("\nval = %d", val & 0xFF);
+  // lcd_write_line(3, "val = %d\n", val & 0xFF);
 
-
-  fs_write_file(SENSOR_FILE_ID, 0, (uint8_t*)&internal_temp, sizeof(internal_temp)); // File 0x40 is configured to use D7AActP trigger an ALP action which broadcasts this file data on Access Class 0
-#endif
-
-#if (defined PLATFORM_EFM32HG_STK3400  || defined PLATFORM_EZR32LG_WSTK6200A || defined PLATFORM_EFM32PG1B_SLSTK3401A)
-  char str[30];
-
-  float internal_temp = hw_get_internal_temperature();
-  sprintf(str, "Int T: %2d.%d C", (int)internal_temp, (int)(internal_temp*10)%10);
-  lcd_write_line(2,str);
-  log_print_string(str);
-
-  uint32_t rhData;
-  uint32_t tData;
-  getHumidityAndTemperature(&rhData, &tData);
-
-  sprintf(str, "Ext T: %d.%d C", (tData/1000), (tData%1000)/100);
-  lcd_write_line(3,str);
-  log_print_string(str);
-
-  sprintf(str, "Ext H: %d.%d", (rhData/1000), (rhData%1000)/100);
-  lcd_write_line(4,str);
-  log_print_string(str);
-
-  uint32_t vdd = hw_get_battery();
-
-  sprintf(str, "Batt %d mV", vdd);
-  lcd_write_line(5,str);
-  log_print_string(str);
-
-  //TODO: put sensor values in array
-
-  uint8_t sensor_values[8];
-  uint16_t *pointer =  (uint16_t*) sensor_values;
-  *pointer++ = (uint16_t) (internal_temp * 10);
-  *pointer++ = (uint16_t) (tData /100);
-  *pointer++ = (uint16_t) (rhData /100);
-  *pointer++ = (uint16_t) (vdd /10);
-
-  fs_write_file(SENSOR_FILE_ID, 0, (uint8_t*)&sensor_values,8);
-#endif
+  fs_write_file(SENSOR_FILE_ID, 0, (uint8_t*)&val, SENSOR_FILE_SIZE);
 
   timer_post_task_delay(&execute_sensor_measurement, SENSOR_UPDATE);
 }
@@ -128,18 +82,20 @@ void init_user_files()
     alp_control_regular_t alp_ctrl = {
         .group = false,
         .response_requested = false,
-        .operation = ALP_OP_READ_FILE_DATA
+        // .operation = ALP_OP_READ_FILE_DATA
+        .operation = ALP_OP_WRITE_FILE_DATA
     };
 
-    alp_operand_file_data_request_t file_data_request_operand = {
+    // alp_operand_file_data_request_t file_data_request_operand = {
+    alp_operand_file_data_t file_data_operand = {
         .file_offset = {
             .file_id = SENSOR_FILE_ID,
             .offset = 0
         },
-        .requested_data_length = SENSOR_FILE_SIZE,
+        .provided_data_length = SENSOR_FILE_SIZE,
     };
 
-    d7asp_master_session_config_t d7asp_fifo_config = {
+    d7asp_master_session_config_t session_config = {
         .qos = {
             .qos_resp_mode = SESSION_RESP_MODE_NO,
             .qos_nls                 = false,
@@ -157,7 +113,8 @@ void init_user_files()
     };
 
     // finally, register D7AActP file
-    fs_init_file_with_D7AActP(ACTION_FILE_ID, &d7asp_fifo_config, &alp_ctrl, (uint8_t*)&file_data_request_operand);
+    // fs_init_file_with_D7AActP(ACTION_FILE_ID, &session_config, (alp_control_t*)&alp_ctrl, (uint8_t*)&file_data_request_operand);
+    fs_init_file_with_D7AActP(ACTION_FILE_ID, &session_config, (alp_control_t*)&alp_ctrl, (uint8_t*)&file_data_operand);
 }
 
 void bootstrap()
@@ -171,16 +128,12 @@ void bootstrap()
             .control_number_of_subbands = 1,
             .subnet = 0x00,
             .scan_automation_period = 0,
-            .transmission_timeout_period = 0x10,
+            .transmission_timeout_period = 50,
             .subbands[0] = (subband_t){
                 .channel_header = {
                     .ch_coding = PHY_CODING_PN9,
                     .ch_class = PHY_CLASS_NORMAL_RATE,
-#ifdef PLATFORM_EZR32LG_WSTK6200A
                     .ch_freq_band = PHY_BAND_868
-#else
-                    .ch_freq_band = PHY_BAND_433
-#endif
                 },
                 .channel_index_start = 16,
                 .channel_index_end = 16,

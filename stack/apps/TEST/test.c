@@ -1,194 +1,242 @@
-/* * OSS-7 - An opensource implementation of the DASH7 Alliance Protocol for ultra
- * lowpower wireless sensor communication
- *
- * Copyright 2015 University of Antwerp
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
-/*
- * \author	glenn.ergeerts@uantwerpen.be
- * \author  maarten.weyn@uantwerpen.be
- * \author  contact@christophe.vg
- */
-
-
-#include "string.h"
-#include "stdio.h"
-#include "stdint.h"
-
-#include "hwleds.h"
-#include "hwwatchdog.h"
+/******************
+ * COMPONENT LIBS *
+ ******************/
+// #include "debug.h"
+// #include "fifo.h"
 #include "log.h"
-#include "random.h"
+#include "scheduler.h"
+#include "timer.h"
 
-#include "d7ap_stack.h"
-#include "dll.h"
-#include "alp_cmd_handler.h"
+/*****************
+ * PLATFORM LIBS *
+ *****************/
+#include "platform.h"
+#include "platform_lcd.h"
+#include "platform_sensors.h"
+#include "userbutton.h"
 
-#ifdef HAS_LCD
+#include "hwadc.h"
 #include "hwlcd.h"
-#endif
+#include "hwleds.h"
+// #include "hwsystem.h"
+// #include "hwuart.h"
 
-#ifdef PLATFORM_EFM32PG1B_SLSTK3401A
- #define RX_MODE
-#endif
 
-#ifdef FRAMEWORK_LOG_ENABLED
-    #ifdef HAS_LCD
-		#define DPRINT(...) log_print_string(__VA_ARGS__); lcd_write_string(__VA_ARGS__)
-	#else
-		#define DPRINT(...) log_print_string(__VA_ARGS__)
-	#endif
+/****************
+ * MODULES LIBS *
+ ****************/
+#include "d7ap_stack.h"
+// #include "dll.h"
+// #include "alp_cmd_handler.h"
+// #include "fs.h"
 
-#else
-	#ifdef HAS_LCD
-		#define DPRINT(...) lcd_write_string(__VA_ARGS__)
-	#else
-		#define DPRINT(...) (void)0
-	#endif
-#endif
+/*****************
+ * STANDARD LIBS *
+ *****************/
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "version.h"
 
 #define SENSOR_FILE_ID           0x40
 #define SENSOR_FILE_SIZE         4
 #define ACTION_FILE_ID           0x41
 
-#define REPORTING_INTERVAL       1 // seconds
-#define REPORTING_INTERVAL_TICKS TIMER_TICKS_PER_SEC * REPORTING_INTERVAL
+#define SENSOR_UPDATE   TIMER_TICKS_PER_SEC * 3
 
-hw_rx_cfg_t rx_cfg = {
-    .channel_id = {
-        .channel_header.ch_coding = PHY_CODING_PN9,
-        .channel_header.ch_class = PHY_CLASS_NORMAL_RATE,
-        .channel_header.ch_freq_band = PHY_BAND_868,
-        .center_freq_index = 16
-    },
-    .syncword_class = PHY_SYNCWORD_CLASS0
-};
-
-hw_tx_cfg_t tx_cfg = {
-    .channel_id = {
-        .channel_header.ch_coding = PHY_CODING_PN9,
-        .channel_header.ch_class = PHY_CLASS_NORMAL_RATE,
-        .channel_header.ch_freq_band = PHY_BAND_868,
-        .center_freq_index = 16
-    },
-    .syncword_class = PHY_SYNCWORD_CLASS0,
-    .eirp = 10
-};
-
-void execute_sensor_measurement() {
-#if HW_NUM_LEDS >= 1
-    led_toggle(0);
+#ifdef PLATFORM_EFM32WG_STK3800
+ #define GATEWAY
 #endif
-    // use the counter value for now instead of 'real' sensor
-    static uint8_t val;
 
-    DPRINT("\nval = %d", val++);
-    // file 0x40 is configured to use D7AActP trigger an ALP action which 
-    // broadcasts this file data on Access Class 0
-    fs_write_file(0x40, 0, (uint8_t*)&val, 4);
-    timer_post_task_delay(&execute_sensor_measurement, REPORTING_INTERVAL_TICKS);
-}
-
-void on_unsollicited_response_received(d7asp_result_t d7asp_result,
-                                      uint8_t *alp_command, uint8_t alp_command_size)
+/********************
+ * APP FILES CONFIG *
+ ********************/
+void init_gateway_files()
 {
-    alp_cmd_handler_output_d7asp_response(d7asp_result, alp_command, alp_command_size);
-    DPRINT("Unsol resp -%d dBm, LB %d dB\n", d7asp_result.rx_level, d7asp_result.link_budget);
+    // file 0x40: contains our sensor data + configure an action file to be executed upon write
+    fs_file_header_t file_header = (fs_file_header_t){
+        .file_properties.action_protocol_enabled = 0,
+        .file_properties.action_file_id = ACTION_FILE_ID,
+        .file_properties.action_condition = ALP_ACT_COND_WRITE,
+        .file_properties.storage_class = FS_STORAGE_VOLATILE,
+        .file_properties.permissions = 0, // TODO
+        .length = SENSOR_FILE_SIZE
+    };
 
-  #if HW_NUM_LEDS >= 2
-      led_toggle(1);
-  #endif
+    fs_init_file(SENSOR_FILE_ID, &file_header, NULL);
 }
 
-void init_user_files() {
-    // file 0x40: contains our sensor data + configure an action file to be 
-    // executed upon write
+void init_sensor_files()
+{
+    // file 0x40: contains our sensor data + configure an action file to be executed upon write
     fs_file_header_t file_header = (fs_file_header_t){
-        .file_properties.action_protocol_enabled  = 1,
-        .file_properties.action_file_id           = ACTION_FILE_ID,
-        .file_properties.action_condition         = ALP_ACT_COND_WRITE,
-        .file_properties.storage_class            = FS_STORAGE_VOLATILE,
-        .file_properties.permissions              = 0, // TODO
+        .file_properties.action_protocol_enabled = 0,
+        .file_properties.action_file_id = ACTION_FILE_ID,
+        .file_properties.action_condition = ALP_ACT_COND_WRITE,
+        .file_properties.storage_class = FS_STORAGE_VOLATILE,
+        .file_properties.permissions = 0, // TODO
         .length = SENSOR_FILE_SIZE
     };
 
     fs_init_file(SENSOR_FILE_ID, &file_header, NULL);
 
-    // configure file notification using D7AActP: write ALP command to 
-    // broadcast changes made to file 0x40 in file 0x41
-    // first generate ALP command consisting of ALP Control header, ALP File 
-    // Data Request operand and D7ASP interface configuration
+    // configure file notification using D7AActP: write ALP command to broadcast changes made to file 0x40 in file 0x41
+    // first generate ALP command consisting of ALP Control header, ALP File Data Request operand and D7ASP interface configuration
     alp_control_regular_t alp_ctrl = {
-        .group                            = false,
-        .response_requested               = true,
-        .operation                        = ALP_OP_READ_FILE_DATA
+        .group = false,
+        .response_requested = false,
+        .operation = ALP_OP_READ_FILE_DATA
+        // .operation = ALP_OP_WRITE_FILE_DATA
     };
 
     alp_operand_file_data_request_t file_data_request_operand = {
+    // alp_operand_file_data_t file_data_operand = {
         .file_offset = {
-            .file_id                      = SENSOR_FILE_ID,
-            .offset                       = 0
+            .file_id = SENSOR_FILE_ID,
+            .offset = 0
         },
-        .requested_data_length            = SENSOR_FILE_SIZE,
+        .requested_data_length = SENSOR_FILE_SIZE,
+        // .provided_data_length = SENSOR_FILE_SIZE,
     };
 
     d7asp_master_session_config_t session_config = {
         .qos = {
-            .qos_resp_mode                = SESSION_RESP_MODE_ANY,
-            .qos_nls                      = false,
-            .qos_record                   = false,
-            .qos_stop_on_error            = false
+            .qos_resp_mode = SESSION_RESP_MODE_NO,
+            .qos_nls                 = false,
+            .qos_stop_on_error       = false,
+            .qos_record              = false
         },
-        .dormant_timeout                  = 0,
+        .dormant_timeout = 0,
         .addressee = {
             .ctrl = {
-                .id_type                  = ID_TYPE_BCAST,
-                .access_class             = 0
+              .id_type = ID_TYPE_BCAST,
+              .access_class = 0
             },
-            .id                 = 0
+            .id = 0
         }
     };
 
     // finally, register D7AActP file
-    fs_init_file_with_D7AActP(ACTION_FILE_ID, &session_config, (alp_control_t*)&alp_ctrl,
-                              (uint8_t*)&file_data_request_operand);
+    fs_init_file_with_D7AActP(ACTION_FILE_ID, &session_config, (alp_control_t*)&alp_ctrl, (uint8_t*)&file_data_request_operand);
+    // fs_init_file_with_D7AActP(ACTION_FILE_ID, &session_config, (alp_control_t*)&alp_ctrl, (uint8_t*)&file_data_operand);
 }
 
-void on_d7asp_fifo_flush_completed(uint8_t fifo_token, uint8_t* progress_bitmap,
-                                   uint8_t* success_bitmap, uint8_t bitmap_byte_count)
+/*************
+ * APP TASKS *
+ *************/
+void log_current_val()
 {
-    if(memcmp(success_bitmap, progress_bitmap, bitmap_byte_count) == 0) {
-        DPRINT("Req ACK\n");
-    } else {
-        DPRINT("Req NACK\n");
+  uint32_t val;
+
+  fs_read_file(SENSOR_FILE_ID, 0, (uint8_t*)&val, SENSOR_FILE_SIZE);
+
+  led_toggle(1);
+  log_print_string("\nval = %d", val & 0xFF);
+  // lcd_write_line(3, "val = %d\n", val & 0xFF);
+
+  timer_post_task_delay(&log_current_val, TIMER_TICKS_PER_SEC);
+}
+
+typedef struct {
+    alp_control_regular_t alp_ctrl;
+    // alp_operand_file_data_request_t file_data_request_operand = {
+    alp_operand_file_data_t file_data_operand;
+    uint32_t val;
+} sensor_alp_cmd_t;
+
+sensor_alp_cmd_t sensor_alp_cmd = {
+    .alp_ctrl = {
+        .group = false,
+        .response_requested = false,
+        // .operation = ALP_OP_READ_FILE_DATA
+        .operation = ALP_OP_WRITE_FILE_DATA
+    },
+
+    // alp_operand_file_data_request_t file_data_request_operand = {
+    .file_data_operand = {
+        .file_offset = {
+            .file_id = SENSOR_FILE_ID,
+            .offset = 0
+        },
+        // .requested_data_length = SENSOR_FILE_SIZE,
+        .provided_data_length = SENSOR_FILE_SIZE,
+    },
+
+    .val = 0,
+};
+
+d7asp_master_session_config_t d7asp_session_config = {
+    .qos = {
+        .qos_resp_mode = SESSION_RESP_MODE_ANY,
+        .qos_nls                 = false,
+        .qos_stop_on_error       = false,
+        .qos_record              = false
+    },
+    .dormant_timeout = 0,
+    .addressee = {
+        .ctrl = {
+          .id_type = ID_TYPE_BCAST,
+          .access_class = 0
+        },
+        .id = 0
     }
+};
+
+extern bool alp_send_command(uint8_t* alp_cmd, uint8_t alp_cmd_len, uint8_t* alp_resp, uint8_t alp_resp_len, d7asp_master_session_config_t* d7asp_session_config);
+
+void execute_sensor_measurement()
+{
+  // static uint32_t val;
+  static uint8_t sensor_alp_resp[ALP_PAYLOAD_MAX_SIZE];
+  static uint8_t sensor_alp_resp_len = SENSOR_FILE_SIZE;
+  // val++;
+  sensor_alp_cmd.val++;
+
+  led_toggle(1);
+  log_print_string("val = %d, tab[0] = %d", sensor_alp_cmd.val & 0xFF, *((uint8_t*)&sensor_alp_cmd));
+  // lcd_write_line(3, "val = %d\n", val & 0xFF);
+
+  fs_write_file(SENSOR_FILE_ID, 0, (uint8_t*)&sensor_alp_cmd.val, SENSOR_FILE_SIZE);
+
+  // alp_process_command(&sensor_alp_cmd, sizeof(sensor_alp_cmd_t), sensor_alp_resp, &sensor_alp_resp_len, ALP_CMD_ORIGIN_APP);
+  alp_send_command((uint8_t*)&sensor_alp_cmd, sizeof(sensor_alp_cmd_t), sensor_alp_resp, sizeof(sensor_alp_cmd_t), &d7asp_session_config);
+
+  timer_post_task_delay(&execute_sensor_measurement, SENSOR_UPDATE);
+}
+
+/*****************
+ * APP CALLBACKS *
+ *****************/
+// Toggle different operational modes
+void userbutton_callback(button_id_t button_id)
+{
+  log_print_string("\nButton: %d", button_id);
+    // lcd_write_line(4, "Button: %d\n", button_id);
 }
 
 static d7asp_init_args_t d7asp_init_args;
 
-void bootstrap() {
-    DPRINT("\nDevice booted at time: %d\n", timer_get_counter_value());
+static void on_unsollicited_response_received(d7asp_result_t d7asp_result, uint8_t *alp_command, uint8_t alp_command_size)
+{
+    alp_cmd_handler_output_d7asp_response(d7asp_result, alp_command, alp_command_size);
+}
 
+void bootstrap()
+{
+    log_print_string("\nDEVICE BOOTED\n");
     dae_access_profile_t access_classes[1] = {
         {
-            .control_scan_type_is_foreground = true,
+            #ifdef GATEWAY
+             .control_scan_type_is_foreground = true,
+            #else
+             .control_scan_type_is_foreground = false,
+            #endif
             .control_csma_ca_mode = CSMA_CA_MODE_UNC,
             .control_number_of_subbands = 1,
-            .subnet = 0x00,
+            .subnet = 0,
             .scan_automation_period = 0,
-            .transmission_timeout_period = 0xFF,
+            .transmission_timeout_period = 50,
             .subbands[0] = (subband_t){
                 .channel_header = {
                     .ch_coding = PHY_CODING_PN9,
@@ -202,23 +250,33 @@ void bootstrap() {
             }
         }
     };
+
     fs_init_args_t fs_init_args = (fs_init_args_t){
-        .fs_user_files_init_cb = &init_user_files,
+        #ifdef GATEWAY
+         .fs_user_files_init_cb = init_gateway_files,
+        #else
+         .fs_user_files_init_cb = init_sensor_files,
+        #endif
         .access_profiles_count = 1,
         .access_profiles = access_classes
     };
 
-    //d7asp_init_args.d7asp_fifo_flush_completed_cb = &on_d7asp_fifo_flush_completed;
-    d7asp_init_args.d7asp_received_unsollicited_data_cb = &on_unsollicited_response_received;
+    ubutton_register_callback(0, &userbutton_callback);
+    ubutton_register_callback(1, &userbutton_callback);
 
-    d7ap_stack_init(&fs_init_args, &d7asp_init_args, true, NULL);
+    #ifdef GATEWAY
+     d7asp_init_args.d7asp_received_unsollicited_data_cb = &on_unsollicited_response_received;
+     d7ap_stack_init(&fs_init_args, &d7asp_init_args, true, NULL);
+     fs_write_dll_conf_active_access_class(0); // use access class 0 for scan automation
+     lcd_write_string("GATEWAY\n");
 
-    #ifdef RX_MODE
-        // sched_register_task(&start_rx);
-        // sched_post_task(&start_rx);
-        fs_write_dll_conf_active_access_class(0); // use access class 0 for scan automation
+     sched_register_task(&log_current_val);
+     timer_post_task_delay(&log_current_val, TIMER_TICKS_PER_SEC);
     #else
-        sched_register_task(&execute_sensor_measurement);
-        timer_post_task_delay(&execute_sensor_measurement, REPORTING_INTERVAL_TICKS);
+     d7ap_stack_init(&fs_init_args, NULL, false, NULL);
+     lcd_write_string("SENSOR\n");
+
+     sched_register_task(&execute_sensor_measurement);
+     timer_post_task_delay(&execute_sensor_measurement, TIMER_TICKS_PER_SEC * 2);
     #endif
 }

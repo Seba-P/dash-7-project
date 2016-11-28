@@ -136,17 +136,17 @@ PLATFORM/fast:
 .PHONY : PLATFORM/fast
 
 #=============================================================================
-# Target rules for targets named CHIP_EFM32PG1B
+# Target rules for targets named CHIP_EFM32WG
 
 # Build rule for target.
-CHIP_EFM32PG1B: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 CHIP_EFM32PG1B
-.PHONY : CHIP_EFM32PG1B
+CHIP_EFM32WG: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 CHIP_EFM32WG
+.PHONY : CHIP_EFM32WG
 
 # fast build rule for target.
-CHIP_EFM32PG1B/fast:
-	$(MAKE) -f framework\hal\platforms\platform\chips\efm32pg1b\CMakeFiles\CHIP_EFM32PG1B.dir\build.make framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/build
-.PHONY : CHIP_EFM32PG1B/fast
+CHIP_EFM32WG/fast:
+	$(MAKE) -f framework\hal\platforms\platform\chips\efm32wg\CMakeFiles\CHIP_EFM32WG.dir\build.make framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/build
+.PHONY : CHIP_EFM32WG/fast
 
 #=============================================================================
 # Target rules for targets named CHIP_CC1101
@@ -318,355 +318,43 @@ d7ap/fast:
 .PHONY : d7ap/fast
 
 #=============================================================================
-# Target rules for targets named continuous_tx.axf
+# Target rules for targets named test.axf
 
 # Build rule for target.
-continuous_tx.axf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 continuous_tx.axf
-.PHONY : continuous_tx.axf
+test.axf: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 test.axf
+.PHONY : test.axf
 
 # fast build rule for target.
-continuous_tx.axf/fast:
-	$(MAKE) -f apps\continuous_tx\CMakeFiles\continuous_tx.axf.dir\build.make apps/continuous_tx/CMakeFiles/continuous_tx.axf.dir/build
-.PHONY : continuous_tx.axf/fast
+test.axf/fast:
+	$(MAKE) -f apps\TEST\CMakeFiles\test.axf.dir\build.make apps/TEST/CMakeFiles/test.axf.dir/build
+.PHONY : test.axf/fast
 
 #=============================================================================
-# Target rules for targets named continuous_tx.elf
+# Target rules for targets named test.elf
 
 # Build rule for target.
-continuous_tx.elf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 continuous_tx.elf
-.PHONY : continuous_tx.elf
+test.elf: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 test.elf
+.PHONY : test.elf
 
 # fast build rule for target.
-continuous_tx.elf/fast:
-	$(MAKE) -f apps\continuous_tx\CMakeFiles\continuous_tx.elf.dir\build.make apps/continuous_tx/CMakeFiles/continuous_tx.elf.dir/build
-.PHONY : continuous_tx.elf/fast
+test.elf/fast:
+	$(MAKE) -f apps\TEST\CMakeFiles\test.elf.dir\build.make apps/TEST/CMakeFiles/test.elf.dir/build
+.PHONY : test.elf/fast
 
 #=============================================================================
-# Target rules for targets named flash-continuous_tx
+# Target rules for targets named flash-test
 
 # Build rule for target.
-flash-continuous_tx: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 flash-continuous_tx
-.PHONY : flash-continuous_tx
+flash-test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 flash-test
+.PHONY : flash-test
 
 # fast build rule for target.
-flash-continuous_tx/fast:
-	$(MAKE) -f apps\continuous_tx\CMakeFiles\flash-continuous_tx.dir\build.make apps/continuous_tx/CMakeFiles/flash-continuous_tx.dir/build
-.PHONY : flash-continuous_tx/fast
-
-#=============================================================================
-# Target rules for targets named d7ap_test.axf
-
-# Build rule for target.
-d7ap_test.axf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 d7ap_test.axf
-.PHONY : d7ap_test.axf
-
-# fast build rule for target.
-d7ap_test.axf/fast:
-	$(MAKE) -f apps\d7ap_test\CMakeFiles\d7ap_test.axf.dir\build.make apps/d7ap_test/CMakeFiles/d7ap_test.axf.dir/build
-.PHONY : d7ap_test.axf/fast
-
-#=============================================================================
-# Target rules for targets named d7ap_test.elf
-
-# Build rule for target.
-d7ap_test.elf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 d7ap_test.elf
-.PHONY : d7ap_test.elf
-
-# fast build rule for target.
-d7ap_test.elf/fast:
-	$(MAKE) -f apps\d7ap_test\CMakeFiles\d7ap_test.elf.dir\build.make apps/d7ap_test/CMakeFiles/d7ap_test.elf.dir/build
-.PHONY : d7ap_test.elf/fast
-
-#=============================================================================
-# Target rules for targets named flash-d7ap_test
-
-# Build rule for target.
-flash-d7ap_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 flash-d7ap_test
-.PHONY : flash-d7ap_test
-
-# fast build rule for target.
-flash-d7ap_test/fast:
-	$(MAKE) -f apps\d7ap_test\CMakeFiles\flash-d7ap_test.dir\build.make apps/d7ap_test/CMakeFiles/flash-d7ap_test.dir/build
-.PHONY : flash-d7ap_test/fast
-
-#=============================================================================
-# Target rules for targets named efm32_sensor.axf
-
-# Build rule for target.
-efm32_sensor.axf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 efm32_sensor.axf
-.PHONY : efm32_sensor.axf
-
-# fast build rule for target.
-efm32_sensor.axf/fast:
-	$(MAKE) -f apps\efm32_sensor\CMakeFiles\efm32_sensor.axf.dir\build.make apps/efm32_sensor/CMakeFiles/efm32_sensor.axf.dir/build
-.PHONY : efm32_sensor.axf/fast
-
-#=============================================================================
-# Target rules for targets named efm32_sensor.elf
-
-# Build rule for target.
-efm32_sensor.elf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 efm32_sensor.elf
-.PHONY : efm32_sensor.elf
-
-# fast build rule for target.
-efm32_sensor.elf/fast:
-	$(MAKE) -f apps\efm32_sensor\CMakeFiles\efm32_sensor.elf.dir\build.make apps/efm32_sensor/CMakeFiles/efm32_sensor.elf.dir/build
-.PHONY : efm32_sensor.elf/fast
-
-#=============================================================================
-# Target rules for targets named flash-efm32_sensor
-
-# Build rule for target.
-flash-efm32_sensor: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 flash-efm32_sensor
-.PHONY : flash-efm32_sensor
-
-# fast build rule for target.
-flash-efm32_sensor/fast:
-	$(MAKE) -f apps\efm32_sensor\CMakeFiles\flash-efm32_sensor.dir\build.make apps/efm32_sensor/CMakeFiles/flash-efm32_sensor.dir/build
-.PHONY : flash-efm32_sensor/fast
-
-#=============================================================================
-# Target rules for targets named gateway.axf
-
-# Build rule for target.
-gateway.axf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 gateway.axf
-.PHONY : gateway.axf
-
-# fast build rule for target.
-gateway.axf/fast:
-	$(MAKE) -f apps\gateway\CMakeFiles\gateway.axf.dir\build.make apps/gateway/CMakeFiles/gateway.axf.dir/build
-.PHONY : gateway.axf/fast
-
-#=============================================================================
-# Target rules for targets named gateway.elf
-
-# Build rule for target.
-gateway.elf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 gateway.elf
-.PHONY : gateway.elf
-
-# fast build rule for target.
-gateway.elf/fast:
-	$(MAKE) -f apps\gateway\CMakeFiles\gateway.elf.dir\build.make apps/gateway/CMakeFiles/gateway.elf.dir/build
-.PHONY : gateway.elf/fast
-
-#=============================================================================
-# Target rules for targets named flash-gateway
-
-# Build rule for target.
-flash-gateway: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 flash-gateway
-.PHONY : flash-gateway
-
-# fast build rule for target.
-flash-gateway/fast:
-	$(MAKE) -f apps\gateway\CMakeFiles\flash-gateway.dir\build.make apps/gateway/CMakeFiles/flash-gateway.dir/build
-.PHONY : flash-gateway/fast
-
-#=============================================================================
-# Target rules for targets named noise_logger.axf
-
-# Build rule for target.
-noise_logger.axf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 noise_logger.axf
-.PHONY : noise_logger.axf
-
-# fast build rule for target.
-noise_logger.axf/fast:
-	$(MAKE) -f apps\noise_logger\CMakeFiles\noise_logger.axf.dir\build.make apps/noise_logger/CMakeFiles/noise_logger.axf.dir/build
-.PHONY : noise_logger.axf/fast
-
-#=============================================================================
-# Target rules for targets named noise_logger.elf
-
-# Build rule for target.
-noise_logger.elf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 noise_logger.elf
-.PHONY : noise_logger.elf
-
-# fast build rule for target.
-noise_logger.elf/fast:
-	$(MAKE) -f apps\noise_logger\CMakeFiles\noise_logger.elf.dir\build.make apps/noise_logger/CMakeFiles/noise_logger.elf.dir/build
-.PHONY : noise_logger.elf/fast
-
-#=============================================================================
-# Target rules for targets named flash-noise_logger
-
-# Build rule for target.
-flash-noise_logger: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 flash-noise_logger
-.PHONY : flash-noise_logger
-
-# fast build rule for target.
-flash-noise_logger/fast:
-	$(MAKE) -f apps\noise_logger\CMakeFiles\flash-noise_logger.dir\build.make apps/noise_logger/CMakeFiles/flash-noise_logger.dir/build
-.PHONY : flash-noise_logger/fast
-
-#=============================================================================
-# Target rules for targets named per_test.axf
-
-# Build rule for target.
-per_test.axf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 per_test.axf
-.PHONY : per_test.axf
-
-# fast build rule for target.
-per_test.axf/fast:
-	$(MAKE) -f apps\per_test\CMakeFiles\per_test.axf.dir\build.make apps/per_test/CMakeFiles/per_test.axf.dir/build
-.PHONY : per_test.axf/fast
-
-#=============================================================================
-# Target rules for targets named per_test.elf
-
-# Build rule for target.
-per_test.elf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 per_test.elf
-.PHONY : per_test.elf
-
-# fast build rule for target.
-per_test.elf/fast:
-	$(MAKE) -f apps\per_test\CMakeFiles\per_test.elf.dir\build.make apps/per_test/CMakeFiles/per_test.elf.dir/build
-.PHONY : per_test.elf/fast
-
-#=============================================================================
-# Target rules for targets named flash-per_test
-
-# Build rule for target.
-flash-per_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 flash-per_test
-.PHONY : flash-per_test
-
-# fast build rule for target.
-flash-per_test/fast:
-	$(MAKE) -f apps\per_test\CMakeFiles\flash-per_test.dir\build.make apps/per_test/CMakeFiles/flash-per_test.dir/build
-.PHONY : flash-per_test/fast
-
-#=============================================================================
-# Target rules for targets named phy_test.axf
-
-# Build rule for target.
-phy_test.axf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 phy_test.axf
-.PHONY : phy_test.axf
-
-# fast build rule for target.
-phy_test.axf/fast:
-	$(MAKE) -f apps\phy_test\CMakeFiles\phy_test.axf.dir\build.make apps/phy_test/CMakeFiles/phy_test.axf.dir/build
-.PHONY : phy_test.axf/fast
-
-#=============================================================================
-# Target rules for targets named phy_test.elf
-
-# Build rule for target.
-phy_test.elf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 phy_test.elf
-.PHONY : phy_test.elf
-
-# fast build rule for target.
-phy_test.elf/fast:
-	$(MAKE) -f apps\phy_test\CMakeFiles\phy_test.elf.dir\build.make apps/phy_test/CMakeFiles/phy_test.elf.dir/build
-.PHONY : phy_test.elf/fast
-
-#=============================================================================
-# Target rules for targets named flash-phy_test
-
-# Build rule for target.
-flash-phy_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 flash-phy_test
-.PHONY : flash-phy_test
-
-# fast build rule for target.
-flash-phy_test/fast:
-	$(MAKE) -f apps\phy_test\CMakeFiles\flash-phy_test.dir\build.make apps/phy_test/CMakeFiles/flash-phy_test.dir/build
-.PHONY : flash-phy_test/fast
-
-#=============================================================================
-# Target rules for targets named simple_leds.axf
-
-# Build rule for target.
-simple_leds.axf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 simple_leds.axf
-.PHONY : simple_leds.axf
-
-# fast build rule for target.
-simple_leds.axf/fast:
-	$(MAKE) -f apps\simple_leds\CMakeFiles\simple_leds.axf.dir\build.make apps/simple_leds/CMakeFiles/simple_leds.axf.dir/build
-.PHONY : simple_leds.axf/fast
-
-#=============================================================================
-# Target rules for targets named simple_leds.elf
-
-# Build rule for target.
-simple_leds.elf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 simple_leds.elf
-.PHONY : simple_leds.elf
-
-# fast build rule for target.
-simple_leds.elf/fast:
-	$(MAKE) -f apps\simple_leds\CMakeFiles\simple_leds.elf.dir\build.make apps/simple_leds/CMakeFiles/simple_leds.elf.dir/build
-.PHONY : simple_leds.elf/fast
-
-#=============================================================================
-# Target rules for targets named flash-simple_leds
-
-# Build rule for target.
-flash-simple_leds: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 flash-simple_leds
-.PHONY : flash-simple_leds
-
-# fast build rule for target.
-flash-simple_leds/fast:
-	$(MAKE) -f apps\simple_leds\CMakeFiles\flash-simple_leds.dir\build.make apps/simple_leds/CMakeFiles/flash-simple_leds.dir/build
-.PHONY : flash-simple_leds/fast
-
-#=============================================================================
-# Target rules for targets named TEST.axf
-
-# Build rule for target.
-TEST.axf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 TEST.axf
-.PHONY : TEST.axf
-
-# fast build rule for target.
-TEST.axf/fast:
-	$(MAKE) -f apps\TEST\CMakeFiles\TEST.axf.dir\build.make apps/TEST/CMakeFiles/TEST.axf.dir/build
-.PHONY : TEST.axf/fast
-
-#=============================================================================
-# Target rules for targets named TEST.elf
-
-# Build rule for target.
-TEST.elf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 TEST.elf
-.PHONY : TEST.elf
-
-# fast build rule for target.
-TEST.elf/fast:
-	$(MAKE) -f apps\TEST\CMakeFiles\TEST.elf.dir\build.make apps/TEST/CMakeFiles/TEST.elf.dir/build
-.PHONY : TEST.elf/fast
-
-#=============================================================================
-# Target rules for targets named flash-TEST
-
-# Build rule for target.
-flash-TEST: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 flash-TEST
-.PHONY : flash-TEST
-
-# fast build rule for target.
-flash-TEST/fast:
-	$(MAKE) -f apps\TEST\CMakeFiles\flash-TEST.dir\build.make apps/TEST/CMakeFiles/flash-TEST.dir/build
-.PHONY : flash-TEST/fast
+flash-test/fast:
+	$(MAKE) -f apps\TEST\CMakeFiles\flash-test.dir\build.make apps/TEST/CMakeFiles/flash-test.dir/build
+.PHONY : flash-test/fast
 
 # Help Target
 help:
@@ -678,7 +366,7 @@ help:
 	@echo ... rebuild_cache
 	@echo ... framework
 	@echo ... PLATFORM
-	@echo ... CHIP_EFM32PG1B
+	@echo ... CHIP_EFM32WG
 	@echo ... CHIP_CC1101
 	@echo ... FRAMEWORK_COMPONENT_cli
 	@echo ... FRAMEWORK_COMPONENT_console
@@ -692,33 +380,9 @@ help:
 	@echo ... FRAMEWORK_COMPONENT_shell
 	@echo ... FRAMEWORK_COMPONENT_timer
 	@echo ... d7ap
-	@echo ... continuous_tx.axf
-	@echo ... continuous_tx.elf
-	@echo ... flash-continuous_tx
-	@echo ... d7ap_test.axf
-	@echo ... d7ap_test.elf
-	@echo ... flash-d7ap_test
-	@echo ... efm32_sensor.axf
-	@echo ... efm32_sensor.elf
-	@echo ... flash-efm32_sensor
-	@echo ... gateway.axf
-	@echo ... gateway.elf
-	@echo ... flash-gateway
-	@echo ... noise_logger.axf
-	@echo ... noise_logger.elf
-	@echo ... flash-noise_logger
-	@echo ... per_test.axf
-	@echo ... per_test.elf
-	@echo ... flash-per_test
-	@echo ... phy_test.axf
-	@echo ... phy_test.elf
-	@echo ... flash-phy_test
-	@echo ... simple_leds.axf
-	@echo ... simple_leds.elf
-	@echo ... flash-simple_leds
-	@echo ... TEST.axf
-	@echo ... TEST.elf
-	@echo ... flash-TEST
+	@echo ... test.axf
+	@echo ... test.elf
+	@echo ... flash-test
 .PHONY : help
 
 

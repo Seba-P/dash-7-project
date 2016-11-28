@@ -289,179 +289,194 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/system_efm32pg1b.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/system_efm32wg.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/CMSIS/device/src/system_efm32pg1b.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/CMSIS/device/src/system_efm32wg.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/startup_efm32pg1b.S.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/startup_efm32wg.S.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/CMSIS/device/src/startup_efm32pg1b.S.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/CMSIS/device/src/startup_efm32wg.S.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_assert.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_assert.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_assert.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_adc.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_adc.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_adc.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_system.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_system.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_system.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_cmu.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_cmu.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_cmu.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_emu.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_emu.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_emu.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_gpio.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_gpio.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_gpio.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_usart.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_usart.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_usart.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/em_rtcc.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/em_rtc.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_rtcc.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_rtc.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_dma.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_dma.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_dma.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_int.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_int.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_int.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_lcd.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_lcd.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_lcd.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_timer.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_timer.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_timer.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_i2c.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_i2c.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_i2c.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_wdog.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_wdog.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_wdog.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/em_prs.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/emlib/src/em_prs.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/emlib/src/em_prs.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/efm32pg1b_adc.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/efm32wg_adc.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/efm32pg1b_adc.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/efm32wg_adc.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/efm32pg1b_mcu.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/efm32wg_mcu.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/efm32pg1b_mcu.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/efm32wg_mcu.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/efm32pg1b_uart.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/efm32wg_uart.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/efm32pg1b_uart.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/efm32wg_uart.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/efm32pg1b_spi.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/efm32wg_spi.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/efm32pg1b_spi.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/efm32wg_spi.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/efm32pg1b_atomic.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/efm32wg_atomic.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/efm32pg1b_atomic.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/efm32wg_atomic.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/efm32pg1b_timer.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/efm32wg_timer.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/efm32pg1b_timer.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/efm32wg_timer.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/efm32pg1b_system.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/efm32wg_system.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/efm32pg1b_system.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/efm32wg_system.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/efm32pg1b_gpio.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/efm32wg_gpio.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/efm32pg1b_gpio.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/efm32wg_gpio.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/efm32pg1b_pins.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/efm32wg_pins.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/efm32pg1b_pins.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/efm32wg_pins.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/efm32pg1b_i2c.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/efm32wg_i2c.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/efm32pg1b_i2c.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/efm32wg_i2c.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/efm32pg1b_watchdog.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/efm32wg_watchdog.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/efm32pg1b_watchdog.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/efm32wg_watchdog.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/display.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/em_usbd.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/display.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/usb/src/em_usbd.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/displayls013b7dh03.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/em_usbdch9.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/displayls013b7dh03.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/usb/src/em_usbdch9.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/displaypalemlib.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/em_usbdep.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/displaypalemlib.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/usb/src/em_usbdep.c.obj</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] framework/Object Files/em_usbdint.c.obj</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/usb/src/em_usbdint.c.obj</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] framework/Object Files/em_usbhal.c.obj</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/usb/src/em_usbhal.c.obj</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] framework/Object Files/em_usbtimer.c.obj</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/usb/src/em_usbtimer.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/dmactrl.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/dmactrl.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/kits/common/drivers/dmactrl.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/gpiointerrupt.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/gpiointerrupt.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/kits/common/drivers/gpiointerrupt.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/textdisplay.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/segmentlcd.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/textdisplay.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/kits/common/drivers/segmentlcd.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/udelay.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/cdc.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/kits/common/drivers/udelay.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/kits/common/drivers/cdc.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/cc1101.c.obj</name>
@@ -479,39 +494,64 @@
 			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/chips/cc1101/CMakeFiles/CHIP_CC1101.dir/cc1101_interface_spi.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/slstk3401a_main.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/stk3800_main.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/slstk3401a_main.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/stk3800_main.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/slstk3401a_leds.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/stk3800_leds.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/slstk3401a_leds.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/stk3800_leds.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/slstk3401a_userbutton.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/stk3800_userbutton.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/slstk3401a_userbutton.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/stk3800_userbutton.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/slstk3401a_sensors.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/stk3800_sensors.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/slstk3401a_sensors.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/stk3800_sensors.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/slstk3401a_debug.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/stk3800_debug.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/slstk3401a_debug.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/stk3800_debug.c.obj</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] framework/Object Files/slstk3401a_lcd.c.obj</name>
+			<name>[Targets]/[lib] framework/Object Files/stk3800_lcd.c.obj</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/slstk3401a_lcd.c.obj</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/stk3800_lcd.c.obj</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] framework/Object Files/stk3800_usb_descriptors.c.obj</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/stk3800_usb_descriptors.c.obj</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] framework/Object Files/stk3800_usb.c.obj</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/stk3800_usb.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/libc_overrides.c.obj</name>
 			<type>1</type>
 			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/libc_overrides.c.obj</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] framework/Object Files/bsp_bcc.c.obj</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/kits/common/bsp/bsp_bcc.c.obj</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] framework/Object Files/bsp_stk.c.obj</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/kits/common/bsp/bsp_stk.c.obj</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] framework/Object Files/bsp_trace.c.obj</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/framework/hal/platforms/platform/CMakeFiles/PLATFORM.dir/kits/common/bsp/bsp_trace.c.obj</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] framework/Object Files/cli.c.obj</name>
@@ -584,39 +624,64 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] PLATFORM/Source Files/slstk3401a_main.c</name>
+			<name>[Targets]/[lib] PLATFORM/Source Files/stk3800_main.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32PG1B_SLSTK3401A/slstk3401a_main.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/stk3800_main.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] PLATFORM/Source Files/slstk3401a_leds.c</name>
+			<name>[Targets]/[lib] PLATFORM/Source Files/stk3800_leds.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32PG1B_SLSTK3401A/slstk3401a_leds.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/stk3800_leds.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] PLATFORM/Source Files/slstk3401a_userbutton.c</name>
+			<name>[Targets]/[lib] PLATFORM/Source Files/stk3800_userbutton.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32PG1B_SLSTK3401A/slstk3401a_userbutton.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/stk3800_userbutton.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] PLATFORM/Source Files/slstk3401a_sensors.c</name>
+			<name>[Targets]/[lib] PLATFORM/Source Files/stk3800_sensors.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32PG1B_SLSTK3401A/slstk3401a_sensors.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/stk3800_sensors.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] PLATFORM/Source Files/slstk3401a_debug.c</name>
+			<name>[Targets]/[lib] PLATFORM/Source Files/stk3800_debug.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32PG1B_SLSTK3401A/slstk3401a_debug.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/stk3800_debug.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] PLATFORM/Source Files/slstk3401a_lcd.c</name>
+			<name>[Targets]/[lib] PLATFORM/Source Files/stk3800_lcd.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32PG1B_SLSTK3401A/slstk3401a_lcd.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/stk3800_lcd.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] PLATFORM/Source Files/stk3800_usb_descriptors.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/stk3800_usb_descriptors.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] PLATFORM/Source Files/stk3800_usb.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/stk3800_usb.c</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] PLATFORM/Source Files/libc_overrides.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32PG1B_SLSTK3401A/libc_overrides.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/libc_overrides.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] PLATFORM/Source Files/bsp_bcc.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/kits/common/bsp/bsp_bcc.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] PLATFORM/Source Files/bsp_stk.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/kits/common/bsp/bsp_stk.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] PLATFORM/Source Files/bsp_trace.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/kits/common/bsp/bsp_trace.c</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] PLATFORM/Header Files</name>
@@ -626,22 +691,12 @@
 		<link>
 			<name>[Targets]/[lib] PLATFORM/Header Files/userbutton.h</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32PG1B_SLSTK3401A/inc/userbutton.h</location>
-		</link>
-		<link>
-			<name>[Targets]/[lib] PLATFORM/Header Files/platform.h</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32PG1B_SLSTK3401A/inc/platform.h</location>
-		</link>
-		<link>
-			<name>[Targets]/[lib] PLATFORM/Header Files/platform_lcd.h</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32PG1B_SLSTK3401A/inc/platform_lcd.h</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/inc/userbutton.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] PLATFORM/Header Files/platform_sensors.h</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32PG1B_SLSTK3401A/inc/platform_sensors.h</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/platforms/EFM32WG_STK3800/inc/platform_sensors.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] PLATFORM/CMake Rules</name>
@@ -659,222 +714,237 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B//startup_efm32pg1b.S</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG//startup_efm32wg.S</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/CMSIS/device/src/startup_efm32pg1b.S</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/CMSIS/device/src/startup_efm32wg.S</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/system_efm32pg1b.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/system_efm32wg.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/CMSIS/device/src/system_efm32pg1b.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/CMSIS/device/src/system_efm32wg.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_assert.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_assert.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_assert.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_assert.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_adc.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_adc.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_adc.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_adc.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_system.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_system.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_system.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_system.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_cmu.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_cmu.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_cmu.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_cmu.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_emu.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_emu.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_emu.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_emu.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_gpio.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_gpio.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_gpio.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_gpio.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_usart.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_usart.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_usart.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_usart.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_rtcc.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_rtc.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_rtcc.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_rtc.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_dma.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_dma.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_dma.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_dma.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_int.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_int.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_int.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_int.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_lcd.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_lcd.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_lcd.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_lcd.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_timer.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_timer.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_timer.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_timer.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_i2c.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_i2c.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_i2c.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_i2c.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_wdog.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_wdog.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_wdog.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_wdog.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/em_prs.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_prs.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/src/em_prs.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/src/em_prs.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/efm32pg1b_adc.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/efm32wg_adc.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/efm32pg1b_adc.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/efm32wg_adc.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/efm32pg1b_mcu.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/efm32wg_mcu.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/efm32pg1b_mcu.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/efm32wg_mcu.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/efm32pg1b_uart.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/efm32wg_uart.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/efm32pg1b_uart.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/efm32wg_uart.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/efm32pg1b_spi.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/efm32wg_spi.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/efm32pg1b_spi.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/efm32wg_spi.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/efm32pg1b_atomic.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/efm32wg_atomic.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/efm32pg1b_atomic.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/efm32wg_atomic.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/efm32pg1b_timer.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/efm32wg_timer.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/efm32pg1b_timer.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/efm32wg_timer.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/efm32pg1b_system.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/efm32wg_system.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/efm32pg1b_system.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/efm32wg_system.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/efm32pg1b_gpio.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/efm32wg_gpio.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/efm32pg1b_gpio.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/efm32wg_gpio.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/efm32pg1b_pins.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/efm32wg_pins.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/efm32pg1b_pins.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/efm32wg_pins.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/efm32pg1b_i2c.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/efm32wg_i2c.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/efm32pg1b_i2c.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/efm32wg_i2c.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/efm32pg1b_watchdog.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/efm32wg_watchdog.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/efm32pg1b_watchdog.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/efm32wg_watchdog.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/display.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_usbd.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/display.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/usb/src/em_usbd.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/displayls013b7dh03.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_usbdch9.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/displayls013b7dh03.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/usb/src/em_usbdch9.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/displaypalemlib.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_usbdep.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/displaypalemlib.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/usb/src/em_usbdep.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/dmactrl.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_usbdint.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/dmactrl.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/usb/src/em_usbdint.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/gpiointerrupt.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_usbhal.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/gpiointerrupt.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/usb/src/em_usbhal.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/textdisplay.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/em_usbtimer.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/textdisplay.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/usb/src/em_usbtimer.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Source Files/udelay.c</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/dmactrl.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/kits/common/drivers/udelay.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/kits/common/drivers/dmactrl.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Header Files</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/gpiointerrupt.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/kits/common/drivers/gpiointerrupt.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/segmentlcd.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/kits/common/drivers/segmentlcd.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Source Files/cdc.c</name>
+			<type>1</type>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/kits/common/drivers/cdc.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Header Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Header Files/em_wdog.h</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Header Files/em_wdog.h</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/inc/em_wdog.h</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/inc/em_wdog.h</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Header Files/em_prs.h</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Header Files/em_prs.h</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32pg1b/emlib/inc/em_prs.h</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/framework/hal/chips/efm32wg/emlib/inc/em_prs.h</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/CMake Rules</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/CMake Rules</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Resources</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Resources</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] CHIP_EFM32PG1B/Object Files</name>
+			<name>[Targets]/[lib] CHIP_EFM32WG/Object Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
@@ -1484,812 +1554,92 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] continuous_tx.axf</name>
+			<name>[Targets]/[exe] test.axf</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] continuous_tx.axf/</name>
+			<name>[Targets]/[exe] test.axf/</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] continuous_tx.axf/Source Files</name>
+			<name>[Targets]/[exe] test.axf/Source Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] continuous_tx.axf/Source Files/continuous_tx.c</name>
+			<name>[Targets]/[exe] test.axf/Source Files/test.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/continuous_tx/continuous_tx.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/test/test.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] continuous_tx.axf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/continuous_tx/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.axf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.axf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.axf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.axf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.elf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.elf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.elf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.elf/Source Files/continuous_tx.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/continuous_tx/continuous_tx.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.elf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/continuous_tx/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.elf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.elf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.elf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] continuous_tx.elf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.axf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.axf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.axf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.axf/Source Files/d7ap_test.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/d7ap_test/d7ap_test.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.axf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/d7ap_test/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.axf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.axf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.axf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.axf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.elf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.elf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.elf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.elf/Source Files/d7ap_test.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/d7ap_test/d7ap_test.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.elf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/d7ap_test/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.elf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.elf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.elf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] d7ap_test.elf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.axf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.axf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.axf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.axf/Source Files/app.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/efm32_sensor/app.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.axf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/efm32_sensor/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.axf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.axf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.axf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.axf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.elf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.elf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.elf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.elf/Source Files/app.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/efm32_sensor/app.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.elf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/efm32_sensor/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.elf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.elf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.elf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] efm32_sensor.elf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.axf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.axf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.axf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.axf/Source Files/app.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/gateway/app.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.axf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/gateway/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.axf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.axf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.axf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.axf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.elf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.elf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.elf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.elf/Source Files/app.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/gateway/app.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.elf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/gateway/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.elf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.elf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.elf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] gateway.elf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.axf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.axf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.axf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.axf/Source Files/noise_logger.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/noise_logger/noise_logger.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.axf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/noise_logger/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.axf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.axf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.axf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.axf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.elf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.elf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.elf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.elf/Source Files/noise_logger.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/noise_logger/noise_logger.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.elf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/noise_logger/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.elf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.elf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.elf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] noise_logger.elf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.axf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.axf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.axf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.axf/Source Files/per_test.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/per_test/per_test.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.axf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/per_test/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.axf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.axf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.axf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.axf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.elf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.elf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.elf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.elf/Source Files/per_test.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/per_test/per_test.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.elf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/per_test/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.elf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.elf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.elf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] per_test.elf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.axf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.axf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.axf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.axf/Source Files/phy_test.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/phy_test/phy_test.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.axf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/phy_test/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.axf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.axf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.axf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.axf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.elf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.elf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.elf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.elf/Source Files/phy_test.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/phy_test/phy_test.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.elf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/phy_test/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.elf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.elf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.elf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] phy_test.elf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.axf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.axf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.axf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.axf/Source Files/app.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/simple_leds/app.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.axf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/simple_leds/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.axf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.axf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.axf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.axf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.elf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.elf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.elf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.elf/Source Files/app.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/simple_leds/app.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.elf/Source Files/version.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/simple_leds/version.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.elf/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.elf/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.elf/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] simple_leds.elf/Object Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] TEST.axf</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] TEST.axf/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] TEST.axf/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[exe] TEST.axf/Source Files/test.c</name>
-			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/TEST/test.c</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] TEST.axf/Source Files/version.c</name>
+			<name>[Targets]/[exe] test.axf/Source Files/version.c</name>
 			<type>1</type>
 			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/TEST/version.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.axf/Header Files</name>
+			<name>[Targets]/[exe] test.axf/Header Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.axf/CMake Rules</name>
+			<name>[Targets]/[exe] test.axf/CMake Rules</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.axf/Resources</name>
+			<name>[Targets]/[exe] test.axf/Resources</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.axf/Object Files</name>
+			<name>[Targets]/[exe] test.axf/Object Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.elf</name>
+			<name>[Targets]/[exe] test.elf</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.elf/</name>
+			<name>[Targets]/[exe] test.elf/</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.elf/Source Files</name>
+			<name>[Targets]/[exe] test.elf/Source Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.elf/Source Files/test.c</name>
+			<name>[Targets]/[exe] test.elf/Source Files/test.c</name>
 			<type>1</type>
-			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/TEST/test.c</location>
+			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/stack/apps/test/test.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.elf/Source Files/version.c</name>
+			<name>[Targets]/[exe] test.elf/Source Files/version.c</name>
 			<type>1</type>
 			<location>D:/SEBA/BACKUP/Projekty/ARM/dash-7-project/praca_inz/dash-7-project/apps/TEST/version.c</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.elf/Header Files</name>
+			<name>[Targets]/[exe] test.elf/Header Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.elf/CMake Rules</name>
+			<name>[Targets]/[exe] test.elf/CMake Rules</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.elf/Resources</name>
+			<name>[Targets]/[exe] test.elf/Resources</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] TEST.elf/Object Files</name>
+			<name>[Targets]/[exe] test.elf/Object Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>

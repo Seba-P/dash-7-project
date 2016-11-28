@@ -193,6 +193,10 @@ void fs_init_file_with_D7AActP(uint8_t file_id, const d7asp_master_session_confi
             alp_operand_len = 3; // File Offset Operand + requested Data Length
                 //TODO File Offset Operand can be 2-5 bytes actually, depending on File Offset Field Length, see spec
             break;
+        case ALP_OP_WRITE_FILE_DATA:
+            alp_operand_len = 3 + ((alp_operand_file_data_t*)alp_operand)->provided_data_length; // File Offset Operand + requested Data Length
+                //TODO File Offset Operand can be 2-5 bytes actually, depending on File Offset Field Length, see spec
+            break;
         default:
             assert(false);
     }

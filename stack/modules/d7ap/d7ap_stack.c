@@ -21,23 +21,6 @@
 #include "debug.h"
 #include "framework_defs.h"
 
-#include "log.h"
-#include "hwlcd.h"
-#ifdef FRAMEWORK_LOG_ENABLED
-#ifdef HAS_LCD
-    #define DPRINT(...) log_print_string(__VA_ARGS__); lcd_write_string(__VA_ARGS__)
-  #else
-    #define DPRINT(...) log_print_string(__VA_ARGS__)
-  #endif
-
-#else
-  #ifdef HAS_LCD
-    #define DPRINT(...) lcd_write_string(__VA_ARGS__)
-  #else
-    #define DPRINT(...)
-  #endif
-#endif
-
 void d7ap_stack_init(fs_init_args_t* fs_init_args, d7asp_init_args_t* d7asp_init_args, bool enable_shell, alp_cmd_handler_appl_itf_callback alp_cmd_handler_appl_itf_cb)
 {
     assert(fs_init_args != NULL);
@@ -90,5 +73,4 @@ void d7ap_stack_init(fs_init_args_t* fs_init_args, d7asp_init_args_t* d7asp_init
       alp_process_command_result_on_d7asp(&broadcast_fifo_config, read_firmware_version_alp_command, sizeof(read_firmware_version_alp_command), ALP_CMD_ORIGIN_APP); // TODO origin stack?
 #endif
     }
-    log_print_string("\nD7AP STACK IS RUNNING");
 }

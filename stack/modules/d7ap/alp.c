@@ -132,6 +132,25 @@ bool alp_process_command(uint8_t* alp_command, uint8_t alp_command_length, uint8
   d7asp_master_session_config_t d7asp_session_config;
   bool do_forward = false;
 
+  // d7asp_master_session_config_t d7asp_session_config = {
+  //       .qos = {
+  //           .qos_resp_mode = SESSION_RESP_MODE_ANY,
+  //           .qos_nls                 = false,
+  //           .qos_stop_on_error       = false,
+  //           .qos_record              = false
+  //       },
+  //       .dormant_timeout = 0,
+  //       .addressee = {
+  //           .ctrl = {
+  //             .id_type = ID_TYPE_BCAST,
+  //             .access_class = 0
+  //           },
+  //           .id = 0
+  //       }
+  //   };
+
+  // bool do_forward = true;  
+
   fifo_t alp_command_fifo, alp_response_fifo;
   fifo_init_filled(&alp_command_fifo, alp_command, alp_command_length, alp_command_length);
   fifo_init(&alp_response_fifo, alp_response, ALP_PAYLOAD_MAX_SIZE);
@@ -153,6 +172,7 @@ bool alp_process_command(uint8_t* alp_command, uint8_t alp_command_length, uint8
 
     alp_control_t control;
     fifo_pop(&alp_command_fifo, &control.raw, 1);
+    DPRINT("\nalp_operation = %d\n", control.operation);
     switch(control.operation) {
       case ALP_OP_READ_FILE_DATA:
         process_op_read_file_data(&alp_command_fifo, &alp_response_fifo);
@@ -211,7 +231,7 @@ void alp_d7asp_request_completed(d7asp_result_t result, uint8_t* payload, uint8_
 
 void alp_d7asp_fifo_flush_completed(uint8_t fifo_token, uint8_t* progress_bitmap, uint8_t* success_bitmap, uint8_t bitmap_byte_count) {
   // TODO end session
-  DPRINT("D7ASP flush completed", operand.file_offset.file_id, operand.requested_data_length);
+  DPRINT("D7ASP flush completed");
   switch(current_command.origin) {
     case ALP_CMD_ORIGIN_SERIAL_CONSOLE:
       if(current_command.respond_when_completed) {
@@ -229,4 +249,22 @@ void alp_d7asp_fifo_flush_completed(uint8_t fifo_token, uint8_t* progress_bitmap
     default:
       assert(false); // ALP_CMD_ORIGIN_D7ASP this would imply a slave session
   }
+}
+
+bool alp_send_command(uint8_t* alp_cmd, uint8_t alp_cmd_len, uint8_t* alp_resp, uint8_t alp_resp_len, d7asp_master_session_config_t* d7asp_session_config)
+{
+  memcpy(current_command.alp_command, alp_cmd, alp_cmd_len);
+  fifo_init_filled(&(current_command.alp_command_fifo), current_command.alp_command, alp_cmd_len, ALP_PAYLOAD_MAX_SIZE);
+  fifo_init(&(current_command.alp_response_fifo), current_command.alp_response, ALP_PAYLOAD_MAX_SIZE);
+  current_command.origin = ALP_CMD_ORIGIN_APP;
+
+  // fifo_t alp_command_fifo, alp_response_fifo;
+  // fifo_init_filled(&alp_command_fifo, alp_cmd, alp_cmd_len, alp_cmd_len);
+  // fifo_init(&alp_response_fifo, sensor_alp_resp, ALP_PAYLOAD_MAX_SIZE);
+
+  d7asp_master_session_t* session = d7asp_master_session_create(d7asp_session_config);
+  // TODO current_command.fifo_token = session->token;
+  // d7asp_queue_result_t queue_result = d7asp_queue_alp_actions(session, (uint8_t*)&alp_command_fifo, alp_cmd_len); // TODO pass fifo directly?
+  d7asp_queue_result_t queue_result = d7asp_queue_alp_actions(session, alp_cmd, alp_cmd_len);
+  current_command.fifo_token = queue_result.fifo_token;
 }
