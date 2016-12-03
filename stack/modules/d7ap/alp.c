@@ -132,6 +132,8 @@ bool alp_process_command(uint8_t* alp_command, uint8_t alp_command_length, uint8
   d7asp_master_session_config_t d7asp_session_config;
   bool do_forward = false;
 
+  bool respond = false;
+
   // d7asp_master_session_config_t d7asp_session_config = {
   //       .qos = {
   //           .qos_resp_mode = SESSION_RESP_MODE_ANY,
@@ -176,6 +178,7 @@ bool alp_process_command(uint8_t* alp_command, uint8_t alp_command_length, uint8
     switch(control.operation) {
       case ALP_OP_READ_FILE_DATA:
         process_op_read_file_data(&alp_command_fifo, &alp_response_fifo);
+        respond = true;
         break;
       case ALP_OP_WRITE_FILE_DATA:
         process_op_write_file_data(&alp_command_fifo, &alp_response_fifo);
@@ -194,6 +197,9 @@ bool alp_process_command(uint8_t* alp_command, uint8_t alp_command_length, uint8
     }
   }
 
+  extern bool notify_reception(uint8_t* alp_cmd, uint8_t alp_cmd_len, alp_command_origin_t origin);
+  notify_reception(&(current_command.alp_command), alp_command_length, origin);
+
   (*alp_response_length) = fifo_get_size(&alp_response_fifo);
 
   if((*alp_response_length) > 0) {
@@ -201,6 +207,26 @@ bool alp_process_command(uint8_t* alp_command, uint8_t alp_command_length, uint8
       alp_cmd_handler_output_alp_command(alp_response, (*alp_response_length));
 
     // TODO APP
+
+    bool alp_send_command(uint8_t* alp_cmd, uint8_t alp_cmd_len, uint8_t* alp_resp, uint8_t alp_resp_len, d7asp_master_session_config_t* d7asp_session_config);
+    d7asp_master_session_config_t d7asp_session_config2 = {
+        .qos = {
+            .qos_resp_mode = SESSION_RESP_MODE_ANY,
+            .qos_nls                 = false,
+            .qos_stop_on_error       = false,
+            .qos_record              = false
+        },
+        .dormant_timeout = 0,
+        .addressee = {
+            .ctrl = {
+              .id_type = ID_TYPE_BCAST,
+              .access_class = 0
+            },
+            .id = 0
+        }
+    };
+    uint8_t resp[ALP_PAYLOAD_MAX_SIZE];
+    alp_send_command(alp_response, *alp_response_length, resp, 2, &d7asp_session_config2);
   }
 
     // TODO return ALP status if requested

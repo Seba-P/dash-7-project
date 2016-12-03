@@ -38,12 +38,7 @@
 #include <stdlib.h>
 
 #include "version.h"
-
-#define SENSOR_FILE_ID           0x40
-#define SENSOR_FILE_SIZE         4
-#define ACTION_FILE_ID           0x41
-
-#define SENSOR_UPDATE   TIMER_TICKS_PER_SEC * 3
+#include "app_files_cfg.h"
 
 #ifdef PLATFORM_EFM32WG_STK3800
  #define GATEWAY
@@ -52,119 +47,40 @@
 /********************
  * APP FILES CONFIG *
  ********************/
+
 void init_gateway_files()
 {
-    // file 0x40: contains our sensor data + configure an action file to be executed upon write
-    fs_file_header_t file_header = (fs_file_header_t){
-        .file_properties.action_protocol_enabled = 0,
-        .file_properties.action_file_id = ACTION_FILE_ID,
-        .file_properties.action_condition = ALP_ACT_COND_WRITE,
-        .file_properties.storage_class = FS_STORAGE_VOLATILE,
-        .file_properties.permissions = 0, // TODO
-        .length = SENSOR_FILE_SIZE
-    };
+    fs_init_file(SENSOR_DATA_FILE_ID, &sensor_data_file, NULL);
+    fs_init_file(SENSOR_DELTA_FILE_ID, &sensor_delta_file, NULL);
+    fs_init_file(SENSOR_HEARTBEAT_FILE_ID, &sensor_heartbeat_file, NULL);
 
-    fs_init_file(SENSOR_FILE_ID, &file_header, NULL);
+    uint32_t sensor_data_file_init = SENSOR_DATA_FILE_INIT;
+    uint32_t sensor_delta_file_init = SENSOR_DELTA_FILE_INIT;
+    uint32_t sensor_heartbeat_file_init = SENSOR_HEARTBEAT_FILE_INIT;
+
+    fs_write_file(SENSOR_DATA_FILE_ID, 0, (uint8_t*)&sensor_data_file_init, SENSOR_DATA_FILE_SIZE);
+    fs_write_file(SENSOR_DELTA_FILE_ID, 0, (uint8_t*)&sensor_delta_file_init, SENSOR_DELTA_FILE_SIZE);
+    fs_write_file(SENSOR_HEARTBEAT_FILE_ID, 0, (uint8_t*)&sensor_heartbeat_file_init, SENSOR_HEARTBEAT_FILE_SIZE);
+
+    log_print_string("\nFile system initialized...");
 }
 
 void init_sensor_files()
 {
-    // file 0x40: contains our sensor data + configure an action file to be executed upon write
-    fs_file_header_t file_header = (fs_file_header_t){
-        .file_properties.action_protocol_enabled = 0,
-        .file_properties.action_file_id = ACTION_FILE_ID,
-        .file_properties.action_condition = ALP_ACT_COND_WRITE,
-        .file_properties.storage_class = FS_STORAGE_VOLATILE,
-        .file_properties.permissions = 0, // TODO
-        .length = SENSOR_FILE_SIZE
-    };
+    fs_init_file(SENSOR_DATA_FILE_ID, &sensor_data_file, NULL);
+    fs_init_file(SENSOR_DELTA_FILE_ID, &sensor_delta_file, NULL);
+    fs_init_file(SENSOR_HEARTBEAT_FILE_ID, &sensor_heartbeat_file, NULL);
 
-    fs_init_file(SENSOR_FILE_ID, &file_header, NULL);
+    uint32_t sensor_data_file_init = SENSOR_DATA_FILE_INIT;
+    uint32_t sensor_delta_file_init = SENSOR_DELTA_FILE_INIT;
+    uint32_t sensor_heartbeat_file_init = SENSOR_HEARTBEAT_FILE_INIT;
 
-    // configure file notification using D7AActP: write ALP command to broadcast changes made to file 0x40 in file 0x41
-    // first generate ALP command consisting of ALP Control header, ALP File Data Request operand and D7ASP interface configuration
-    alp_control_regular_t alp_ctrl = {
-        .group = false,
-        .response_requested = false,
-        .operation = ALP_OP_READ_FILE_DATA
-        // .operation = ALP_OP_WRITE_FILE_DATA
-    };
+    fs_write_file(SENSOR_DATA_FILE_ID, 0, (uint8_t*)&sensor_data_file_init, SENSOR_DATA_FILE_SIZE);
+    fs_write_file(SENSOR_DELTA_FILE_ID, 0, (uint8_t*)&sensor_delta_file_init, SENSOR_DELTA_FILE_SIZE);
+    fs_write_file(SENSOR_HEARTBEAT_FILE_ID, 0, (uint8_t*)&sensor_heartbeat_file_init, SENSOR_HEARTBEAT_FILE_SIZE);
 
-    alp_operand_file_data_request_t file_data_request_operand = {
-    // alp_operand_file_data_t file_data_operand = {
-        .file_offset = {
-            .file_id = SENSOR_FILE_ID,
-            .offset = 0
-        },
-        .requested_data_length = SENSOR_FILE_SIZE,
-        // .provided_data_length = SENSOR_FILE_SIZE,
-    };
-
-    d7asp_master_session_config_t session_config = {
-        .qos = {
-            .qos_resp_mode = SESSION_RESP_MODE_NO,
-            .qos_nls                 = false,
-            .qos_stop_on_error       = false,
-            .qos_record              = false
-        },
-        .dormant_timeout = 0,
-        .addressee = {
-            .ctrl = {
-              .id_type = ID_TYPE_BCAST,
-              .access_class = 0
-            },
-            .id = 0
-        }
-    };
-
-    // finally, register D7AActP file
-    fs_init_file_with_D7AActP(ACTION_FILE_ID, &session_config, (alp_control_t*)&alp_ctrl, (uint8_t*)&file_data_request_operand);
-    // fs_init_file_with_D7AActP(ACTION_FILE_ID, &session_config, (alp_control_t*)&alp_ctrl, (uint8_t*)&file_data_operand);
+    log_print_string("\nFile system initialized...");
 }
-
-/*************
- * APP TASKS *
- *************/
-void log_current_val()
-{
-  uint32_t val;
-
-  fs_read_file(SENSOR_FILE_ID, 0, (uint8_t*)&val, SENSOR_FILE_SIZE);
-
-  led_toggle(1);
-  log_print_string("\nval = %d", val & 0xFF);
-  // lcd_write_line(3, "val = %d\n", val & 0xFF);
-
-  timer_post_task_delay(&log_current_val, TIMER_TICKS_PER_SEC);
-}
-
-typedef struct {
-    alp_control_regular_t alp_ctrl;
-    // alp_operand_file_data_request_t file_data_request_operand = {
-    alp_operand_file_data_t file_data_operand;
-    uint32_t val;
-} sensor_alp_cmd_t;
-
-sensor_alp_cmd_t sensor_alp_cmd = {
-    .alp_ctrl = {
-        .group = false,
-        .response_requested = false,
-        // .operation = ALP_OP_READ_FILE_DATA
-        .operation = ALP_OP_WRITE_FILE_DATA
-    },
-
-    // alp_operand_file_data_request_t file_data_request_operand = {
-    .file_data_operand = {
-        .file_offset = {
-            .file_id = SENSOR_FILE_ID,
-            .offset = 0
-        },
-        // .requested_data_length = SENSOR_FILE_SIZE,
-        .provided_data_length = SENSOR_FILE_SIZE,
-    },
-
-    .val = 0,
-};
 
 d7asp_master_session_config_t d7asp_session_config = {
     .qos = {
@@ -185,24 +101,66 @@ d7asp_master_session_config_t d7asp_session_config = {
 
 extern bool alp_send_command(uint8_t* alp_cmd, uint8_t alp_cmd_len, uint8_t* alp_resp, uint8_t alp_resp_len, d7asp_master_session_config_t* d7asp_session_config);
 
+/*************
+ * APP TASKS *
+ *************/
+uint32_t sensor_data = 50;
+uint32_t last_recvd_time = 0;
+
+void sensor_connection_check()
+{
+    #define SENSOR_UPDATE_PERIOD (TIMER_TICKS_PER_SEC / 4)
+    uint8_t sensor_alp_resp[ALP_PAYLOAD_MAX_SIZE];
+
+    uint32_t sensor_heartbeat;
+
+    last_recvd_time += SENSOR_UPDATE_PERIOD;
+    fs_read_file(SENSOR_HEARTBEAT_FILE_ID, 0, (uint8_t*)&sensor_heartbeat, SENSOR_HEARTBEAT_FILE_SIZE);
+
+    if(last_recvd_time >= (sensor_heartbeat + SENSOR_UPDATE_PERIOD))
+    {
+        log_print_string("\nSensor does not respond...");
+        last_recvd_time = SENSOR_UPDATE_PERIOD;
+    }
+
+    timer_post_task_delay(&sensor_connection_check, SENSOR_UPDATE_PERIOD);
+
+    #undef SENSOR_UPDATE_PERIOD
+}
+
 void execute_sensor_measurement()
 {
-  // static uint32_t val;
-  static uint8_t sensor_alp_resp[ALP_PAYLOAD_MAX_SIZE];
-  static uint8_t sensor_alp_resp_len = SENSOR_FILE_SIZE;
-  // val++;
-  sensor_alp_cmd.val++;
+    #define SENSOR_UPDATE_PERIOD (TIMER_TICKS_PER_SEC / 4)
+    uint8_t sensor_alp_resp[ALP_PAYLOAD_MAX_SIZE];
 
-  led_toggle(1);
-  log_print_string("val = %d, tab[0] = %d", sensor_alp_cmd.val & 0xFF, *((uint8_t*)&sensor_alp_cmd));
-  // lcd_write_line(3, "val = %d\n", val & 0xFF);
+    // static uint32_t sensor_data;
+    uint32_t sensor_delta;
+    uint32_t sensor_heartbeat;
+    static uint32_t last_transm_time;
+    static uint32_t last_transm_data;
 
-  fs_write_file(SENSOR_FILE_ID, 0, (uint8_t*)&sensor_alp_cmd.val, SENSOR_FILE_SIZE);
+    last_transm_time += SENSOR_UPDATE_PERIOD;
+    // log_print_string("\nsensor_data = %d", sensor_data);
+    // lcd_write_line(3, "val = %d\n", val & 0xFF);
 
-  // alp_process_command(&sensor_alp_cmd, sizeof(sensor_alp_cmd_t), sensor_alp_resp, &sensor_alp_resp_len, ALP_CMD_ORIGIN_APP);
-  alp_send_command((uint8_t*)&sensor_alp_cmd, sizeof(sensor_alp_cmd_t), sensor_alp_resp, sizeof(sensor_alp_cmd_t), &d7asp_session_config);
+    //fs_read_file(SENSOR_DATA_FILE_ID, 0, (uint8_t*)&sensor_data, SENSOR_DATA_FILE_SIZE);
+    fs_read_file(SENSOR_DELTA_FILE_ID, 0, (uint8_t*)&sensor_delta, SENSOR_DELTA_FILE_SIZE);
+    fs_read_file(SENSOR_HEARTBEAT_FILE_ID, 0, (uint8_t*)&sensor_heartbeat, SENSOR_HEARTBEAT_FILE_SIZE);
 
-  timer_post_task_delay(&execute_sensor_measurement, SENSOR_UPDATE);
+    fs_write_file(SENSOR_DATA_FILE_ID, 0, (uint8_t*)&sensor_data, SENSOR_DATA_FILE_SIZE);
+    if(sensor_data < (last_transm_data - sensor_delta) || sensor_data > (last_transm_data + sensor_delta) || last_transm_time >= sensor_heartbeat)
+    {
+    last_transm_data = sensor_data;
+    last_transm_time = 0;
+    led_toggle(1);
+
+    sensor_data_write_cmd.val = sensor_data;
+    alp_send_command((uint8_t*)&sensor_data_write_cmd, sizeof(sensor_alp_cmd_write_t), sensor_alp_resp, sizeof(sensor_alp_cmd_write_t), &d7asp_session_config);
+    }
+
+    timer_post_task_delay(&execute_sensor_measurement, SENSOR_UPDATE_PERIOD);
+
+    #undef SENSOR_UPDATE_PERIOD
 }
 
 /*****************
@@ -211,8 +169,53 @@ void execute_sensor_measurement()
 // Toggle different operational modes
 void userbutton_callback(button_id_t button_id)
 {
-  log_print_string("\nButton: %d", button_id);
+    #ifdef GATEWAY
+     uint32_t sensor_heartbeat;
+     uint8_t sensor_alp_resp[ALP_PAYLOAD_MAX_SIZE];
+
+     fs_read_file(SENSOR_HEARTBEAT_FILE_ID, 0, (uint8_t*)&sensor_heartbeat, SENSOR_HEARTBEAT_FILE_SIZE);
+     if(button_id)
+     {
+        sensor_heartbeat += TIMER_TICKS_PER_SEC;
+     }else
+     {
+        sensor_heartbeat -= TIMER_TICKS_PER_SEC;
+     }
+     fs_write_file(SENSOR_HEARTBEAT_FILE_ID, 0, (uint8_t*)&sensor_heartbeat, SENSOR_HEARTBEAT_FILE_SIZE);
+
+     sensor_heartbeat_write_cmd.val = sensor_heartbeat;
+     alp_send_command((uint8_t*)&sensor_heartbeat_write_cmd, sizeof(sensor_alp_cmd_write_t), sensor_alp_resp, sizeof(sensor_alp_cmd_write_t), &d7asp_session_config);
+
+     log_print_string("\nButton: %d, sensor_heartbeat = %d", button_id, sensor_heartbeat);
+    #else
+     if(!button_id)
+     {
+        sensor_data++;
+     }else
+     {
+        sensor_data--;
+     }
+
+     log_print_string("\nButton: %d, sensor_data = %d", button_id, sensor_data);
+    #endif
     // lcd_write_line(4, "Button: %d\n", button_id);
+}
+
+bool notify_reception(uint8_t* alp_cmd, uint8_t alp_cmd_len, alp_command_origin_t origin)
+{
+    alp_control_t alp_ctrl;
+    uint8_t alp_operand[ALP_PAYLOAD_MAX_SIZE];
+
+    alp_ctrl.raw = alp_cmd[0];
+    memcpy(alp_operand, alp_cmd + 1, alp_cmd_len - 1);
+
+    if(alp_ctrl.operation == ALP_OP_WRITE_FILE_DATA && alp_operand[0] == SENSOR_DATA_FILE_ID)
+    {
+        log_print_string("\nSensor data = %d", (uint32_t)*(alp_operand + sizeof(alp_operand_file_data_t)));
+        last_recvd_time = 0;      
+    }
+
+    return true;
 }
 
 static d7asp_init_args_t d7asp_init_args;
@@ -230,7 +233,7 @@ void bootstrap()
             #ifdef GATEWAY
              .control_scan_type_is_foreground = true,
             #else
-             .control_scan_type_is_foreground = false,
+             .control_scan_type_is_foreground = true,
             #endif
             .control_csma_ca_mode = CSMA_CA_MODE_UNC,
             .control_number_of_subbands = 1,
@@ -270,13 +273,13 @@ void bootstrap()
      fs_write_dll_conf_active_access_class(0); // use access class 0 for scan automation
      lcd_write_string("GATEWAY\n");
 
-     sched_register_task(&log_current_val);
-     timer_post_task_delay(&log_current_val, TIMER_TICKS_PER_SEC);
+     sched_register_task(&sensor_connection_check);
+     timer_post_task_delay(&sensor_connection_check, TIMER_TICKS_PER_SEC);
     #else
      d7ap_stack_init(&fs_init_args, NULL, false, NULL);
      lcd_write_string("SENSOR\n");
 
      sched_register_task(&execute_sensor_measurement);
-     timer_post_task_delay(&execute_sensor_measurement, TIMER_TICKS_PER_SEC * 2);
+     timer_post_task_delay(&execute_sensor_measurement, TIMER_TICKS_PER_SEC);
     #endif
 }
