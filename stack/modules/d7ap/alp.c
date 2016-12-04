@@ -174,7 +174,7 @@ bool alp_process_command(uint8_t* alp_command, uint8_t alp_command_length, uint8
 
     alp_control_t control;
     fifo_pop(&alp_command_fifo, &control.raw, 1);
-    DPRINT("\nalp_operation = %d\n", control.operation);
+    // DPRINT("\nalp_operation = %d\n", control.operation);
     switch(control.operation) {
       case ALP_OP_READ_FILE_DATA:
         process_op_read_file_data(&alp_command_fifo, &alp_response_fifo);

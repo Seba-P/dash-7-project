@@ -48,7 +48,7 @@
  * APP FILES CONFIG *
  ********************/
 
-void init_gateway_files()
+void init_gateway_files(void)
 {
     fs_init_file(SENSOR_DATA_FILE_ID, &sensor_data_file, NULL);
     fs_init_file(SENSOR_DELTA_FILE_ID, &sensor_delta_file, NULL);
@@ -65,7 +65,7 @@ void init_gateway_files()
     log_print_string("\nFile system initialized...");
 }
 
-void init_sensor_files()
+void init_sensor_files(void)
 {
     fs_init_file(SENSOR_DATA_FILE_ID, &sensor_data_file, NULL);
     fs_init_file(SENSOR_DELTA_FILE_ID, &sensor_delta_file, NULL);
@@ -104,22 +104,81 @@ extern bool alp_send_command(uint8_t* alp_cmd, uint8_t alp_cmd_len, uint8_t* alp
 /*************
  * APP TASKS *
  *************/
+#ifdef GATEWAY
+ typedef struct
+ {
+    uint16_t year;
+    uint8_t month;
+    uint8_t day;
+    uint8_t hour;
+    uint8_t minute;
+    uint8_t second;
+ } date_struct_t;
+
+ date_struct_t current_date =
+ {
+    .year = 2016,
+    .month = 12,
+    .day = 31,
+    .hour = 23,
+    .minute = 58,
+    .second = 58,
+ };
+
+ void current_date_calculation(void)
+ {  
+    uint8_t month_days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    if(++(current_date.second) >= 60)
+    {
+        current_date.second = 0;
+        if(++(current_date.minute) >= 60)
+        {
+            current_date.minute = 0;
+            if(++(current_date.hour) >= 24)
+            {
+                current_date.hour = 0;
+                if(++(current_date.day) >= month_days[current_date.month-1])
+                {
+                    current_date.day = 0;
+                    if(++(current_date.month) >= 13)
+                    {
+                        current_date.month = 1;
+                        current_date.year++;
+                    }
+                }
+            }
+        } 
+    }
+
+    timer_post_task_delay(&current_date_calculation, TIMER_TICKS_PER_SEC);
+ }
+
+ void print_current_date(void)
+ {
+    log_print_string("\n[%4d-%02d-%02d, %02d:%02d:%02d] ", current_date.year, current_date.month, current_date.day,
+                                                    current_date.hour, current_date.minute, current_date.second);
+ }
+#endif
+
 uint32_t sensor_data = 50;
 uint32_t last_recvd_time = 0;
 
-void sensor_connection_check()
+void sensor_connection_check(void)
 {
     #define SENSOR_UPDATE_PERIOD (TIMER_TICKS_PER_SEC / 4)
+
     uint8_t sensor_alp_resp[ALP_PAYLOAD_MAX_SIZE];
 
-    uint32_t sensor_heartbeat;
+    volatile uint32_t sensor_heartbeat;
 
     last_recvd_time += SENSOR_UPDATE_PERIOD;
     fs_read_file(SENSOR_HEARTBEAT_FILE_ID, 0, (uint8_t*)&sensor_heartbeat, SENSOR_HEARTBEAT_FILE_SIZE);
 
     if(last_recvd_time >= (sensor_heartbeat + SENSOR_UPDATE_PERIOD))
     {
-        log_print_string("\nSensor does not respond...");
+        print_current_date();
+        log_print_string("Sensor does not respond...");
         last_recvd_time = SENSOR_UPDATE_PERIOD;
     }
 
@@ -128,14 +187,15 @@ void sensor_connection_check()
     #undef SENSOR_UPDATE_PERIOD
 }
 
-void execute_sensor_measurement()
+void execute_sensor_measurement(void)
 {
     #define SENSOR_UPDATE_PERIOD (TIMER_TICKS_PER_SEC / 4)
+
     uint8_t sensor_alp_resp[ALP_PAYLOAD_MAX_SIZE];
 
     // static uint32_t sensor_data;
-    uint32_t sensor_delta;
-    uint32_t sensor_heartbeat;
+    volatile uint32_t sensor_delta;
+    volatile uint32_t sensor_heartbeat;
     static uint32_t last_transm_time;
     static uint32_t last_transm_data;
 
@@ -211,7 +271,8 @@ bool notify_reception(uint8_t* alp_cmd, uint8_t alp_cmd_len, alp_command_origin_
 
     if(alp_ctrl.operation == ALP_OP_WRITE_FILE_DATA && alp_operand[0] == SENSOR_DATA_FILE_ID)
     {
-        log_print_string("\nSensor data = %d", (uint32_t)*(alp_operand + sizeof(alp_operand_file_data_t)));
+        print_current_date();
+        log_print_string("Sensor data = %d", (uint32_t)*(alp_operand + sizeof(alp_operand_file_data_t)));
         last_recvd_time = 0;      
     }
 
@@ -225,7 +286,7 @@ static void on_unsollicited_response_received(d7asp_result_t d7asp_result, uint8
     alp_cmd_handler_output_d7asp_response(d7asp_result, alp_command, alp_command_size);
 }
 
-void bootstrap()
+void bootstrap(void)
 {
     log_print_string("\nDEVICE BOOTED\n");
     dae_access_profile_t access_classes[1] = {
@@ -274,12 +335,14 @@ void bootstrap()
      lcd_write_string("GATEWAY\n");
 
      sched_register_task(&sensor_connection_check);
-     timer_post_task_delay(&sensor_connection_check, TIMER_TICKS_PER_SEC);
+     sched_register_task(&current_date_calculation);
+     timer_post_task_delay(&sensor_connection_check, TIMER_TICKS_PER_SEC * 2);
+     timer_post_task_delay(&current_date_calculation, TIMER_TICKS_PER_SEC);
     #else
      d7ap_stack_init(&fs_init_args, NULL, false, NULL);
      lcd_write_string("SENSOR\n");
 
      sched_register_task(&execute_sensor_measurement);
-     timer_post_task_delay(&execute_sensor_measurement, TIMER_TICKS_PER_SEC);
+     timer_post_task_delay(&execute_sensor_measurement, TIMER_TICKS_PER_SEC * 3);
     #endif
 }
