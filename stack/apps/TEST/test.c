@@ -2,8 +2,6 @@
 /******************
  * COMPONENT LIBS *
  ******************/
-// #include "debug.h"
-// #include "fifo.h"
 #include "log.h"
 #include "scheduler.h"
 #include "timer.h"
@@ -19,21 +17,16 @@
 #include "hwadc.h"
 #include "hwlcd.h"
 #include "hwleds.h"
-// #include "hwsystem.h"
-// #include "hwuart.h"
-
+#include "hwsystem.h"
 
 /****************
  * MODULES LIBS *
  ****************/
 #include "d7ap_stack.h"
-// #include "dll.h"
-// #include "alp_cmd_handler.h"
-// #include "fs.h"
 
-/*****************
- * STANDARD LIBS *
- *****************/
+/************
+ * APP LIBS *
+ ************/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -47,7 +40,6 @@
 /********************
  * APP FILES CONFIG *
  ********************/
-
 void init_gateway_files(void)
 {
     fs_init_file(SENSOR_DATA_FILE_ID, &sensor_data_file, NULL);
@@ -104,7 +96,7 @@ extern bool alp_send_command(uint8_t* alp_cmd, uint8_t alp_cmd_len, uint8_t* alp
 /*************
  * APP TASKS *
  *************/
-#ifdef GATEWAY
+// #ifdef GATEWAY
  typedef struct
  {
     uint16_t year;
@@ -159,9 +151,8 @@ extern bool alp_send_command(uint8_t* alp_cmd, uint8_t alp_cmd_len, uint8_t* alp
     log_print_string("\n[%4d-%02d-%02d, %02d:%02d:%02d] ", current_date.year, current_date.month, current_date.day,
                                                     current_date.hour, current_date.minute, current_date.second);
  }
-#endif
+// #endif
 
-uint32_t sensor_data = 50;
 uint32_t last_recvd_time = 0;
 
 void sensor_connection_check(void)
@@ -187,27 +178,24 @@ void sensor_connection_check(void)
     #undef SENSOR_UPDATE_PERIOD
 }
 
-void execute_sensor_measurement(void)
+void sensor_data_update_check(void)
 {
     #define SENSOR_UPDATE_PERIOD (TIMER_TICKS_PER_SEC / 4)
 
     uint8_t sensor_alp_resp[ALP_PAYLOAD_MAX_SIZE];
 
-    // static uint32_t sensor_data;
+    volatile int32_t sensor_data;
     volatile uint32_t sensor_delta;
     volatile uint32_t sensor_heartbeat;
     static uint32_t last_transm_time;
-    static uint32_t last_transm_data;
+    static int32_t last_transm_data;
 
     last_transm_time += SENSOR_UPDATE_PERIOD;
-    // log_print_string("\nsensor_data = %d", sensor_data);
-    // lcd_write_line(3, "val = %d\n", val & 0xFF);
 
-    //fs_read_file(SENSOR_DATA_FILE_ID, 0, (uint8_t*)&sensor_data, SENSOR_DATA_FILE_SIZE);
+    fs_read_file(SENSOR_DATA_FILE_ID, 0, (uint8_t*)&sensor_data, SENSOR_DATA_FILE_SIZE);
     fs_read_file(SENSOR_DELTA_FILE_ID, 0, (uint8_t*)&sensor_delta, SENSOR_DELTA_FILE_SIZE);
     fs_read_file(SENSOR_HEARTBEAT_FILE_ID, 0, (uint8_t*)&sensor_heartbeat, SENSOR_HEARTBEAT_FILE_SIZE);
 
-    fs_write_file(SENSOR_DATA_FILE_ID, 0, (uint8_t*)&sensor_data, SENSOR_DATA_FILE_SIZE);
     if(sensor_data < (last_transm_data - sensor_delta) || sensor_data > (last_transm_data + sensor_delta) || last_transm_time >= sensor_heartbeat)
     {
     last_transm_data = sensor_data;
@@ -218,7 +206,25 @@ void execute_sensor_measurement(void)
     alp_send_command((uint8_t*)&sensor_data_write_cmd, sizeof(sensor_alp_cmd_write_t), sensor_alp_resp, sizeof(sensor_alp_cmd_write_t), &d7asp_session_config);
     }
 
-    timer_post_task_delay(&execute_sensor_measurement, SENSOR_UPDATE_PERIOD);
+    timer_post_task_delay(&sensor_data_update_check, SENSOR_UPDATE_PERIOD);
+
+    #undef SENSOR_UPDATE_PERIOD
+}
+
+void sensor_measurement_task(void)
+{
+    #define SENSOR_UPDATE_PERIOD (TIMER_TICKS_PER_SEC)
+
+    int32_t sensor_data = 10 * hw_get_internal_temperature();
+
+    char buffer[10];
+    snprintf(buffer, sizeof(buffer), "%2d.%d *C", sensor_data / 10, sensor_data % 10);
+    log_print_string("\n\nTemperature = %s\n", buffer);
+
+    fs_write_file(SENSOR_DATA_FILE_ID, 0, (uint8_t*)&sensor_data, SENSOR_DATA_FILE_SIZE);
+    led_toggle(0);
+
+    timer_post_task_delay(&sensor_measurement_task, SENSOR_UPDATE_PERIOD);
 
     #undef SENSOR_UPDATE_PERIOD
 }
@@ -226,7 +232,6 @@ void execute_sensor_measurement(void)
 /*****************
  * APP CALLBACKS *
  *****************/
-// Toggle different operational modes
 void userbutton_callback(button_id_t button_id)
 {
     #ifdef GATEWAY
@@ -248,17 +253,19 @@ void userbutton_callback(button_id_t button_id)
 
      log_print_string("\nButton: %d, sensor_heartbeat = %d", button_id, sensor_heartbeat);
     #else
-     if(!button_id)
-     {
-        sensor_data++;
-     }else
-     {
-        sensor_data--;
-     }
+     // uint32_t sensor_delta;
 
-     log_print_string("\nButton: %d, sensor_data = %d", button_id, sensor_data);
+     // fs_read_file(SENSOR_DELTA_FILE_ID, 0, (uint8_t*)&sensor_delta, SENSOR_DELTA_FILE_SIZE);
+     // if(!button_id)
+     // {
+     //    sensor_delta++;
+     // }else
+     // {
+     //    sensor_delta--;
+     // }
+
+     // log_print_string("\nButton: %d, sensor_delta = %d", button_id, sensor_delta);
     #endif
-    // lcd_write_line(4, "Button: %d\n", button_id);
 }
 
 bool notify_reception(uint8_t* alp_cmd, uint8_t alp_cmd_len, alp_command_origin_t origin)
@@ -271,8 +278,13 @@ bool notify_reception(uint8_t* alp_cmd, uint8_t alp_cmd_len, alp_command_origin_
 
     if(alp_ctrl.operation == ALP_OP_WRITE_FILE_DATA && alp_operand[0] == SENSOR_DATA_FILE_ID)
     {
+        int32_t sensor_data = (int32_t)*(alp_operand + sizeof(alp_operand_file_data_t));
+
+        char buffer[10];
+        snprintf(buffer, sizeof(buffer), "%2d.%d *C", sensor_data / 10, sensor_data % 10);
+
         print_current_date();
-        log_print_string("Sensor data = %d", (uint32_t)*(alp_operand + sizeof(alp_operand_file_data_t)));
+        log_print_string("Temperature = %s\n", buffer);
         last_recvd_time = 0;      
     }
 
@@ -340,9 +352,15 @@ void bootstrap(void)
      timer_post_task_delay(&current_date_calculation, TIMER_TICKS_PER_SEC);
     #else
      d7ap_stack_init(&fs_init_args, NULL, false, NULL);
+     lcd_enable(1);
      lcd_write_string("SENSOR\n");
 
-     sched_register_task(&execute_sensor_measurement);
-     timer_post_task_delay(&execute_sensor_measurement, TIMER_TICKS_PER_SEC * 3);
+     // adc_calibrate();
+     adc_init(adcReference1V25, adcInputSingleTemp, 400000);
+
+     sched_register_task(&sensor_data_update_check);
+     sched_register_task(&sensor_measurement_task);
+     timer_post_task_delay(&sensor_data_update_check, TIMER_TICKS_PER_SEC * 3);
+     timer_post_task_delay(&sensor_measurement_task, TIMER_TICKS_PER_SEC / 4);
     #endif
 }

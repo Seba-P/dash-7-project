@@ -136,17 +136,17 @@ PLATFORM/fast:
 .PHONY : PLATFORM/fast
 
 #=============================================================================
-# Target rules for targets named CHIP_EFM32WG
+# Target rules for targets named CHIP_EFM32PG1B
 
 # Build rule for target.
-CHIP_EFM32WG: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 CHIP_EFM32WG
-.PHONY : CHIP_EFM32WG
+CHIP_EFM32PG1B: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 CHIP_EFM32PG1B
+.PHONY : CHIP_EFM32PG1B
 
 # fast build rule for target.
-CHIP_EFM32WG/fast:
-	$(MAKE) -f framework\hal\platforms\platform\chips\efm32wg\CMakeFiles\CHIP_EFM32WG.dir\build.make framework/hal/platforms/platform/chips/efm32wg/CMakeFiles/CHIP_EFM32WG.dir/build
-.PHONY : CHIP_EFM32WG/fast
+CHIP_EFM32PG1B/fast:
+	$(MAKE) -f framework\hal\platforms\platform\chips\efm32pg1b\CMakeFiles\CHIP_EFM32PG1B.dir\build.make framework/hal/platforms/platform/chips/efm32pg1b/CMakeFiles/CHIP_EFM32PG1B.dir/build
+.PHONY : CHIP_EFM32PG1B/fast
 
 #=============================================================================
 # Target rules for targets named CHIP_CC1101
@@ -366,7 +366,7 @@ help:
 	@echo ... rebuild_cache
 	@echo ... framework
 	@echo ... PLATFORM
-	@echo ... CHIP_EFM32WG
+	@echo ... CHIP_EFM32PG1B
 	@echo ... CHIP_CC1101
 	@echo ... FRAMEWORK_COMPONENT_cli
 	@echo ... FRAMEWORK_COMPONENT_console

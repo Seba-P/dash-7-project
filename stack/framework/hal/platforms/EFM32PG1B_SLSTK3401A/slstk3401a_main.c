@@ -85,8 +85,6 @@ int main()
     __framework_bootstrap();
     //initialise platform functionality that depends on the framework
     __platform_post_framework_init();
-    log_print_string("\nSCHEDULER IS RUNNING\n");
-
     scheduler_run();
 
     return 0;

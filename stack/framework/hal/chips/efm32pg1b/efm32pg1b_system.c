@@ -95,12 +95,12 @@ void hw_reset()
 
 float hw_get_internal_temperature()
 {
-  adc_init(adcReference1V25, adcInputSingleTemp, 400000);
+  // adc_init(adcReference1V25, adcInputSingleTemp, 400000);
 
   // TODO take into account warmup time
   uint32_t value = adc_read_single();
 
-  return (CAL_TEMP_0 - ((float)(ADC_TEMP_0_READ_1V25 - value) * 1250 / (float)(4096 * -1.835)));
+  return (CAL_TEMP_0 - (float)((float)(ADC_TEMP_0_READ_1V25 - value) * 1250 / (float)(4096 * -1.835)));
   // GRAD = (4096*(-1,84))/1250
 }
 

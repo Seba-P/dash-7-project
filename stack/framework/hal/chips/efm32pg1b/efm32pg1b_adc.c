@@ -239,7 +239,6 @@ void adc_init(ADC_Reference reference, ADC_Input input, uint32_t adc_frequency)
 
 	/* Base the ADC configuration on the default setup. */
 	ADC_Init_TypeDef init = ADC_INIT_DEFAULT;
-	//adcWarmupKeepADCWarm?
 	ADC_InitSingle_TypeDef sInit = ADC_INITSINGLE_DEFAULT;
 
 	/* Initialize timebases */
@@ -313,11 +312,12 @@ void adc_init(ADC_Reference reference, ADC_Input input, uint32_t adc_frequency)
     break;
 	}
 
+  // sInit.acqTime = adcAcqTime8;
 	ADC_InitSingle(ADC0, &sInit);
 
 	/* Setup interrupt generation on completed conversion. */
-  ADC_IntEnable(ADC0, ADC_IF_SINGLE);
-  NVIC_EnableIRQ(ADC0_IRQn);
+  // ADC_IntEnable(ADC0, ADC_IF_SINGLE);
+  // NVIC_EnableIRQ(ADC0_IRQn);
 }
 
 void adc_start()
